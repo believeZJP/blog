@@ -3,6 +3,7 @@ title: ES6新语法积累
 date: 2018-11-05 19:48:55
 updated: 2018-11-05 19:48:55
 tags:
+categories: es6
 ---
 
 # es6强制让一个函数有一个默认值
@@ -16,6 +17,8 @@ if (!a) {
 
 # Promise
 [Promise迷你书](http://liubin.org/promises-book/)
+
+<!-- more -->
 
 # js中Map和Set区别
 

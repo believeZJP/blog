@@ -1,5 +1,6 @@
 ---
 title: 搭建Hexo博客笔记
+tags: hexo
 ---
 
 # hexo 搭建
@@ -23,6 +24,7 @@ hexo server
 
 在sources/posts文件夹下新建一个test.md文件，再次访问页面，可看到新加的文章。
 
+<!-- more -->
 
 # 安装hexo-admin
 
@@ -73,8 +75,6 @@ hexo d -g
 less  ~/.ssh/id_rsa.pub
 ```
 githubSSH keys地址[快捷地址](https://github.com/settings/ssh), 添加 SSH key 值
-
-<!-- more -->
 
 # 打赏设置
 将二维码图片放到主题 source/images 下面
@@ -201,6 +201,111 @@ leancloud_visitors:
   在左侧点击存储，创建一个名为Counter的 Class 文件，这里的名称一定为Counter 不能随意取！！！
   权限设置要选无限制, 否则在第二次访问会报错。
 设置完后，回到我的博客，随便点击一篇博文，刷新几次 就可以在 leancloud–》存储–》Counter 看到我们的浏览记录了，在我们的博文副标题也可以看到浏览记录。
+
+# hexo 新建目录，page, 标签, 分类, 关于
+在主题的_config.yml中打开配置
+```
+menu:
+  home: / || home
+  about: /about/ || user
+  tags: /tags/ || tags
+  categories: /categories/ || th
+  archives: /archives/ || archive
+  #schedule: /schedule/ || calendar
+  #sitemap: /sitemap.xml || sitemap
+  
+```
+可以看到左上角新增关于, 标签, 分类
+## 标签
+运行hexo new page tags
+访问标签页, 新页面可以正常访问
+在source/tags/index.md中如下设置, 即可看到标签分类(前提:在文章中需添加tags)
+```
+---
+title: tags
+date: 2018-11-06 16:55:49
+type: "tags"
+layout: "tags"
+---
+```
+## 分类
+```
+hexo new page categories
+```
+在source/categories/index.md中添加如下
+```
+---
+title: categories
+date: 2018-11-06 17:11:29
+type: "categories"
+layout: "categories"
+---
+```
+
+文章中多个tag时，如下配置
+```
+tags: 
+    - http
+    - 网络
+```
+单个
+```
+tags: 网络
+```
+
+
+## 关于
+```
+hexo new page about
+```
+在source/about/index.md写个人信息
+
+
+# 添加社交链接
+在主题配置文件中搜索 social:
+```
+social:
+  GitHub: https://github.com/believeZJP || github
+  微博: https://weibo.com/u/6021664425 || weibo
+  QQ: tencent://message/?uin=421790588&Site=www&Menu=yes || qq
+```
+
+图标配置：
+```
+social_icons:
+  enable: true
+  icons_only: true
+  transition: false
+  微博: weibo
+  QQ: qq
+```
+在左侧即可看到链接。
+需要注意, 图标的配置是根据font-awesome.min.css中的css属性样式, 想添加对应的可以在文件中搜索。
+
+默认显示文字和图标, 如果只显示图标可设置
+  icons_only: true
+
+# 站内搜索
+```
+npm install hexo-generator-searchdb --save
+npm install hexo-generator-search --save
+
+```
+
+在主题_config.yml中配置
+```
+local_search:
+  enable: true
+```
+在全局配置中添加
+```
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+```
+
 # hexo 命令
 常用命令
 

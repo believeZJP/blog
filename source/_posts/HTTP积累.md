@@ -2,7 +2,12 @@
 title: HTTP积累
 date: 2018-11-05 19:40:58
 updated: 2018-11-05 19:40:58
-tags:
+tags: 
+    - http
+    - 网络
+categories:
+    - http
+    - 网络
 ---
 [TOC]
 
@@ -22,6 +27,8 @@ OPTIONS	允许客户端查看服务器的性能。
 TRACE	回显服务器收到的请求，主要用于测试或诊断。
 
 HEAD	类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头
+
+<!-- more -->
 
 # HTTP2 与 HTTP1.1 区别
 
