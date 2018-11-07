@@ -288,16 +288,14 @@ social_icons:
 # 站内搜索
 ```
 npm install hexo-generator-searchdb --save
-npm install hexo-generator-search --save
-
 ```
 
-在主题_config.yml中配置
+在主题next/_config.yml中配置
 ```
 local_search:
   enable: true
 ```
-在全局配置中添加
+在全局配置中_config.yml添加
 ```
 search:
   path: search.xml
@@ -305,6 +303,29 @@ search:
   format: html
   limit: 10000
 ```
+-----------正常情况到这就可以使用搜索功能了---------
+
+复盘:
+
+点击首页搜索,发现弹框弹出, loading一直加载。没有显示搜索界面.
+- 检查network, 发现search.xml请求成功, 状态200.
+- 用链接直接访问search.xml localhost:4000/search.xml
+提示报错, 有错误字符
+- 可以拉到最后看哪篇文章被截断
+- 也可以审查元素, 点击每个entry-content 查看最近为空的那个,找到后, 这篇文章中有错误字符不识别。
+- 在network看search.xml中截断的文章中有两个字中间有个点的地方, 在文中找到这个地方光标移动发现会有一次没有移动, 删除即可。
+- 实在找不到可以先剪切文章, 看是否能正常显示.
+
+
+# 来必力评论
+
+https://www.livere.com/一定要用这个注册, 中文版(http://www.laibili.com.cn/)失效！！！！
+注册完成后, 填写相应信息, 即可获取到data-uid.
+next/_config.yml中搜索`livere_uid`, 填入对应data-uid
+**注意:**
+格式如下:
+livere_uid: fsdfs343==
+一定不要加任何引号~~~~~~~(🕳🕳🕳🕳🕳)
 
 # hexo 命令
 常用命令

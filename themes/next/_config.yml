@@ -314,7 +314,7 @@ codeblock:
   #description: ex. subscribe to my blog by scanning my public wechat account
 
 # Reward
-reward_comment: '扫码送礼, 走起~~~'
+reward_comment: '小礼物走一走, 扫码~~~'
 wechatpay: /images/wechatpay.jpeg
 alipay: /images/alipay.jpeg
 #bitcoin: /images/bitcoin.png
@@ -508,7 +508,7 @@ valine:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: your uid
+livere_uid: MTAyMC80MDg0NC8xNzM2OQ==
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
