@@ -394,7 +394,19 @@ let r = new Repo()
 console.log(r.useName()) // Repo name is modern-js-cheatsheet and it contains some really important stuff
 ```
 
+# 新对象替换老对象
+```
+state.obj = {...state.obj, newProp: 123}
 
+oldObj = Object.assign({}, newObj)
+
+oldObj = JSON.parse(JSON.stringify(newObj))
+```
+
+# 在对象上添加新属性
+```
+Vue.set(obj, 'newProp', 123)
+```
 
 
 
