@@ -338,6 +338,27 @@ livere_uid: fsdfs343==
 <img src="/img/clipboard.png" >
 ```
 注意: 这里一定要用绝对路径, 因为图片在根目录下
+
+# 部署命令简化
+在package.json中添加
+```
+"scripts": {
+  "d": "hexo clean && hexo g -d",
+  "s": "hexo clean && hexo g && hexo s"
+},
+```
+部署时，只需在终端运行`npm run d`即可发布文章
+
+启动时，运行`npm run s`,即可在本地访问服务
+
+[好的链接](https://blog.csdn.net/qq_35561857/article/details/81590953)
+
+
+
+
+
+
+
 # hexo 命令
 常用命令
 
