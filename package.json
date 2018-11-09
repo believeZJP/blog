@@ -10,6 +10,7 @@
     "s": "hexo clean && hexo g && hexo s"
   },
   "dependencies": {
+    "conventional-changelog": "^3.0.5",
     "hexo": "^3.7.0",
     "hexo-admin": "^2.3.0",
     "hexo-deployer-git": "^0.3.1",

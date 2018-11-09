@@ -354,8 +354,23 @@ livere_uid: fsdfs343==
 [好的链接](https://blog.csdn.net/qq_35561857/article/details/81590953)
 
 
+# 添加头像
+在next/config.yml里搜avatar,如下配置, 图片链接可更换
+```
+avatar:
+  url: /images/avatar.gif
+  rounded: true
+  opacity: 1
+  rotated: true
+```
 
 
+# 项目添加changelog❌
+```
+npm install --save conventional-changelog
+
+conventional-changelog -p angular -i CHANGELOG.md -w -r 0
+```
 
 
 
