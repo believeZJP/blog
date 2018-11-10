@@ -354,6 +354,20 @@ livere_uid: fsdfs343==
 [好的链接](https://blog.csdn.net/qq_35561857/article/details/81590953)
 
 
+# 百度统计
+在next/_config.yml中搜索baidu_analytics, 配置id
+
+在[官网](https://tongji.baidu.com/),新建应用，点击管理，复制id
+```
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?60d1bc14f9ca17b7";
+  var s = document.getElementsByTagName("script")[0]; 
+```
+
+
 # 添加头像
 在next/config.yml里搜avatar,如下配置, 图片链接可更换
 ```

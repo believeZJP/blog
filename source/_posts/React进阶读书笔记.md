@@ -294,7 +294,7 @@ eg:
 class Modal extends Component {
     constructor(props) {
         super(props);
-        // 􏴟􏲭􏲮􏰖􏱡􏱢􏰫􏰚根节点下创建一个div􏲭􏲮节点
+        // 根节点下创建一个div节点
         this.container = document.createElement("div");
         document.body.appendChild(this.container);
     }
@@ -709,7 +709,7 @@ key的使用，减少了DOM操作，提高了DOM更新效率，当列表元素�
 # 高阶组件
 
 主要用来实现组件逻辑的抽象和服用
-**本质**：也是一个函数，并不是一个组件
+**本质**：也是一个函数，并不是一个组件  装饰器设计模式
 
 ## 基本概念
 JavaScript中，高阶组件是以函数为参数，并且返回值也是函数的函数。
@@ -717,6 +717,14 @@ JavaScript中，高阶组件是以函数为参数，并且返回值也是函数�
 
 形式：`const EnhancedComponent = higherOrderComponent(WrappedComponent);`
 
+## 主要功能
+封装并分离组件的通用逻辑，让通用逻辑在组件间更好的被复用。
+
+## 使用场景
+1. 操纵props
+2. 通过ref访问组件实例
+3. 组件状态提升
+4. 用其他元素包装组件
 
 
 
