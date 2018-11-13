@@ -14,6 +14,8 @@ tags: hexo
 npm install -g hexo-cli
 ```
 
+<!-- more  -->
+
 运行
 ```bash
 hexo init blog
@@ -315,7 +317,7 @@ search:
 - 也可以审查元素, 点击每个entry-content 查看最近为空的那个,找到后, 这篇文章中有错误字符不识别。
 - 在network看search.xml中截断的文章中有两个字中间有个点的地方, 在文中找到这个地方光标移动发现会有一次没有移动, 删除即可。
 - 实在找不到可以先剪切文章, 看是否能正常显示.
-
+- 用vim编辑器查看特殊字符一目了然
 
 # 来必力评论
 
