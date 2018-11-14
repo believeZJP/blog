@@ -1,8 +1,10 @@
 ---
 layout: react
-title: Native入门
+title: React Native入门
 date: 2018-11-14 19:26:35
 tags:
+- react
+- React Native
 ---
 # 开发环境搭建
 
@@ -10,7 +12,7 @@ tags:
 * python2
 * java sdk 并配置java环境变量
 
-```
+```JavaScript
 npm install -g react-native
 npm install -g react-native-cli
 ```
@@ -22,7 +24,7 @@ avd 是灰色 无法点击
 删除.android文件，重新导入，即可
 
 # 如果打包失败报错
-```
+```JavaScript
 Error:Execution failed for task ':app:transformClassesWithInstantRunForAcproductionDebug'.
 > Invalid signature file digest for Manifest main attributes
 ```
@@ -59,7 +61,7 @@ Debug server host & port for device
 
 # react native 绑定事件
 
-```
+```JavaScript
 onPressSwitch() {
     console.log('changed')
     let status =  this.props.powerStatus
@@ -77,7 +79,7 @@ onPressSwitch() {
 
 用es6的箭头函数之后，
 
-```
+```JavaScript
 <!--这里是箭头函数-->
 onPressSwitch = () => {
     console.log('changed')
@@ -89,7 +91,7 @@ onPressSwitch = () => {
 
 这是用新的绑定 ，不要bind ，==[正确的写法]==
 
-```
+```JavaScript
 
  <TouchableOpacity onPress={this.onPressSwitch}>
         <Image  source={require('../../assets/light-close.png')}/>
@@ -98,13 +100,13 @@ onPressSwitch = () => {
 ```
 
 需要传参的写法 ==[传参的写法]==
-```
+```JavaScript
 <TouchableOpacity onPress={() => this.onPressSwitch(item)}>
     <Image  source={getPicture('switch-'+item.status)}/>
 </TouchableOpacity>
 ```
 如果不传参的话，不能写为空如下：  ==[错误的写法]==
-```
+```JavaScript
 <TouchableOpacity onPress={() => this.onPressSwitch}>
     <Image  source={getPicture('switch-'+item.status)}/>
 </TouchableOpacity>
@@ -120,12 +122,12 @@ onPressSwitch = () => {
 
 # setState 语法
 setState括号里必须是个对象，不是会报错。
-```
+```JavaScript
 this.setState({'item': newItem})
 ```
 
 报错信息：
-```
+```JavaScript
 setState(...): takes an object of state variables to update or a function which returns an object of state variables.
 ```
 
@@ -136,7 +138,7 @@ setState(...): takes an object of state variables to update or a function which 
 ## 父组件传给子组件
 
 父组件调用子组件
-```
+```JavaScript
 <ControlArea powerStatus={this.state.powerStatus} callbackPowerChanged={this.changePowerStatus.bind(this)}></ControlArea>
 
 ```
@@ -147,7 +149,7 @@ changePowerStatus是在父组件中供子组件调用时执行的方法。
 ## 子组件调用父组件
 
 子组件：
-```
+```JavaScript
 onPressSwitch = () => {
    console.log('changed')
    let status =  this.props.powerStatus
@@ -165,7 +167,7 @@ onPressSwitch = () => {
 
 
 # 根据数组，循环生成dom
-```
+```JavaScript
 <View style={[styles.topCon]}>
     {this.props.dataList.map((item, index) => (
         <TouchableOpacity key={index} onPress={() => this.onPressSwitch(item)}>
@@ -199,7 +201,7 @@ onPressSwitch = () => {
 
 看文档好不容易找到了screenProps.
 
- ```
+ ```JavaScript
  <SimpleApp
   screenProps={{tintColor: 'blue'}}
 />
@@ -207,7 +209,7 @@ onPressSwitch = () => {
 
 在组件内取值
 
-```
+```JavaScript
  this.state = {
     // deviceInfo: JSON.parse(this.props.deviceInfoStr), 其他路由的取值
     pageConfig: JSON.parse(this.props.screenProps.pageConfigStr),
@@ -218,7 +220,7 @@ onPressSwitch = () => {
 #### 2. 路由跳转
 
 目前测试只能这样写，将navigate提取出来好像不可以。以后需做测试
-```
+```JavaScript
  render() {
     const { navigate } = this.props.navigation;
     return (
@@ -236,7 +238,7 @@ onPressSwitch = () => {
 #### 3. 导航跳转到的组件是父页面， 而子页面中想用导航的navigation，此时是无法用的，    需要在父组件中将navigation传给子组件，这样，子组件就可以用父组件的navigation
 
 父组件中调用子组件，并把navigation传给子组件
-```
+```JavaScript
 <Content pageConfig={this.state.pageConfig}
     navigation = {this.state.navigation}
     callbackPowerChanged={this.changePowerStatus.bind(this)}
@@ -244,7 +246,7 @@ onPressSwitch = () => {
 ```
 
 在子组件中
-```
+```JavaScript
  render() {
     const { navigate } = this.props.navigation
     
@@ -260,15 +262,13 @@ onPressSwitch = () => {
 
 #### 4. 返回上一级
 注意，用之前确保有navigation这个属性，没有的话看上面的例子。
-```
+```JavaScript
 goBack = () => {
     this.props.navigation.goBack()
 }
 
 // 在按钮上加事件
 onPress={this.goBack}
-
-
 ```
 
 
@@ -281,12 +281,12 @@ onPress={this.goBack}
 JavaScript模块可以通过使用DeviceEventEmitter模块来监听事件：
 
 1. 引用
-```
+```JavaScript
 import { View, DeviceEventEmitter } from 'react-native'
 ```
 
 2. 监听事件
-```
+```JavaScript
 componentDidMount() {
     this.subSwitchEmitter = DeviceEventEmitter.addListener('subSwitch', (e) => {
         this.changePowerStatus(e.item)
@@ -298,13 +298,12 @@ componentDidMount() {
 }
 ```
 3. 触发监听事件，发出通知
-```
+```JavaScript
 DeviceEventEmitter.emit('subSwitch', {item: this.state.item});
-
 ```
 
 4. 移除监听
-```
+```JavaScript
  componentWillUnmount() {
     // 移除所有的事件
     DeviceEventEmitter.remove(); 
@@ -313,12 +312,10 @@ DeviceEventEmitter.emit('subSwitch', {item: this.state.item});
     this.modifyItemEmitter.remove();
 }
 ```
-
-
 # ref的使用
 1. 父传子，通过ref
 
-```
+```JavaScript
 定义ref
 <SonCompoent ref="son" />
 获取子组件，执行指定方法，方法参数中传值
@@ -341,7 +338,7 @@ Ref 使用场景
 
 # mac配置连接windows的服务
 
-```
+```iOS
 NSURL *jsCodeLocation;
 
 [[RCTBundleURLProvider sharedSettings] setDefaults];
@@ -364,7 +361,7 @@ jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot
 
 
 # setState设置状态后，直接console.log获取到的还是旧数据
-```
+```JavaScript
 this.setState({data:data});
 console.log(this.state.data);
 ```
@@ -380,7 +377,7 @@ setState之后，需要走完RN生命周期，也就是走到render时，state�
 这个没试过
 
 正确写法
-```
+```JavaScript
 this.setState(state,()=>{
     console.log(this.state);
 });
@@ -421,8 +418,6 @@ http://www.jianshu.com/p/90ceb04da552
 
 app或者云端给设备发消息属于下行
 
-
-
 # 修改为redux后，思路整理
 我有一个state(deviceData),设备端有个对应的state,
 deviceProperty 也有个对应的state,
@@ -449,7 +444,7 @@ deviceProperty 也有个对应的state,
 
 # redux的数据处理逻辑
 1. 所有的数据都在store中定义好,可以有不同的对象
-```
+```JavaScript
 const initState = {
     deviceInfo: {
         deviceId: 0,
@@ -464,7 +459,7 @@ const initState = {
 export default initState
 ```
 在store中引用
-```
+```JavaScript
 const store = createStore(
     reducers,
     initState,
@@ -478,7 +473,7 @@ const store = createStore(
 export default store
 ```
 2. 要更改store中的数据，都通过action去调用事件触发
-```
+```JavaScript
 const powerOn = (subDomainName, physicalDeviceId, command) => ({
     type: types.powerOn,
     payload: {
@@ -497,7 +492,7 @@ const powerOn = (subDomainName, physicalDeviceId, command) => ({
 
 ```
 3. action请求回调返回结果，根据返回成功失败，在reducer中分别处理store中的数据。
-```
+```JavaScript
 case `${types.powerOn}_PENDING`:
     return Object.assign({}, state, {
         isFetching: true,
@@ -608,7 +603,7 @@ export default i18n;
 ### 2. translations为中英文对应的文字信息
 
 translations.js
-```
+```JavaScript
 export default {
     en: {
         greeting: 'Greeting in en',
@@ -630,7 +625,7 @@ export default {
 ```
 注意，这里的中英文可以单独出来，做成两个单独的文件。
 zh.js
-```
+```JavaScript
 export default {
     greeting: '欢迎欢迎热烈欢迎',
     exit: '是否退出?',
@@ -642,7 +637,7 @@ export default {
 ```
 en.js
 
-```
+```JavaScript
 export default {
     greeting: 'Greeting in en',
     exit: 'exit?',
@@ -654,7 +649,7 @@ export default {
 ```
 
 在单独引入文件
-```
+```JavaScript
 import i18n from 'react-native-i18n';
 import en from './en';
 import zh from './zh';
@@ -671,7 +666,7 @@ export default i18n;
 
 ## 3. 业务层调用
 
-```
+```JavaScript
 import {i18n} from '你预设的index的目录';
 
 // js
@@ -680,7 +675,6 @@ i18n.t('Timing')
 <Text style={styles.text}>{i18n.t('Timing')}</Text>
 
 ```
-
 
 ### 总结
 
@@ -695,20 +689,20 @@ i18n.t('Timing')
 这个插件不需要改动android和ios代码
 
 1. 安装
-```
+```JavaScript
 npm i react-native-easy-toast --save
 ```
 
 2. 引用
-```
+```JavaScript
 import Toast, {DURATION} from 'react-native-easy-toast'
 ```
 在html中需要写在View底部引用
-```
+```JavaScript
 <Toast ref="toast"/>
 ```
 3. js调用显示
-```
+```JavaScript
 // 默认250ms消失
  this.refs.toast.show('hello world!');
  
@@ -759,7 +753,7 @@ npm install --save prop-types
 
 使用
 
-```
+```JavaScript
 import PropTypes from 'prop-types';
 
 class Greeting extends React.Component {
@@ -776,7 +770,7 @@ Greeting.propTypes = {
 ```
 1. React.PropTypes.element.isRequired，可以为组件指定必须项
 2. defaultProps：为props指定一个默认值
-```
+```JavaScript
 Greeting.defaultProps = {
   name: 'Stranger'
 };
@@ -797,9 +791,7 @@ adb install -r name.apk
 
 # js用switch case实现区间
 
-重点是switch(true){
-    
-}
+重点是switch(true){}
 ```javascript
 function getAQIDegree(jq){
     switch(true){
