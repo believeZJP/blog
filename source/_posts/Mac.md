@@ -5,6 +5,9 @@ tags: mac
 
 [TOC]
 
+# mac录屏 
+自带软件即可录制
+QuickTime Player
 # mac 安装 tomcat
 
     1. 按照百度经验，安装Java jdk，配置环境变量
