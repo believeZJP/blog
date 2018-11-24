@@ -775,20 +775,69 @@ action表明修改应用状态的意图，真正对应用状态做修改的是re
 
 reducer必须是纯函数，所以reducer在接收action时，不能直接修改原来的状态对象，而要创建一个新的状态对象返回。
 
-## 主要组成
-action, reducer, store
 
-
-
-
-
-
-# 纯函数
+### 纯函数
 必须满足两个条件
 1. 对于同样的参数值，函数的返回结果总是相同的。函数结果不依赖任何在程序执行过程中可能改变的变量。
 2. 函数的执行不会产生副作用，例如修改外部对象或输出到I/O设备。
 
 
 
+## 主要组成
+action, reducer, store
 
+### action
+action是Redux中信息的载体， 是store唯一的信息来源。
+action发送给store必须通过store的dispatch。
 
+action是普通的JavaScript对象，但每个action必须有一个type属性描述action的类型，一般被定义为字符串常量。除了type属性之外，action的结构完全由自己决定，但应该能确保action的结构能清晰的描述实际业务场景。
+
+一般通过action creator创建action， action creator是返回action的函数。如下：
+```JavaScript
+function addTodo(text) {
+    return {
+        type: 'ADD_TODO',
+        text
+    }
+}
+```
+
+### reducer
+
+action用于描述应用发生了什么操作， reducer则根据action做出响应，决定如何修改state.
+
+state既可以包含服务器端获取的数据，也可以包含UI状态。
+
+最基本的reducer, eg:
+```JavaScript
+import { VisibilityFilters } from './acitons'
+
+const initialState = {
+    todos: [],
+    visibilityFilter: VisibilityFilters.SHOW_ALL
+}
+
+// reducer
+function todoApp(state = initialState, action) {
+    return state
+}
+
+```
+
+### store
+store是action和reducer之间的桥梁。负责以下工作：
+1. 保存应用状态
+2. 通过getState访问应用状态
+3. 通过dispatch(action)发送更新状态的意图
+4. 通过subscribe(listener)注册监听函数、监听应用状态的改变。
+
+一个Redux应用中只有一个store，store保存了唯一数据源。
+store通过createStore()创建，创建时需要传递reducer作为参数，创建store。
+
+```
+import { createStore } from 'redux'
+import todoApp from './reducers'
+
+let store = createStore(todoApp)
+
+```
