@@ -841,3 +841,145 @@ import todoApp from './reducers'
 let store = createStore(todoApp)
 
 ```
+## 总结redux数据流过程
+
+1. 调用store.dispatch(action)。可以在任何地方调用。包括组件，XHR回调，定时器等。
+2. store调用reducer。store传递两个参数给reducer：当前应用的状态和action。
+3. 根reducer会把多个子reducer的返回结果组合成最终的应用状态。redux提供了combineReducer方便组合。
+4. store保存根reducer返回的完整应用状态。此时应用状态才完成更新。
+
+
+## react-redux
+
+### 展示组件和容器组件
+
+根据组件意图的不同，可以将组件划分为两类：展示组件(presentational components)和容器组件(container components).
+
+展示组件负责应用的UI展示(how things look), 展示组件不关心渲染时使用的数据是如何获取的，数据如何获取是容器组件负责的事情。
+
+容器组件负责应用逻辑的处理(how things work), 如发送请求，处理返回数据，将处理过的数据传递给展示组件等。还提供修改源数据的方法，通过展示组件的props传递给展示组件，当展示组件的状态变更引起源数据变化时，展示组件通过调用容器组件提供的方法同步这些变化。
+
+展示组件和容器组件可以自由嵌套。这样的分工可以使与UI渲染无直接关系的业务逻辑由容器组件集中负责，展示组件只关注UI的渲染逻辑，从而使展示组件更容易被复用。
+
+> 展示组件和容器组件与无状态组件和有状态组件区别：
+划分依据：
+展示组件和容器组件是根据组件的意图划分组件
+无状态组件和有状态组件是根据组件内部是否使用state划分组件。
+
+通常展示组件是通过无状态组件实现，容器组件通过有状态组件实现。但展示组件也可以是有状态组件，容器组件也可以是无状态组件。
+
+
+
+### connect
+react-redux提供了connect函数，用于把react组件和redux的store连接起来，生成一个容器组件，负责管理数据管理和业务逻辑。
+```JavaScript
+import { connect } from 'react-redux'
+import TodoList from './TodoList'
+
+const VisibleTodoList = connect()(TodoList);
+
+```
+
+根据Redux的数据流过程，VisibleTodoList需要承担两个工作：
+1. 从Redux的store中获取展示组件所需的应用状态
+2. 把展示组件的状态同步到Redux的store中
+
+通过两个参数实现
+```JavaScript
+import { connect } from 'react-redux'
+import TodoList from './TodoList'
+
+const VisibleTodoList = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList);
+```
+
+mapStateToProps 和 mapDsipatchToProps 的类型都是函数，前者负责从全局应用状态state中取出所需数据，映射到展示组件的props，后者负责把需要用到的action映射到展示组件的props上
+
+
+### mapStateToProps
+mapStateToProps作用是把state转换成props。state是store中保存的应用状态，会作为参数传递给mapStateToProps，props是被连接的展示组件的props。
+
+每当store中的state更新时，mapStateToProps会重新执行，重新计算传递给展示组件的props，从而触发组件的重新渲染。
+
+> store中的state更新一定会导致mapStateToProps重新执行，但不一定会触发组件render方法的重新执行。如果mapStateToProps新返回的对象和之前的对象浅比较(shallow comparison)相等，组件的shouldComponentUpdate会返回false，render不再触发。
+
+
+connect可以省略mapStateToProps参数，这样state的更新就不会引起组件的重新渲染。
+
+mapStateToProps除了接收state参数外，还可以使用第二个参数，代表容器组件的props对象
+```JavaScript
+// ownProps 是组件的props对象
+function mapStateToProps(state, ownProps) {
+    //...
+}
+
+```
+
+### mapDispatchToProps
+！！！！
+容器组件除了可以从state中读取数据外，还可以发送action更新state，这依赖于connect的第二个参数 mapDispatchToProps. mapDispatchToProps 接收 store.dispatch 方法作为参数返回展示组件用来修改state的函数。
+
+```JavaScript
+// toggleTodo(id) 返回一个action
+function toggleTodo(id) {
+    return {type: 'TOGGLE_TODO', id}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onTodoClick: funciton(id) {
+            dispatch(toggleTodo(id))
+        }
+    }
+}
+
+```
+这样展示组件内就可以调用 this.props.onTodoClick(id) 的action。
+与mapStateToProps相同，mapDispatchToProps也支持第二个参数，代表容器组件的props。
+
+### Provider组件
+通过connect函数创建出容器组件，但这个容器组件如何获取到Redux的store？react-redux提供了Provider组件，示意代码如下：
+```JavaScript
+class Provider extends Component {
+    getChildContext() {
+        return {
+            store: this.props.store
+        };
+    }
+
+    render() {
+        return this.props.children;
+    }
+
+}
+
+Provider.childContextTypes = {
+    store: React.PropTypes.object
+}
+```
+
+Provider组件需要接收一个store属性，然后把store保存到context。Provider组件正是通过context把store传递给子组件，所以使用Provider组件时，一般把它作为根组件，这样内层的任意组件才可以从context中获取store对象。
+
+```JavaScript
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import todoApp from './reducers'
+import App from './components/App'
+
+let store = createStore(todoApp);
+
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+)
+
+```
+
+## 中间件与异步操作
+
+
+
