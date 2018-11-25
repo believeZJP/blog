@@ -981,5 +981,98 @@ render(
 
 ## 中间件与异步操作
 
+### 中间件
+redux的action类比web框架收到的请求，reducer类比web框架的业务逻辑层，因此redux的中间件代表action在到达reducer前经过的处理程序。
+
+实际上，一个redux中间件就是一个函数。redux中间件增强了store的功能，可以利用中间件为action添加一些通用功能，如日志输出，异常捕获等。
+
+通过改造 store.dispatch 增加日志输出功能：
+```JavaScript
+let next = store.dispatch
+
+store.dispatch = function dispatchAndLog(action) {
+    console.log('dispatching', action)
+    let result = next(action)
+    console.log('next state', store.getState())
+    return result
+}
+
+```
+通过重新定义store.dispatch，在发送action前后都添加了日志输出，这就是中间件的雏形。
+
+对store.dispatch方法进行搞糟，在发出action和执行 reducer 这两步之间添加其他功能。
+
+实际项目中通常使用别人直接写好的中间件。如redux-logger.
+
+在应用中会用到applyMiddleware。通过applyMiddleware将中间件logger传给createStore, 完成store.dispatch功能的加强。
+
+applyMiddleware把接收到的中间件放入数组chain中，通过compose(...chain)(store.dispatch)定义加强版的dispatch。
+
+compose是工具函数，compose(f, g, h)等价于 (...args)=>f(g(h(args))). 每个中间件都接收一个包含getState和dispatch的参数对象，在利用中间件执行异步操作时，会用到这两个方法。
+
+### 异步操作
+redux中的异步操作必须借助中间件完成。
+
+[redux-thunk]()是处理异步操作最常用的中间件。
+
+store.dispatch 只能接收普通JavaScript对象代表的action，使用redux-thunk，store.dispatch 就能接收函数作为参数了。异步action先经过redux-thunk的处理，当请求返回后，再发送一个action: dispatch({type: 'RECEIVE_DATA', json}), 把返回的数据发送出去，这时的action就是一个普通的JavaScript对象了，处理流程和不使用中间件流程一样。
+
+> 常用中间件 redux-promise, redux-sage等。
+
+## 小结
+
+本章详细介绍了redux架构以及Redux各组成部分(action, reducer, store)，在react项目中使用redux需要借助react-redux，可以方便的将react组件和redux的store连接。中间件是redux的一大利器，redux中执行异步操作就是通过引入中间件实现的。
+
+
+# redux实战经验
+## 设计state
+
+设计state**容易犯的两个错误**：
+1. 以API作为设计state的依据
+以API作为设计state的依据往往是一个API对应全局state中的一部分结构，且这部分结构同API返回的数据结构保持一致或接近一致。
+
+因为API是基于服务端逻辑设计的，而不是基于应用状态设计的。
+
+2. 以页面UI为设计state的依据
+基于页面UI设计state 。页面UI需要什么样的数据和数据结构，state就设计成什么样。
+
+
+
+### 合理设计state
+
+最重要一句话：像设计数据库一样设计state。
+
+把state看做一个数据库，state中的每一部分状态看做数据库中的一张表，状态中每个字段对应表的一个字段。
+
+设计数据库遵循三个原则：
+- 1. 数据按照领域(Domain)分类存储在不同的表中，不同表中存储的列数据不能重复
+- 2. 表中每一列的数据都依赖于这张表的主键
+- 3. 表中除了主键以外其他列互相之间不能有直接依赖关系
+
+对照以上三个原则，设计state原则：
+- 1. 整个应用的状态按照领域分成若干子状态，子状态之间不能保存重复的数据
+- 2. state以键值对的结构存储数据，以记录的key活ID作为记录索引，记录中的其他字段都依赖于索引
+- 3. state中不能保存可以通过state中的已有字段计算而来的数据，即state中的字段不互相依赖。
+
+> 有开发者习惯把UI状态数据保存在组件state中，由组件自己管理，而不是交给Redux管理。但将UI状态数据也交给redux统一管理有利于应用UI状态的追溯。
+
+
+## 设计模块
+
+定义模块不能只被UI组件使用，各个模块之间也可以互相调用
+
+> action和reducer之间并不存在一对一的关系。一个action可以被多个模块的reducer处理，尤其是多个模块之间存在关联关系时。
+
+良好的模块设计对外暴露的应该是模块的接口，而不是模块的具体结构
+
+# 性能优化
+
+
+
+
+
+
+
+
 
 
