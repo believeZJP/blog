@@ -43,7 +43,7 @@ ZSH_THEME="ys"
 
 [主题配置库](https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes)
 
-# 代码高亮([zsh-syntax-highlighting]())
+# 代码高亮([zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md))
 ```bash
 # 1 安装
 brew install zsh-syntax-highlighting
@@ -51,7 +51,7 @@ brew install zsh-syntax-highlighting
 plugins=(zsh-syntax-highlighting git)
 ```
 
-# 自动提示命令([sh-autosuggestions](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md))
+# 自动提示命令([zsh-autosuggestions]())
 先进到oh-my-zsh的plugins目录
 
 ```bash
@@ -99,10 +99,14 @@ autojump --purge
 ```
 brew update
 ```
+在安装一些软件时，会遇到updating homebrew卡住的问题，这时control+c断开，执行brew update.
 
+会成功更新。
+
+网上还有说法是更换brew镜像源---没试过。
 
 # 启动问候语设置
-```
+```bash
 cd /etc
 sudo pico motd
 control+x
@@ -111,7 +115,97 @@ control+x
 用 y保存退出，再 y一次确认文件名motd
 ```
 打开新标签页，即可看到提示语
+
+
 # 安装iTerm2 后替换为系统自带的bash
 打开iTerm2->prefrences->profiles-command
 选择command输入`/bin/bash`即可
+
+```bash
+# 修改iterm 默认程序
+chsh -s /bin/zsh
+
+# 恢复原来的bash
+chsh -s /bin/bash
+```
+
+# 常用快捷键
+```bash
+# 打开新标签
+command+t
+
+# 关闭标签
+command+w
+
+# 垂直切分窗口
+command+d
+
+# 水平切分窗口
+command+shift+d
+
+# 复制窗口
+左上角shell->duplicate Tab 以当前路径下打开新的窗口
+
+# 进入与返回全屏模式
+command+enter
+
+# 保存当前快照
+Window > Save Window Arrangement.
+
+# 恢复快照：
+Window > Restore Window Arrangement
+
+可以在Preferences > General > Open saved window arrangement.设置自动恢复快照
+
+# 从终端进入Finder
+进入某个目录
+open .
+
+# Finder 进终端
+直接拖拽
+
+# 查看历史命令
+command + ;
+
+# 查看剪贴板历史
+command + shift + h
+```
+
+# 自动补全插件incr ---如果提示多了会卡的很严重，曾经用过，后来替换成zsh-autosuggestions
+
+下载此插件：
+```bash
+wget http://mimosa-pudica.net/src/incr-0.2.zsh   
+
+# 将此插件放到oh-my-zsh目录的插件库下：
+
+# 在~/.zshrc文件末尾加上
+source ~/.oh-my-zsh/plugins/incr/incr*.zsh
+# 更新配置
+source ~/.zshrc   
+```
+
+# 命令参数提示
+举个栗子，之前偶尔需要用到删除文件夹的操作，rm -r [path]，但是常常会忘记中间的参数是什么，现在我只需要这么做：
+```bash
+# 输入 rm - ， 然后按tab
+rm -
+-R  -r  -- remove directories and their contents recursively
+-f      -- ignore nonexistent files, never prompt
+-i      -- prompt before every removal
+```
+
+# [官方插件列表](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview)
+看别人在用的插件
+- fasd
+- history
+
+# 常用命令
+```bash
+#  查看当前所用的 Shell
+echo $SHELL
+
+# 查看系统内已安装的 Shell
+cat /etc/shells
+```
 
