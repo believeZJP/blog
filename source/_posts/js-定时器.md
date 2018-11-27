@@ -22,6 +22,8 @@ var timeoutId = window.setTimeout(code[, delay]);
 * delay: 延迟的时间(单位：毫秒)，默认值0
 * param1, param2: 向延迟函数传递的参数。
 
+<!--- more --->
+
 ## setInterval: 以固定时间间隔重复调用一个函数或代码段
 
 ```

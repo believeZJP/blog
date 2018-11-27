@@ -24,6 +24,8 @@ function render() {
 
 ```
 
+<!--- more --->
+
 # return null
 不需要返回可以返回null, 代替空div, 提升效率
 ```javascript

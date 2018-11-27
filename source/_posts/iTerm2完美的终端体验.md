@@ -7,15 +7,14 @@ tags:
 - iTerm2
 ---
 
-mac自带的终端实在是差劲，改用iTerm2可以6到飞起
+mac自带的终端实在是差劲，改用iTerm2可以6到飞起~~~
 
 # 安装
 
-[官网下载](https://www.iterm2.com/)
-直接下载安装即可。
-# 安装oh-my-zsh
+[直接下载](https://www.iterm2.com/)安装即可。
 
-[github地址](https://github.com/robbyrussell/oh-my-zsh)
+# 安装[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+
 via curl
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -26,6 +25,8 @@ via wget
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 ```
+
+<!--- more --->
 
 # 配置主题
 修改 ZSH_THEME="主题名"

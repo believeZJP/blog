@@ -17,6 +17,7 @@ npm install -g react-native
 npm install -g react-native-cli
 ```
 
+<!---more--->
 
 # 启动虚拟器 
 avd 是灰色 无法点击
