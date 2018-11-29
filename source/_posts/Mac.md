@@ -195,8 +195,14 @@ http://soft.macx.cn/6205.htm
 # iPhone 8强制重启
 先按音量+，再按音量-，再长按电源键10s左右会显示开机画面。
 
+# homebrew 软件下载安装利器
+[下载安装]https://brew.sh/index_zh-cn)
+[所有软件列表](https://formulae.brew.sh/formula/)
+安装
+```bash
+brew install wget
+```
 # mac常用软件下载地址
 [mac-torrent-download](https://mac-torrent-download.net/)
-
 # 参考链接
 - [程序员如何优雅地使用 macOS？](https://www.zhihu.com/question/20873070)
