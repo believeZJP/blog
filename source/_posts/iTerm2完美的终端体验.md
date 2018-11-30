@@ -159,7 +159,8 @@ Window > Restore Window Arrangement
 可以在Preferences > General > Open saved window arrangement.设置自动恢复快照
 
 # 从终端进入Finder
-进入某个目录
+
+进入某个目录
 open .
 
 # Finder 进终端

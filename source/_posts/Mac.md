@@ -204,5 +204,9 @@ brew install wget
 ```
 # mac常用软件下载地址
 [mac-torrent-download](https://mac-torrent-download.net/)
+
+
+
+
 # 参考链接
 - [程序员如何优雅地使用 macOS？](https://www.zhihu.com/question/20873070)

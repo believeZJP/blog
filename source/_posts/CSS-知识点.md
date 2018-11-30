@@ -29,6 +29,7 @@ tags:
 - **优化CSS可用性**：用一些小技巧
 - **解释代码**：用注释和详细的文档来
 
+<!--more-->
 
 # 页面首次加载动画展示
 - [WOW中文文档](https://github.com/matthieua/WOW)
@@ -149,3 +150,26 @@ transform 动画由GPU控制，支持硬件加速，并不需要软件方面的�
 `<strong></strong>`标签加粗是为了突出重点
 在网页中使用`<strong></strong>`突出的内容更容易被网页搜索蜘蛛搜索到。
 盲人朋友使用阅读设备阅读网络时：`<strong>`会重读，`<b>`不会
+
+# CSS优先级算法如何计算
+
+- 元素选择符： 1
+- class选择符： 10
+- id选择符：100
+- 元素标签：1000
+- !important声明的样式优先级最高，如果冲突再进行计算。
+
+如果优先级相同，则选择最后出现的样式。
+继承得到的样式的优先级最低。
+
+# box-sizing属性
+用来控制元素的盒子模型的解析模式，默认为content-box
+context-box：W3C的标准盒子模型，设置元素的 height/width 属性指的是content部分的高/宽
+border-box：IE传统盒子模型。设置元素的height/width属性指的是border + padding + content部分的高/宽
+inherit:   应从父元素继承 box-sizing 属性的值
+
+# 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？
+标准盒子模型：宽度=内容的宽度（content）+ border + padding + margin
+低版本IE盒子模型：宽度=内容宽度（content+border+padding）+ margin
+
+

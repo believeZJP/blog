@@ -18,6 +18,8 @@ tags:
 }
 ```
 
+<!---more--->
+
 # placeholder样式修改
 
 ```css
