@@ -13,3 +13,5 @@ tags:
     画布定时重绘
 3.    加入键盘鼠标控制
     可操控
+
+动画框架[PixiJS](https://pixijs.io)
