@@ -2,7 +2,7 @@
 title: 搭建Hexo博客笔记
 tags: hexo
 ---
-
+[toc]
 # hexo 搭建
 1. [HEXO官网](https://hexo.io/zh-cn/docs/)
 2. [文档](https://hexo.io/zh-cn/docs/)
@@ -149,6 +149,18 @@ symbols_count_time:
 ```
 重启服务, 刷新页面, 可以看到效果。
 这个只针对文章详情页才会展示。列表页不会展示。
+
+# 展示总访问量
+[不蒜子 - 极简网页计数器](http://busuanzi.ibruce.info/)
+
+在themes/next/layout/_partials/footer.swig中添加如下代码
+
+```html
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+```
+即可在首页末尾看到总数，因为本地是localhost:4000,所以数量有误
 
 # 修改footer内容
 next主题默认会有由next强力驱动等文字。不喜欢可以去掉, 配置方法:
@@ -381,6 +393,57 @@ avatar:
   rotated: true
 ```
 
+# 添加缓存
+[hexo-offline](https://www.npmjs.com/package/hexo-offline)
+```
+npm i hexo-offline --save
+```
+# 修改默认的文章链接
+
+[官方文档](https://hexo.io/zh-cn/docs/permalinks.html)
+
+默认文章链接是http://localhost:4000/2018/10/18/hello-world/
+
+有年月日层级太深，不利于SEO
+
+修改为http://localhost:4000/posts/hello-world/
+
+在_config.yml中搜索`permalink`,修改如下
+```JavaScript
+# permalink: :year/:month/:day/:title/
+permalink: :category/:title/
+```
+搜索`default_category`,修改如下
+```JavaScript
+default_category: posts
+```
+
+重启服务即可
+
+# 绑定自己域名
+在阿里云控制台域名修改域名解析，记录类型CNAME, 记录纸为believezjp.github.io
+
+在 hexo 项目下，source 文件夹下面创建 CNAME 文件（没有后缀名的），在里面写上购买的域名。
+```
+believezjp.github.io
+```
+在 github 上面，打开 username.github.io 项目的（Settings）设置，然后在 GitHub Pages的 Custom domain设置里填上购买的域名。
+
+详见:[参考链接](https://blog.csdn.net/wgshun616/article/details/81019739)
+
+# 替换jquery资源库地址
+
+在主题目录下找到after-footer.ejs文件，PS：主题目录指的是themes下next目录
+
+找到下面一段代码
+```html
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+```
+修改为：（将jquery的在线地址修改为百度的静态资源库地址）
+```html
+<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+```
 
 # 项目添加changelog❌
 ```
