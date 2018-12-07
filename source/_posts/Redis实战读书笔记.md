@@ -58,6 +58,7 @@ xcode-select --install
 |set key value  |设置 key 的值      |
 |get key	    |获取 key 的值      |
 |exists key	    |查看此 key 是否存在 |
+|del key	    |删除存储在给定键中的值|
 |keys *	        |查看所有的 key     |
 |flushall       |消除所有的 key     |
 
@@ -68,4 +69,145 @@ Redis是一个远程内存数据库，具有复制特性及未解决问题而升
 Redis提供了5种不同类型的数据结构，各种问题都可映射到这些数据结构。
 
 # redis简介
+
+## redis是什么
 Redis 是一个速度非常快的非关系数据库(non-relational database), 可以存储键(key)与5种不同类型的值之间的映射(mapping), 可以将存储在内存的键值对数据持久化到硬盘，还可以通过复制，持久化和客户端分片等特性，可以将redis扩展成一个能够包含数百GB数据、每秒处理上百万请求的系统。
+
+## redis能做什么
+- - - 
+
+
+# redis数据结构
+
+5种结构
+|结构类型|存储的值|读写能力|
+|-------|-------|------|
+|string|可以是字符串、整数或浮点数|对整个字符串或者字符串的其中一部分执行操作；对整数和浮点数执行自增或自减操作|
+|list  |一个链表，每个节点都包含一个字符串|从链表两端推入或弹出元素；根据偏移量对链表进行trim;读取单个或多个元素；根据值查找或移除元素|
+|set   |包含字符串的无序收集器(unordered collection), 并且被包含的每个字符串都是独一无二、各不相同的|添加、获取、移除单个元素；检查一个元素是否存在；计算交集，并集，差集；从集合里随机获取元素|
+|hash  |包含键值对的无序散列表|添加、获取移除单个键值对；获取所有键值对|
+|zset(有序集合)|字符串成员(member)与浮点数分值(score)之间的有序映射，元素的排列书序有分值大小决定|添加、获取、移除单个元素；根据分值范围(range)或成员来获取元素|
+
+
+## string
+
+形如: `hello: world`
+
+set, get, del 使用示例
+
+```bash
+set hello world
+get hello
+del hello
+get hello
+```
+> 命令返回1表示成功执行， 0表示执行失败
+
+## list 列表
+
+一个列表结构可以有序的存储多个字符串，**列表可以包含相同的元素**
+形如: `list-key: [item, item2, item]`
+
+列表命令
+|命令|行为|
+|---|----|
+|lpush  |将元素推入列表左端(left end)|
+|rpush  |            ...右端(right end)|
+|lpop   |从列表左端弹出元素|
+|rpop   |从右端弹出元素  |
+|lindex |获取列表在给定位置的单个元素|
+|lrange |获取列表给定范围所有值|
+
+```bash
+rpush list-key item
+rpush list-key item2
+rpush list-key item
+lrange list-key 0 -1
+lindex list-key 1
+lpop list-key
+lrange list-key 0 -1
+```
+
+## set 集合
+
+集合通过散列表保证自己**存储的每个字符串是各不相同的**(这些散列表只有键，没有与键相关联的值)
+
+集合使用无序(unordered)方式存储元素.
+形如: `setkey: [item, item2, item3]`
+
+集合命令
+|命令|行为|
+|---|----|
+|sadd       |将给定元素添加到集合|
+|smembers   |返回集合所有元素(慢，慎用)|
+|sismember  |检查给定元素是否存在|
+|srem       |如果给定元素存在，移除|
+
+```bash
+sadd setkey item
+sadd setkey item2
+sadd setkey item3
+sadd setkey item // 失败
+smembers setkey
+sismember setkey item4
+sismember setkey item
+srem setkey item2
+srem setkey item2
+
+```
+
+## hash 散列
+
+散列可以存储多个键值对之间的映射，和字符串一样，既可以是字符串也可以是数字值，并且可以对散列存储的数字值执行自增自减操作。
+
+散列很多当面像一个微缩版的redis，不少字符串命令都有相应的散列版本。
+
+形如：`hashset: [{subkey1: value1},{subkey2: value2},{subkey3: value3},]`
+
+散列命令
+|命令|  行为|
+|---|------|
+|hset   |在散列里关联给定的键值对|
+|hget   |获取给定散列键的值|
+|hgetall|获取散列所有键值对|
+|hdel   |如果键存在，移除|
+
+```bash
+hset hashkey subkey1 value1
+hset hashkey subkey2 value2
+hset hashkey subkey3 value3
+hgetall hashkey
+hdel hashkey subkey2
+hdel hashkey subkey2
+hdel hashkey subkey1
+hgetall hashkey
+```
+
+## zset 有序集合
+
+有序集合和散列一样，都用于存储键值对，有序集合的键值被称为成员(member)，每个成员都是各不相同的；而有序集合的值被称为分值(score)，分值必须为浮点数。有序集合是Redis里唯一一个既可以根据成员访问元素，又可以根据分值及分值的排序顺序来访问元素的结构
+
+
+有序集合命令
+|命令|行为|
+|---|----|
+|zadd   |将带有给定分值的成员添加到有序集合里|
+|zrange |根据元素在有序排列中所处的位置，从有序集合李获取多少个元素|
+|zrangebyscore|获取有序集合在给定分值范围内的所有元素|
+|zrem   |如果给定成员存在，移除|
+
+```bash
+zadd zsetkey 728 member1
+zadd zsetkey 928 member0
+zadd zsetkey 928 member0
+
+zrange zsetkey 0 -1 withscores
+zrangebyscore zsetkey 0 800 withscores
+
+zrem zsetkey member1
+zrem zsetkey member1
+
+zrange zsetkey 0 -1 withscores
+```
+
+
