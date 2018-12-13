@@ -5,7 +5,7 @@ updated: 2018-12-09 19:30:57
 tags:
     - React
 ---
-
+[TOC]
 # 高阶组件
 高阶组件（ higher-order component ，HOC ）是 React 中复用组件逻辑的一种进阶技巧。
 它本身并不是 React 的 API，而是一种 React 组件的设计理念，众多的 React 库已经证明了它的价值，例如耳熟能详的 react-redux。
@@ -269,26 +269,6 @@ const CommentWithRelay = Relay.createContainer(Comment, config);
 // React Redux's `connect`
 const ConnectedComment = connect(commentSelector, commentActions)(Comment);
 ```
-## 约定: 最大化组合(Maximizing Composability)
-
-不是所有的高阶组件看起来都是一样的。有时候，它接受包裹组件作为单一参数：
-
-```js
-const NavbarWithRouter = withRouter(Navbar);
-```
-
-通常情况下，高阶组件接受其他的参数。在Relay这个例子中，配置对象用来指定组件的数据依赖关系：
-
-```js
-const CommentWithRelay = Relay.createContainer(Comment, config);
-```
-
-高阶组件最常见的签名如下：
-
-```js
-// React Redux's `connect`
-const ConnectedComment = connect(commentSelector, commentActions)(Comment);
-```
 
 **什么?!**，如果你把它分开，就更容易看到发生了什么。
 
@@ -329,7 +309,6 @@ const EnhancedComponent = enhance(WrappedComponent)
 
 最常见的方法是给被包裹元素包裹一个显示名称(display name)。因此，如果你的高阶组件名字为`withSubscription`，被包裹的元素名称为`CommentList`，那就选择名称为`WithSubscription(CommentList)`。
 
-
 ```js
 function withSubscription(WrappedComponent) {
   class WithSubscription extends React.Component {/* ... */}
@@ -341,7 +320,6 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 ```
-
 
 ## 警告
 
@@ -421,39 +399,9 @@ export { someFunction };
 import MyComponent, { someFunction } from './MyComponent.js';
 ```
 
-### Refs不会被传递
-
-尽管惯例是高阶组件会给被包裹组件传递所有的属性(props)，但是不会传递`refs`。因为`ref`不是一个属性，就像`key`一样，它是由React特殊处理的。如果你给高阶组件产生的组件的元素添加`ref`,`ref`引用的是外层的容器组件的实例，而不是被包裹的组件。
-
-如果你遇到这个问题，最好的解决方法是避免使用`ref`。有时候，React新手用户依赖于`refs`，这时候`props`是更好的选择。
-
-也就是说，也就是说`refs`有时候是必要的，否则React也不会提供`refs`。
-选中输入框(focusing an input field)是一个你可能希望强制控制组件的例子。在这种例子中，一个解决办法是通过起一个别名，将`ref`作为一个普通的props传递：
-
-```js
-function Field({ inputRef, ...rest }) {
-  return <input ref={inputRef} {...rest} />;
-}
-
-// Wrap Field in a higher-order component
-const EnhancedField = enhance(Field);
-
-// Inside a class component's render method...
-<EnhancedField
-  inputRef={(inputEl) => {
-    // This callback gets passed through as a regular prop
-    this.inputEl = inputEl
-  }}
-/>
-
-// Now you can call imperative methods
-this.inputEl.focus();
-```
-
-无论如何，这都是一个完美的解决方案。我们倾向于`refs`是由库去处理，而不是要求你手动地处理。我们正在寻找解决这个问题的办法，以便在使用高阶组件时不需要注意这个问题。
-
 
 # [参考链接]
+
 [React 进阶之高阶组件](https://github.com/MrErHu/React-Advanced-Guides-CN/blob/master/doc/Higher%20Order%20Components.md)
 
 [深入理解 React 高阶组件](https://www.jianshu.com/p/0aae7d4d9bc1)
@@ -540,14 +488,14 @@ React.createElement(WrappedComponent, this.props, null)
 ```
 
 Props Proxy 可以做什么
-- 更改 props
+- 操作 props
 - 通过 refs 获取组件实例
 - 抽象 state
 - 把 WrappedComponent 与其它 elements 包装在一起
 
-- 操作props
+### 操作props
 
- 接收到props可以做任何读取，编辑，删除等自定义操作。都可以通过props再传下去
+接收到props可以做任何读取，编辑，删除等自定义操作。都可以通过props再传下去
 
 ```js
 import React, { Component } from 'react';
@@ -569,6 +517,120 @@ export default propsProxyHoc;
 ```
 在Usual组件中会接收到handleClick属性
 
+在修改或删除重要 props 的时候要小心，你可能应该给高阶组件的 props 指定命名空间（namespace），以防破坏从外传递给 WrappedComponent 的 props。
+例子：添加新 props。这个应用目前登陆的一个用户可以在 WrappedComponent 通过 this.props.user 获取
+
+```js
+function ppHOC(WrappedComponent) {
+  return class PP extends React.Component {
+    render() {
+      const newProps = {
+        user: currentLoggedInUser
+      }
+      return <WrappedComponent {...this.props} {...newProps}/>
+    }
+  }
+}
+```
+
+### 通过refs获取组件实例
+
+Refs不会被传递
+
+尽管惯例是高阶组件会给被包裹组件传递所有的属性(props)，但是不会传递`refs`。因为`ref`不是一个属性，就像`key`一样，它是由React特殊处理的。如果你给高阶组件产生的组件的元素添加`ref`,`ref`引用的是外层的容器组件的实例，而不是被包裹的组件。
+
+如果你遇到这个问题，最好的解决方法是避免使用`ref`。有时候，React新手用户依赖于`refs`，这时候`props`是更好的选择。
+
+也就是说，也就是说`refs`有时候是必要的，否则React也不会提供`refs`。
+选中输入框(focusing an input field)是一个你可能希望强制控制组件的例子。在这种例子中，一个解决办法是通过起一个别名，将`ref`作为一个普通的props传递：
+
+```js
+function Field({ inputRef, ...rest }) {
+  return <input ref={inputRef} {...rest} />;
+}
+
+// Wrap Field in a higher-order component
+const EnhancedField = enhance(Field);
+
+// Inside a class component's render method...
+<EnhancedField
+  inputRef={(inputEl) => {
+    // This callback gets passed through as a regular prop
+    this.inputEl = inputEl
+  }}
+/>
+
+// Now you can call imperative methods
+this.inputEl.focus();
+```
+
+无论如何，这都是一个完美的解决方案。我们倾向于`refs`是由库去处理，而不是要求你手动地处理。我们正在寻找解决这个问题的办法，以便在使用高阶组件时不需要注意这个问题。
+
+
+### 抽象state
+
+可以通过向 WrappedComponent 传递 props 和 callbacks（回调函数）来抽象 state，这和 React 中另外一个组件构成思想 [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 很相似。
+
+例子：在下面这个抽象 state 的例子中，我们幼稚地（原话是naively :D）抽象出了 name input 的 value 和 onChange。我说这是幼稚的是因为这样写并不常见，但是你会理解到点。
+```js
+function ppHOC(WrappedComponent) {
+  return class PP extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        name: ''
+      }
+      this.onNameChange = this.onNameChange.bind(this)
+    }
+    onNameChange(event) {
+      this.setState({
+        name: event.target.value
+      })
+    }
+    render() {
+      const newProps = {
+        name: {
+          value: this.state.name,
+          onChange: this.onNameChange
+        }
+      }
+      return <WrappedComponent {...this.props} {...newProps}/>
+    }
+  }
+}
+```
+
+然后这样使用它：
+```js
+@ppHOC
+class Example extends React.Component {
+  render() {
+    return <input name="name" {...this.props.name}/>
+  }
+}
+```
+这里的 input 自动成为一个受控的 input。
+
+### 把 WrappedComponent 与其它 elements 包装在一起
+
+出于操作样式、布局或其它目的，你可以将 WrappedComponent 与其它组件包装在一起。一些基本的用法也可以使用正常的父组件来实现（附录 B），但是就像之前所描述的，使用高阶组件你可以获得更多的灵活性。
+
+```js
+function ppHOC(WrappedComponent) {
+  return class PP extends React.Component {
+    render() {
+      return (
+        <div style={{display: 'block'}}>
+          <WrappedComponent {...this.props}/>
+        </div>
+      )
+    }
+  }
+}
+
+```
+
+
 ## 反向继承
 
 反向继承(Inheritance Inversion), 简称II，
@@ -588,10 +650,162 @@ function iiHOC(WrappedComponent) {
 反向继承允许高阶组件通过 this 关键词获取 WrappedComponent，意味着它可以获取到 state，props，组件生命周期（component lifecycle）钩子，以及渲染方法（render）。
 
 
+**可以用反向继承高阶组件做什么？**
+- 渲染劫持（Render Highjacking）
+- 操作 state
+
+### 渲染劫持
+
+被叫做渲染劫持是因为高阶组件控制了 WrappedComponent 生成的渲染结果，并且可以做各种操作。
+
+通过渲染劫持你可以：
+
+- 『读取、添加、修改、删除』任何一个将被渲染的 React Element 的 props
+- 在渲染方法中读取或更改 React Elements tree，也就是 WrappedComponent 的 children
+- 根据条件不同，选择性的渲染子树
+- 给子树里的元素变更样式
+
+*渲染 指的是 WrappedComponent.render 方法
+
+> 你无法更改或创建 props 给 WrappedComponent 实例，因为 React 不允许变更一个组件收到的 props，但是你可以在 render 方法里更改子元素/子组件们的 props。
+
+就像之前所说的，反向继承的高阶组件不能保证一定渲染整个子元素树，这同时也给渲染劫持增添了一些限制。通过反向继承，你只能劫持 WrappedComponent 渲染的元素，这意味着如果 WrappedComponent 的子元素里有 Function 类型的 React Element，你不能劫持这个元素里面的子元素树的渲染。
+
+例子1：条件性渲染。如果 this.props.loggedIn 是 true，这个高阶组件会原封不动地渲染 WrappedComponent，如果不是 true 则不渲染（假设此组件会收到 loggedIn 的 prop）
+```js
+function iiHOC(WrappedComponent) {
+  return class Enhancer extends WrappedComponent {
+    render() {
+      if (this.props.loggedIn) {
+        return super.render()
+      } else {
+        return null
+      }
+    }
+  }
+}
+```
+
+例子2：通过 render 来变成 React Elements tree 的结果
+```js
+function iiHOC(WrappedComponent) {
+  return class Enhancer extends WrappedComponent {
+    render() {
+      const elementsTree = super.render()
+      let newProps = {};
+      if (elementsTree && elementsTree.type === 'input') {
+        newProps = {value: 'may the force be with you'}
+      }
+      const props = Object.assign({}, elementsTree.props, newProps)
+      const newElementsTree = React.cloneElement(elementsTree, props, elementsTree.props.children)
+      return newElementsTree
+    }
+  }
+}
+```
+
+在这个例子中，如果 WrappedComponent 的顶层元素是一个 input，则改变它的值为 “may the force be with you”。
+这里你可以做任何操作，比如你可以遍历整个 element tree 然后变更某些元素的 props。这恰好就是 Radium 的工作方式。
+
+> 注意：你不能通过 Props Proxy 来做渲染劫持
+> 即使你可以通过 WrappedComponent.prototype.render 获取它的 render 方法，你需要自己手动模拟整个实例以及生命周期方法，而不是依靠 React，这是不值当的，应该使用反向继承来做到渲染劫持。要记住 React 在内部处理组件的实例，而你只通过 this 或 refs 来处理实例。
+
+### 操作 state
+
+高阶组件可以 『读取、修改、删除』WrappedComponent 实例的 state，如果需要也可以添加新的 state。需要记住的是，你在弄乱 WrappedComponent 的 state，可能会导致破坏一些东西。通常不建议使用高阶组件来读取或添加 state，添加 state 需要使用命名空间来防止与 WrappedComponent 的 state 冲突。
+
+例子：通过显示 WrappedComponent 的 props 和 state 来 debug
+```js
+export function IIHOCDEBUGGER(WrappedComponent) {
+  return class II extends WrappedComponent {
+    render() {
+      return (
+        <div>
+          <h2>HOC Debugger Component</h2>
+          <p>Props</p> <pre>{JSON.stringify(this.props, null, 2)}</pre>
+          <p>State</p><pre>{JSON.stringify(this.state, null, 2)}</pre>
+          {super.render()}
+        </div>
+      )
+    }
+  }
+}
+```
 
 
+## 案例学习
+### React-Redux
 
+React-Redux 是 Redux 官方的对于 React 的绑定。 其中一个方法 connect 处理了所有关于监听 store 的 bootstrap 代码 以及清理工作，这是通过 Props Proxy 来实现的。
 
+如果你曾经使用过 Flux 你会知道 React 组件需要和一个或多个 store 连接，并且添加/删除对 store 的监听，从中选择需要的那部分 state。而 React-Redux 帮你把它们实现了，自己就不用再去写这些了。
 
+### Radium
+Radium 是一个增强了行内（inline）css 能力的库，它允许了在 inline css 使用 CSS 伪选择器。[点此](https://github.com/FormidableLabs/radium)了解关于使用 inline css 的好处.
 
+那么，Radium 是怎么允许 inline css 来实现 CSS 伪选择器的呢（比如 hover）？它实现了一个反向继承来使用渲染劫持，添加适当的事件监听来模拟 CSS 伪选择器。这要求 Radium 读取整个 WrappedComponent 将要渲染的元素树，每当找个某个元素带有 style prop，它就添加对应的时间监听 props。简单地说，Radium 修改了原先元素树的 props（实际上会更复杂，但这么说你可以理解到要点所在）。
 
+Radium 只暴露了一个非常简单的 API 给开发者。这非常惊艳，因为开发者几乎不会注意到它的存在和它是怎么发挥作用的，而实现了想要的功能。这揭露了高阶组件的能力。
+
+## 附录
+
+### 附录A: 高阶组件和参数
+
+有时，在高阶组件中使用参数是很有用的。这个在以上所有例子中都不是很明显，但是对于中等的 JavaScript 开发者是比较自然的事情。让我们迅速的介绍一下。
+
+例子：一个简单的 Props Proxy 高阶组件搭配参数。重点是这个 HOCFactoryFactory 方法。
+
+```js
+function HOCFactoryFactory(...params) {
+  // do something with params
+  return function HOCFactory(WrappedComponent) {
+    return class HOC extends React.Component {
+      render() {
+        return <WrappedComponent {...this.props}/>
+      }
+    }
+  }
+}
+```
+你可以这样使用它：
+```js
+HOCFactoryFactory(params)(WrappedComponent)
+//or
+@HOCFatoryFactory(params)
+class WrappedComponent extends React.Component{}
+```
+
+### 附录 B：和父组件的不同之处
+
+父组件就是单纯的 React 组件包含了一些子组件（children）。React 提供了获取和操作一个组件的 children 的 APIs。
+
+例子：父组件获取它的 children
+```js
+class Parent extends React.Component {
+  render() {
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    )
+  }
+}
+
+render((
+  <Parent>
+    {children}
+  </Parent>
+), mountNode)
+
+```
+
+现在来总结一下父组件能做和不能做的事情（与高阶组件对比）：
+
+- 渲染劫持
+- 操作内部 props
+- 抽象 state。但是有缺点，不能再父组件外获取到它的 state，除非明确地实现了钩子。
+- 与新的 React Element 包装。这似乎是唯一一点，使用父组件要比高阶组件强，但高阶组件也同样可以实现。
+- Children 的操控。如果 children 不是单一 root，则需要多添加一层来包括所有 children，可能会使你的 markup 变得有点笨重。使用高阶组件可以保证单一 root。
+- 父组件可以在元素树立随意使用，它们不像高阶组件一样限制于一个组件。
+
+通常来讲，能使用父组件达到的效果，尽量不要用高阶组件，因为高阶组件是一种更 hack 的方法，但同时也有更高的灵活性。
