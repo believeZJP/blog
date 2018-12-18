@@ -188,6 +188,16 @@ https://support.apple.com/zh-cn/HT204063
 # 重置 Mac 上的系统管理控制器 (SMC)
 https://support.apple.com/zh-cn/HT201295
 
+# UI 切图工具
+- [sketch](http://www.sketchcn.com/)
+绘图工具
+[下载破解版](https://www.zhinin.com/sketch-mac.html)
+
+- [PxCook](http://www.fancynode.com.cn/pxcook)
+生成前端代码利器
+
+- [Flavor](http://www.fancynode.com.cn/flavor)
+sketch导出为PxCook插件Flavor
 
 # Windows虚拟机
 http://soft.macx.cn/6205.htm
