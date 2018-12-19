@@ -199,6 +199,12 @@ https://support.apple.com/zh-cn/HT201295
 - [Flavor](http://www.fancynode.com.cn/flavor)
 sketch导出为PxCook插件Flavor
 
+# Xmind安装
+
+[下载地址](http://www.carrotchou.blog/6539.html)
+下载主程序和破解补丁。 先安装主程序，按照破解补丁里的步骤安装即可。
+
+
 # Windows虚拟机
 http://soft.macx.cn/6205.htm
 # TODO
