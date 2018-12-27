@@ -204,6 +204,13 @@ sketch导出为PxCook插件Flavor
 [下载地址](http://www.carrotchou.blog/6539.html)
 下载主程序和破解补丁。 先安装主程序，按照破解补丁里的步骤安装即可。
 
+# mac关闭指定端口
+```bash
+sudo lsof -i:8090
+udo kill -9 [pid]
+# eg
+udo kill -9 59296
+```
 
 # Windows虚拟机
 http://soft.macx.cn/6205.htm
