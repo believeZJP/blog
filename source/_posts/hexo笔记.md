@@ -593,8 +593,34 @@ feat(blog): add comment section
 - wip：移除文件或者代码
 - chore：不属于以上类型的其他类型
 
+# 生成changelog
 
+Change log 就可以用脚本自动生成。生成的文档包括以下三个部分：
+- New features
+- Bug fixes
+- Breaking changes.
 
+[onventional-changelog](https://github.com/conventional-changelog/conventional-changelog) 就是生成 Change log 的工具，运行下面的命令即可。
+用到的是其中的[cli工具](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli)
+```bash
+npm install -g conventional-changelog-cli
+conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0
+```
+
+为了方便使用，可以将其写入 package.json 的 scripts 字段：
+
+```json
+{
+    "scripts": {
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0"
+    }
+}
+```
+以后，直接运行下面的命令即可：
+
+```bash
+npm run changelog
+```
 
 # hexo 命令
 
