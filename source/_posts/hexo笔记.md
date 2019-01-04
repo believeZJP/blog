@@ -543,6 +543,59 @@ npm install --save conventional-changelog
 conventional-changelog -p angular -i CHANGELOG.md -w -r 0
 ```
 
+# 项目添加git commit 规范
+
+[插件链接](https://github.com/marionebl/commitlint)
+
+```bash
+npm install --save-dev @commitlint/{cli,config-conventional}
+echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+npm install --save-dev husky
+
+# 在package.json中配置
+# package.json
+{
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }  
+  }
+}
+```
+
+提交方式：
+
+格式：
+> type(scope?): subject  # scope 可选
+
+subject是 commit 目的的简短描述，不超过50个字符，且结尾不加句号（.）
+
+eg:
+```
+chore: run tests on travis ci
+fix(server): send cors headers
+feat(blog): add comment section
+
+
+```
+
+- build: 主要目的是修改项目构建系统(例如 gulp，webpack，rollup 的配置等)的提交
+- ci: 主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交
+- docs：文档（documentation）
+- feat：新功能（feature）
+- merge: 合并分支
+- fix：修复bug
+- perf: (performance) 优化相关，比如提升性能、体验
+- refactor：重构（即不是新增功能，也不是修改bug的代码变动）
+- revert: 回滚到上一个版本
+- style： 格式（不影响代码运行的变动）
+- test：增加测试
+- wip：移除文件或者代码
+- chore：不属于以上类型的其他类型
+
+
+
+
 # hexo 命令
 
 常用命令
