@@ -82,3 +82,127 @@ getBooksByAuthorWithPromise(id) {
 这里如果调用`getBooksByAuthorWithPromise`可能返回Promise(正常情况)或null(异常情况id为空), 在这种情况下，调用者不能调用.then()
 
 # async/await 可能会产生误导
+
+有人将`async/await`与Promise进行比较，并声称它是JavaScript下一代异步编程风格。
+`async/await`是一种改进，但它只不过是一种语法糖，不会完全改变编码风格。
+
+本质上，async 函数仍然是Promise。 正确使用async函数之前，必须先了解promise.更糟糕的是大多数时，需要在使用promise时同时使用async函数。
+
+这意味着，getBooksByAuthorWithAwait将返回一个promise，所以也可以使用.then(...)方式来调用它。
+
+# async/await
+
+使用async/await时，常见错误：
+
+## 太过串行化
+
+尽管await可以使代码看起来像是同步的，但实际上他们仍然是异步的，必须避免太过串行化。
+
+```js
+async getBooksByAuthor(id) {
+    const books = await bookModel.fetchAll();
+    const author = await authorModel.fetch(id);
+    return {
+        author,
+        books: books.filter(book => book.authorId === id)
+    };
+}
+```
+以上代码看似正确，然而这是错误的。
+- 1. await bookModel.fetchAll() 会等待fetchAll()直到fetchAll返回结果
+- 2. 然后await authorModel.fetch(id) 被调用
+
+第二个fetch不依赖于第一个fetch的结果，实际上可以并行调用。然而这里用了await，两个调用变成串行，总的执行时间比并行版本要长的多。
+
+正确写法：
+```js
+async getBooksByAuthor(id) {
+    const bookPromise = bookModel.fetchAll();
+    const authorPromise = authorModel.fetch(id);
+    const book = await bookPromise;
+    const author = await authorPromise;
+    return {
+        author,
+        books: books.filter(book => book.authorId === id)
+    };
+}
+```
+
+如果数组中每个item都要请求异步数据，必须依赖promise
+
+```js
+async getAuthor(id) {
+    // 会引起串行调用，增加运行时间
+    const authors = _.map(
+        authorIds,
+        id => await authorModel.fetch(id)
+    );
+}
+
+正确方式
+const promises = _.map(authorIds, id => authorModel.fetch(id));
+const authors = await Promise.all(promises);
+```
+
+总之，仍需将流程视为异步的，然后用await写出同步的代码，在复杂的流程中，直接使用promise可能更方便。
+
+# 错误处理
+
+在promise中，异步函数有两个返回值： resolved 和 rejected。可以用.then()处理正常情况，用.catch()处理异常情况。然而用`async/await`方式处理错误比较棘手。
+
+## try...catch
+
+推荐用try...catch语法捕获异常。所以最好把await命令放到try...catch代码块中。
+
+```js
+class bookModel {
+    fetchAll() {
+        return new Promise((resolve, reject) => {
+            window.setTimeout(() => {
+                reject({error: 400})
+            }, 1000);
+        });
+    }
+}
+// async/await
+async getBooksByAuthorWithAwait(id) {
+    try {
+        const books = await bookModel.fetchAll();
+    } catch (error) {
+        console.log(error); // {error: 400}
+    }
+}
+```
+捕捉到异常处理方法：
+- 返回一个正常值。(不在catch块中使用任何return语句，相当于return undefined)
+- 想让调用者处理它，可以直接抛出普通的错误对象。如throw error。允许在promise.catch中处理错误。
+
+使用try...catch好处：
+- 简单，易于理解
+- 如果不需要每部执行错误处理，可以在一个try...catch块中包装多个await调用来处理一个地方的错误。
+
+这种方法有个缺陷，由于try...catch会捕获代码块中的异常，所以通常不会被promise捕获的异常也会被捕获到。
+```js
+class BookModel {
+    fetchAll() {
+        cb();// cb未定义，导致异常
+        return fetch('/books');
+    }
+}
+
+try {
+    bookModel.fetchAll();
+} catch(err) {
+    console.log(err); // 打印 cb is not undefined
+}
+```
+代码会打印`cb is not undefined`，这个错误是由console.log打印出来，而不是JavaScript本身。有时，这是致命的，如果BookModel被包含在一些列函数调用中，其中一个调用者吞噬了错误，那么很难找到这样一个未定义错误。
+
+## 让函数返回两个值
+`[err, user] = await to(UserModel.findById(1));`
+
+## 使用.catch
+
+
+
+
