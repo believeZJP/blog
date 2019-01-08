@@ -633,6 +633,11 @@ npm run changelog
 `hexo server --drafts`
 下面这条命令可以把草稿变成文章，或者页面：
 `hexo publish [layout] <filename>`
+或`hexo P <filename>`
+filename为不包含md后缀的文章名称。它的原理只是将文章从 source/_drafts 移动到 source/_posts 而已。
+
+> 若日后想将正式文章转为为草稿，只需手动将文章从 source/_posts 目录移动到 source/_drafts 目录即可。
+
 
 
 # hexo 命令

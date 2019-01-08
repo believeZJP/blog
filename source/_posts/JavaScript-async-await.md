@@ -37,7 +37,7 @@ await 等待的是一个表达式，这个表达式的计算结果是 Promise �
 
 # async/await 的优点
 
-async/await 带给我们的最重要的好处是同步编程风格。
+**async/await 带给我们的最重要的好处是同步编程风格。**
 
 代码演示:
 
@@ -59,7 +59,7 @@ getBooksByAuthorWithPromise(id) {
 这里调用`this.getBooksByAuthorWithAwait(id)`返回的是Promise对象， 需要执行.then才能获取到异步返回的结果
 
 - 很明显async/await版本比Promise版本更容易理解，如果忽略await关键字，代码看起来像其他任何同步代码。
-目前所有主流浏览器都完全支持异步功能。
+目前所有主流浏览器都完全支持异步功能。
 
 - 浏览器支持意味着不必转换代码。便于调试。
 
@@ -90,7 +90,7 @@ getBooksByAuthorWithPromise(id) {
 
 这意味着，getBooksByAuthorWithAwait将返回一个promise，所以也可以使用.then(...)方式来调用它。
 
-# async/await
+# async/await常见错误
 
 使用async/await时，常见错误：
 
@@ -133,15 +133,14 @@ async getBooksByAuthor(id) {
 ```js
 async getAuthor(id) {
     // 会引起串行调用，增加运行时间
-    const authors = _.map(
-        authorIds,
-        id => await authorModel.fetch(id)
-    );
+    // const authors = _.map(
+    //     authorIds,
+    //     id => await authorModel.fetch(id)
+    // );
+    // 正确方式
+    const promises = _.map(authorIds, id => authorModel.fetch(id));
+    const authors = await Promise.all(promises);
 }
-
-正确方式
-const promises = _.map(authorIds, id => authorModel.fetch(id));
-const authors = await Promise.all(promises);
 ```
 
 总之，仍需将流程视为异步的，然后用await写出同步的代码，在复杂的流程中，直接使用promise可能更方便。
@@ -203,6 +202,20 @@ try {
 
 ## 使用.catch
 
+await的功能：它将等待promise完成它的工作。promise.catch()也会返回一个promise。
 
+所以我们可以这样处理错误：
+```js
+// books === undefined if error happens,
+// since nothing returned in the catch statement
+let books = await bookModel.fetchAll().catch(err => {console.log(err);});
+```
 
+这个方法有两个小问题：
+- 它是promise和async函数的混合体。仍需要理解promise是如何工作的。
+- 错误理解先于正常路径，这是不直观的。
 
+# 结论
+
+ES7引入的 async/await 关键字无疑是对J avaScrip t异步编程的改进。它可以使代码更容易阅读和调试。
+然而，为了正确地使用它们，必须完全理解 promise，因为 async/await 只不过是 promise 的语法糖，本质上仍然是 promise。
