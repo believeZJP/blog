@@ -35,6 +35,8 @@ await 等待的是一个表达式，这个表达式的计算结果是 Promise �
 
 > 这就是 await 必须用在 async 函数中的原因。async 函数调用不会造成阻塞，它内部所有的阻塞都被封装在一个 Promise 对象中异步执行。
 
+<!-- more -->
+
 # async/await 的优点
 
 **async/await 带给我们的最重要的好处是同步编程风格。**

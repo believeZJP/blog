@@ -7,6 +7,11 @@ tags: mac
 
 [TOC]
 
+# 窗口平铺工具
+[Magnet](https://itunes.apple.com/cn/app/magnet/id441258766?mt=12&ign-mpt=uo%3D4)
+
+在xclient.info可以下载到
+
 # mac录屏 
 自带软件即可录制
 QuickTime Player
@@ -180,6 +185,9 @@ Command-加号或等号 放大页面　　
 Command-减号 缩小页面
 
 切换同个软件的不同窗口  command+`
+
+# 锁屏
+`ctrl+command+q`
 # 触摸板
 触摸板可以设置成触摸板轻敲替代按下的…
 
@@ -230,7 +238,7 @@ brew install wget
 # mac常用软件下载地址
 [mac-torrent-download](https://mac-torrent-download.net/)
 
-
+[xclient.info](https://xclient.info/)👍👍👍👍👍
 
 
 # 参考链接

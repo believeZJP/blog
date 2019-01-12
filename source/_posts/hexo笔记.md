@@ -419,12 +419,20 @@ livere_uid: fsdfs343==
 3. 在 img 中添加图片
 4. 在 md 中引用图片
 
-```
+```md
 [记忆曲线](/img/clipboard.png)
 <img src="/img/clipboard.png" >
 ```
 
 注意: 这里一定要用绝对路径, 因为图片在根目录下
+
+## 不用根目录的图片添加
+用`hexo n '文章标题'`创建文章后，会生成与文章标题相同的文件夹，可以把图片放到对应文件夹中
+在md中引用方式
+```md
+![添加自定义search](/posts/Alfred/addbaidu.png)
+![设置百度内容](/posts/Alfred/addbaidu-input.png)
+```
 
 # 部署命令简化
 
