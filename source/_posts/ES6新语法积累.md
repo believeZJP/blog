@@ -5,7 +5,7 @@ updated: 2018-11-05 19:48:55
 tags:
 categories: es6
 ---
-
+[TOC]
 # es6强制让一个函数有一个默认值
 ```javascript
 if (!a) {
@@ -86,6 +86,23 @@ var b = `Hi, I'm ${ fName } ${ sName }, I'm ${ age } and work as a ${ job }.`;
 # 块级作用域 let const
 JavaScript 本身一直是函数式作用域，这就是我们经常将整个 JavaScript 文件封装在一个空的立即调用函数表达式（IIFE）中的原因。这样做是为了隔离文件中的所有变量，因此全局中就不会存在变量名冲突。
 
+ES5 中如果你想限制变量 tmp 的作用范围仅在某一块代码中有效，你不得不使用一个叫 IIFE(Immediately-Invoked Function Expression，立即执行函数表达式) 的模式：
+```js
+(function () {  // IIFE 开始
+    var tmp = ···;
+    ···
+}());  // IIFE 结束
+console.log(tmp); // ReferenceError
+// ECMAScript 6 中可以简单地使用块和 let 申明(或 const 申明)：
+{
+    // 块起始
+    let tmp = ···;
+    ···
+}  // 块结束
+console.log(tmp); // ReferenceError
+
+```
+
 ## let
 
 let 声明的变量具有块级作用域，所以可以在不影响外部变量的情况下声明具有相同名称的新局部（内部）变量。
@@ -120,7 +137,7 @@ for (var i = 1; i < 5; i++) {
 ## Const
 JavaScript 中声明一个常量变量，那么惯例是将变量命名大写。然而，这并不能保证它是一个常量 - 它只是让其他开发人员知道这是一个常量，不应该改变。
 
-==const 不会使变量不可变，只是锁定它的赋值。 如果你有一个复杂的赋值（对象或数组），那么该值仍然可以修改。==
+==**const 不会使变量不可变，只是锁定它的赋值。 如果你有一个复杂的赋值（对象或数组），那么该值仍然可以修改。**==
 ```javascript
 {
     const c = "tree";
@@ -167,6 +184,10 @@ baz();
 
 现在我们会得到 ‘ReferenceError’，因为baz()总是受到块范围的约束。
 ```
+建议：
+- 首选 const。所有不会改变值的变量都可以使用它。
+- 其它的使用 let，用于值会被改变的变量。
+- 避免使用 var。
 
 # 扩展运算符
 
