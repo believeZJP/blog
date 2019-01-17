@@ -172,4 +172,34 @@ inherit:   应从父元素继承 box-sizing 属性的值
 标准盒子模型：宽度=内容的宽度（content）+ border + padding + margin
 低版本IE盒子模型：宽度=内容宽度（content+border+padding）+ margin
 
+# nth-child与nth-of-type区别
+```css
+.product-list .item:nth-child(2n) {
+    margin-left: 6px;
+}
+.product-list .item:nth-child(2n+1) {
+    margin-right: 6px;
+}
+.product-list .item:nth-of-type(2n) {
+    margin-left: 6px;
+}
+.product-list .item:nth-of-type(2n+1) {
+    margin-right: 6px;
+}
+```
+
+> :nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，**不论元素的类型**。
+> :nth-of-type(n) 选择器匹配属于父元素的特定类型的第 N 个子元素的每个元素.
+
+
+# justify-content设置居左
+
+CSS语法: 
+`justify-content: flex-start|flex-end|center|space-between|space-around|initial|inherit;`
+
+默认值为flex-start, 如果要居左可以设置这个值，
+> 注意：设置left不生效，因为没有left这个值。
+
+
+
 
