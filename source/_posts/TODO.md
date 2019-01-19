@@ -24,7 +24,7 @@ JS 精度问题
 [解决办法](https://blog.csdn.net/qq_39712029/article/details/81031458)
 
 
-# 无法实现的需求
+## 无法实现的需求
 
 ## 1. 数字输入框只唤起数字键盘，不能输入汉字
 `<input type='number'>`
@@ -45,3 +45,6 @@ JS 精度问题
 [[CSS]浏览器IME输入法控制禁止输入中文](https://blog.csdn.net/yctccg/article/details/52217988)
 [关于表单input type="number"非法值时的一些探究及拓展](https://www.qcyoung.com/2015/09/01/type-number%E9%9D%9E%E6%B3%95%E5%80%BC%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8E%A2%E7%A9%B6%E5%8F%8A%E6%8B%93%E5%B1%95/)
 [input type=number驗證問題Script](https://www.itread01.com/p/1000919.html)
+
+
+## [从 for of 聊到 Generator](https://juejin.im/post/5c40484bf265da61171cfb4d)
