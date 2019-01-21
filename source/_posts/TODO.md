@@ -14,7 +14,7 @@ JS 精度问题
 1.1 * 100
 
 0.1 + 0.2 = 0.3？
-
+[从标准原理出发理解 JavaScript 数值精度](https://juejin.im/post/5c3db8b7e51d45515817bdeb)
 
 
 ```
@@ -48,3 +48,7 @@ JS 精度问题
 
 
 ## [从 for of 聊到 Generator](https://juejin.im/post/5c40484bf265da61171cfb4d)
+
+## [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/project/modules.html)
+
+## [MDN javascript中高级教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
