@@ -13,9 +13,9 @@ tags:
 
 # for of
 
-在`JavaScript`中, 循环数组可以通过`map, filter, for of` 等来遍历一个数组.
+在`JavaScript`中, 循环数组可以通过`map, filter, for of` 等来遍历一个数组.
 
-为什么for of 可以遍历数组或类数组对象(`String, Maps, Sets, arguments`)？
+为什么for of 可以遍历数组或类数组对象(`String, Maps, Sets, arguments`)？
 为什么不能用来遍历一个对象？
 
 循环数组时，需要两个信息：
@@ -76,9 +76,9 @@ iterator每次都返回一个对象，这个对象包含两个信息，当前下
 
 ### 为什么在Object中没有内置迭代器？
 
-先了解一下基本概念
+先了解一下基本概念
 
-遍历对象只会在两种层级上对一个`JavaScript`对象进行遍历：
+遍历对象只会在两种层级上对一个`JavaScript`对象进行遍历：
 - 程序的层级。对一个对象进行迭代，是在迭代展示其结构的对象属性。举个栗子：`Array.prototype.length`这个属性与对象的结构相关，但却不是它的数据。
 - 数据的层级。迭代数据结构并提取它的数据。举个栗子：迭代数组，对它的每个数据进行迭代，如果`arr=[a，b，c]`，迭代器访问的是`1,2,3`
 
@@ -122,10 +122,10 @@ s.next(); // {value: 3, done: false}
 s.next(); // {value: undefined, done: true}
 ```
 
-generator可以实例化出一个iterator，yield语句就是用来中断代码的执行的。配合next() 方法，每次只会执行一个yield语句。
+generator可以实例化出一个iterator，yield语句就是用来中断代码的执行的。配合next() 方法，每次只会执行一个yield语句。
 
 
-### generator特性
+### generator特性
 - yield后面可以跟上另一个Generator, 并且他们会按照次序执行
 ```js
 function* gen() {
@@ -175,7 +175,7 @@ iterator.next();
 
 
 ## Generator原理
-async 和await 只是Generator的语法糖。
+async 和await 只是Generator的语法糖。
 [dva](https://dvajs.com/guide/concepts.html#effect)中有Effect概念，它就是使用Generator来解决异步请求的问题。
 
 ### Generator和Promise如何异步编程
@@ -186,7 +186,7 @@ iterator.next();
 Promise表示一个异步操作的最终状态（完成或失败），以及其返回的值。参考[Promise-MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 
-异步编程使用Generator和Promise实现的原理：
+异步编程使用Generator和Promise实现的原理：
 1. 因为 Generator 本身 yield 语句是分离执行的，所以我们利用这一点，在 yield 语句中返回一个 Promise 对象
 2. 首次调用 Generator 中的 next() 后, 假设返回值叫 result ,那么此时 result.value 就是我们定义在 yield 语句中的 Promise 对象
 
