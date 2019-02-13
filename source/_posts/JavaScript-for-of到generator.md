@@ -19,14 +19,17 @@ tags:
 为什么不能用来遍历一个对象？
 
 循环数组时，需要两个信息：
+
 > 1. 对应下标的值
 > 2. 是否遍历结束的标志
 
 在控制台打印一个数组看一下结构
+
 ```js
 const arr = [1, 2, 3];
 console.dir(arr);
 ```
+
 在__proto__中可以看到`Symbol(Symbol.iterator)`
 **数组或类数组对象的原型中都实现了一个方法`Symbol.iterator`**
 
@@ -166,8 +169,8 @@ function* effect() {
 const iterator = effect();
 iterator.next();
 iterator.next();
-
 ```
+
 执行两次 next() 得到结果，看起来很繁琐。
 假设每次执行 A() / B() 的请求结束之后，都会自动执行 next() 即可解决。
 
