@@ -240,6 +240,5 @@ brew install wget
 
 [xclient.info](https://xclient.info/)👍👍👍👍👍
 
-
 # 参考链接
 - [程序员如何优雅地使用 macOS？](https://www.zhihu.com/question/20873070)

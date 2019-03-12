@@ -647,7 +647,6 @@ filename为不包含md后缀的文章名称。它的原理只是将文章从 sou
 > 若日后想将正式文章转为为草稿，只需手动将文章从 source/_posts 目录移动到 source/_drafts 目录即可。
 
 
-
 # hexo 命令
 
 常用命令

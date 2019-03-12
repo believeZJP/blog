@@ -217,6 +217,15 @@ rm -
 -i      -- prompt before every removal
 ```
 
+# git 快捷键
+
+```bash
+cd ~/.oh-my-zsh/plugins/git
+less git.plugin.zsh
+```
+
+在这里可以看到常用的git命令别名
+
 # [官方插件列表](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview)
 
 看别人在用的插件
