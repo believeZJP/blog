@@ -167,6 +167,7 @@ Control-A 移至行或段落的开头
 在Finder中：
 Command-Option-V 剪切文件　　
 Command-Shift-N 新建文件夹（New）　　
+Command-Shift-. 显示或隐藏系统文件　　
 Command-Shift-G 调出窗口，可输入绝对路径直达文件夹（Go）　　
 return 这个其实不算快捷键，点击文件，按下可重命名文件　　
 Command-O 打开所选项。在Mac里打开文件不像Windows里直接按Enter　　
