@@ -12,7 +12,7 @@ tags: mac
 
 在xclient.info可以下载到
 
-# mac录屏 
+# mac录屏
 自带软件即可录制
 QuickTime Player
 # mac 安装 tomcat
