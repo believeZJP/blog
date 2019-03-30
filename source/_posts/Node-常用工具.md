@@ -15,6 +15,8 @@ tags:
 平时，我们 node app.js 后，当我们修改了 app.js 的内容，就需要关闭 node 命令行再执行 node app.js。
 而我们使用 supervisor 后，我们修改了 app.js 中的内容，只要点击保存，即可生效保存后的代码，实现实时监听 node 代码的变动。
 
+<!-- more -->
+
 ## 基本用法
 1. 安装插件：`npm i supervisor -g`
 2. 运行命令：`supervisor app.js`

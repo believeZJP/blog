@@ -43,6 +43,8 @@ const set = new Set();
 console.dir(set);
 ```
 
+<!-- more -->
+
 ## iterator(迭代器)
 
 [迭代协议 mdn文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols)
@@ -151,6 +153,7 @@ console.log(iterator.next());
 
 // 1,4,5,2
 ```
+
 - return 会终结整个Generator。卸载return后的yield不会执行。
 
 ### Generator有什么用？
