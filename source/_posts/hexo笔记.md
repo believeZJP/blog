@@ -664,7 +664,7 @@ hexo clean #清除缓存，**强烈建议每次执行命令前先清理缓存，
 
 简写
 
-```
+```bash
 hexo n == hexo new
 hexo g == hexo generate
 hexo s == hexo server
