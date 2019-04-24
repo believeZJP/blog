@@ -7,15 +7,22 @@ tags: mac
 
 [TOC]
 
-# 窗口平铺工具
+# mac日常经验积累
+
+记录日常经验
+
+## 窗口平铺工具
+
 [Magnet](https://itunes.apple.com/cn/app/magnet/id441258766?mt=12&ign-mpt=uo%3D4)
 
 在xclient.info可以下载到
 
-# mac录屏
+## mac录屏
+
 自带软件即可录制
 QuickTime Player
-# mac 安装 tomcat
+
+## mac 安装 tomcat
 
 1. 按照百度经验，安装Java jdk，配置环境变量
     检查Java版本 java -version
@@ -24,20 +31,22 @@ QuickTime Player
 2. 下载tomcat，官网版
 3. 修改授权
     进入tomcat的bin目录,修改授权
-    ```
+
+    ```bash
     ➜ bin pwd
     /Users/yp/Documents/workspace/apache-tomcat-7.0.68/bin
     ➜ bin sudo chmod 755 *.sh
     ```
-1. sudo为系统超级管理员权限.
-2. chmod 改变一个或多个文件的存取模式
-3. 755代表用户对该文件拥有读、写、执行的权限，同组的其他人员拥有执行和读的权限，没有写的权限，其它用户的权限和同组人员一样.
-4. 777代表，user,group ,others ,都有读写和可执行权限.
-5. chmod -R 777 folername,获取文件夹权限.
+
+   1. sudo为系统超级管理员权限.
+   2. chmod 改变一个或多个文件的存取模式
+   3. 755代表用户对该文件拥有读、写、执行的权限，同组的其他人员拥有执行和读的权限，没有写的权限，其它用户的权限和同组人员一样.
+   4. 777代表，user,group ,others ,都有读写和可执行权限.
+   5. chmod -R 777 folername,获取文件夹权限.
 
 <!---more--->
 
-## 启动
+### 启动
 
 二、启动
 执行启动命令 sudo sh ./startup.sh
@@ -60,35 +69,36 @@ mac 下 vim 快捷键
 不在编辑状态下按 dd 删除行
 [链接](https://www.jianshu.com/p/6f13474d36ac)
 
-# mac 添加任何来源允许权限
+## mac 添加任何来源允许权限
 
 在命令行执行
 
-```
+```bash
   sudo spctl --master-disable
 ```
-输入密码,再回到隐私里，就能看到任何来源.
-# 如何卸载 paragon NTFS for mac ?
 
-```
+输入密码,再回到隐私里，就能看到任何来源.
+
+## 如何卸载 paragon NTFS for mac ?
+
+```bash
 找到 /Library/Application Support/Paragon Software 目录
 
 sudo ./com.paragon-software.ntfs.uninstall
 ```
 
-# mac本地绑定hosts
+## mac本地绑定hosts
+
 ```bash
 sudo vim /etc/hosts  
 
 添加以下内容
 10.180.112.208 www.baidu.com www.jd.com
 ```
+
 可以添加多个域名, 也可以一个
 
-
-
-
-# mac手势快捷键
+## mac手势快捷键
 
     1.三指拖动✨✨✨✨✨
         设置->辅助功能->鼠标与触控板->触控板选项->启动拖移->三指拖移
@@ -105,25 +115,28 @@ sudo vim /etc/hosts
     5.全屏下切换窗口✨✨✨
         四指滑动
 
+## mac安装[homebrew](https://brew.sh/index_zh-cn)
 
-# mac安装[homebrew](https://brew.sh/index_zh-cn)
 Homebrew的安装非常简单，打开终端复制、粘贴以下命令，回车，搞定(请放心使用，原汁原味的官方安装方法搬运）
 `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-# 新建管理员用户怎么弄？
+## 新建管理员用户怎么弄？
+
 点击“系统偏好设置”-“用户与群组”,点解锁，输入密码，然后点击左下角的“+”新建一个管理员用户，然后回到电脑主屏幕，点击右上角菜单的当前用户，然后选择新建的用户切换进入使用。
 
-# 触发角
+## 触发角
+
 在「桌面与屏幕保护程序」-「屏幕保护程序」
 可以设置鼠标在每个角落的时候相应的操作。
- 
+
 可用于锁屏，显示桌面
 
-# MAC 快捷键：
+## MAC 快捷键：
+
 Mac中主要有四个修饰键，分别是Command，Control，Option和Shift。
 
 Command是Mac里最重要的修饰键，在大多数情况下相当于Windows下的Ctrl。所以以下最基本操作很好理解：
-Command-Z 撤销　
+Command-Z 撤销
 Command-X 剪切　　
 Command-C 拷贝（Copy）　　
 Command-V 粘贴　　
@@ -187,17 +200,24 @@ Command-减号 缩小页面
 
 切换同个软件的不同窗口  command+`
 
-# 锁屏
+## 锁屏
+
 `ctrl+command+q`
-# 触摸板
+
+## 触摸板
+
 触摸板可以设置成触摸板轻敲替代按下的…
 
-# 如何重置 Mac 上的 NVRAM
+## 如何重置 Mac 上的 NVRAM
+
 https://support.apple.com/zh-cn/HT204063
-# 重置 Mac 上的系统管理控制器 (SMC)
+
+## 重置 Mac 上的系统管理控制器 (SMC)
+
 https://support.apple.com/zh-cn/HT201295
 
-# UI 切图工具
+## UI 切图工具
+
 - [sketch](http://www.sketchcn.com/)
 绘图工具
 [下载破解版](https://www.zhinin.com/sketch-mac.html)
@@ -208,12 +228,13 @@ https://support.apple.com/zh-cn/HT201295
 - [Flavor](http://www.fancynode.com.cn/flavor)
 sketch导出为PxCook插件Flavor
 
-# Xmind安装
+## Xmind安装
 
 [下载地址](http://www.carrotchou.blog/6539.html)
 下载主程序和破解补丁。 先安装主程序，按照破解补丁里的步骤安装即可。
 
-# mac关闭指定端口
+## mac关闭指定端口
+
 ```bash
 sudo lsof -i:8090
 udo kill -9 [pid]
@@ -221,25 +242,42 @@ udo kill -9 [pid]
 udo kill -9 59296
 ```
 
-# Windows虚拟机
+## Windows虚拟机
+
 http://soft.macx.cn/6205.htm
-# TODO
+
+## TODO
+
 解锁Alfred, Workflow
 
-# iPhone 8强制重启
+## iPhone 8强制重启
+
 先按音量+，再按音量-，再长按电源键10s左右会显示开机画面。
 
-# homebrew 软件下载安装利器
+## homebrew 软件下载安装利器
+
 [下载安装]https://brew.sh/index_zh-cn)
 [所有软件列表](https://formulae.brew.sh/formula/)
 安装
+
 ```bash
 brew install wget
 ```
-# mac常用软件下载地址
+
+## 在finder左侧边栏建立新文件夹
+
+打开finder在设备找到电脑磁盘`Macintosh HD`或在桌面找到`Macintosh HD`，
+
+进入用户，选择自己的用户名，新建文件夹，然后拖动到左边边栏即可。想要删除直接右击，选中，从边栏移除.
+
+详见[百度经验链接](https://jingyan.baidu.com/article/3052f5a1081d4397f31f862c.html)
+
+## mac常用软件下载地址
+
 [mac-torrent-download](https://mac-torrent-download.net/)
 
 [xclient.info](https://xclient.info/)👍👍👍👍👍
 
-# 参考链接
+## 参考链接
+
 - [程序员如何优雅地使用 macOS？](https://www.zhihu.com/question/20873070)
