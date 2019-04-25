@@ -209,5 +209,3 @@ zrem zsetkey member1
 
 zrange zsetkey 0 -1 withscores
 ```
-
-
