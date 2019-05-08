@@ -21,7 +21,7 @@ var twoSum = function(nums, target) {
     let i = 0, il = nums.length, sumArr = [];
     for(; i < il; i++ ) {
         for (let j = i + 1; j < il; j++) {
-            if (nums[i] === target - nums[j]) {
+            if (**nums**[i] === target - nums[j]) {
                 return [i, j];
             }
         }
@@ -51,4 +51,100 @@ var twoSum = function(nums, target) {
         arrObj[nums[i]] = i;
     }
 };
+```
+
+## 第2题 两个链表求和
+
+给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+
+这个题是参考答案做的。
+
+```js
+/*
+ * @lc app=leetcode id=2 lang=javascript
+ *
+ * [2] Add Two Numbers
+ */
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    var List = new ListNode(0);
+    var head = List;
+    var sum = 0;
+    var carry = 0;
+
+    while (l1 !== null || l2 !== null || sum > 0) {
+        if (l1 !== null) {
+            sum = sum + l1.val;
+            l1 = l1.next;
+        }
+        if (l2 !== null) {
+            sum = sum + l2.val;
+            l2 = l2.next;
+        }
+        if (sum >= 10) {
+            carry = 1;
+            sum -= 10;
+        }
+
+        head.next = new ListNode(sum);
+        head = head.next;
+
+        sum = carry;
+        carry = 0;
+    }
+    return List.next;
+};
+```
+
+## 第3题 查找字符串中子字符串最长长度
+
+    刚开始的思路是放到map里，后来发现会有bdfb的情况，所以不能用map来判断是否存在，改为用数组判断是否存在，存在就从所在位置删除之前的数组
+
+```js
+
+/*
+ * @lc app=leetcode id=3 lang=javascript
+ *
+ * [3] Longest Substring Without Repeating Characters
+ */
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    let sArr = s.split('');
+    let mapObj = [];
+    let l = 0;
+    let max = 0;
+    for (let i = 0, il = sArr.length; i < il; i++) {
+        let tmp = sArr[i];
+        if (mapObj.includes(tmp)) {
+            // mapObj = [];
+            // l = 1;
+            mapObj = mapObj.slice(mapObj.indexOf(tmp) + 1, mapObj.length);
+            // mapObj.shift();
+            mapObj.push(tmp);
+            l = mapObj.length;
+        } else {
+            mapObj.push(tmp);
+            ++l;
+        }
+        if (l > max) {
+            max = l;
+        }
+    }
+    return max;
+};
+
 ```
