@@ -124,20 +124,17 @@ var addTwoNumbers = function(l1, l2) {
  */
 var lengthOfLongestSubstring = function(s) {
     let sArr = s.split('');
-    let mapObj = [];
+    let maxArr = [];
     let l = 0;
     let max = 0;
     for (let i = 0, il = sArr.length; i < il; i++) {
         let tmp = sArr[i];
-        if (mapObj.includes(tmp)) {
-            // mapObj = [];
-            // l = 1;
-            mapObj = mapObj.slice(mapObj.indexOf(tmp) + 1, mapObj.length);
-            // mapObj.shift();
-            mapObj.push(tmp);
-            l = mapObj.length;
+        if (maxArr.includes(tmp)) {
+            maxArr = maxArr.slice(maxArr.indexOf(tmp) + 1, maxArr.length);
+            maxArr.push(tmp);
+            l = maxArr.length;
         } else {
-            mapObj.push(tmp);
+            maxArr.push(tmp);
             ++l;
         }
         if (l > max) {
@@ -146,5 +143,18 @@ var lengthOfLongestSubstring = function(s) {
     }
     return max;
 };
+
+
+// 厉害的解法
+function lengthOfLongestSubstring(s) {
+    const map = {};
+    let left = 0;
+
+    return s.split('').reduce((max, v, i) => {
+        left = map[v] >= left ? map[v] + 1 : left;
+        map[v] = i;
+        return Math.max(max, i - left + 1);
+    }, 0);
+}
 
 ```
