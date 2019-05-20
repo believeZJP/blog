@@ -81,7 +81,7 @@ source ~/.zshrc
 
 # autojump
 
-```
+```bash
 brew install autojump
 ```
 
@@ -110,7 +110,7 @@ autojump --purge
 
 # homebrew 更新
 
-```
+```bash
 brew update
 ```
 
@@ -241,4 +241,12 @@ echo $SHELL
 
 # 查看系统内已安装的 Shell
 cat /etc/shells
+```
+
+# iterm中git status 显示字符，不显示中文
+
+  解决方法：在命令行执行命令
+
+```bash
+git config --global core.quotepath false
 ```
