@@ -57,6 +57,23 @@ tags:
 
 这些误解都影响了设计模式在JavaScript语言中的发展。
 
+JavaScript中的原型继承
+
+1. 所有的数据都是对象
+2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它
+    JavaScript的根对象是Object.prototype对象。
+
+    ```js
+    var obj1 = new Object();
+    var obj2 = {};
+
+    console.log(Object.getPrototypeOf(obj1) === Object.prototype); // true
+    console.log(Object.getPrototypeOf(obj2) === Object.prototype); // true
+    ```
+
+3. JavaScript对象会记住它的原型
+4. 如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型
+
 ## 工厂模式列表
 
 1. 抽象工厂模式（Abstract Factory）
