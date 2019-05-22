@@ -91,3 +91,26 @@ JavaScript中的原型继承
     区别：抽象工厂模式的主要目的是创建产品簇，这个产品簇里面的单个产品就相当于是构成一个复杂对象的部件对象，抽象工厂对象创建完成后就立即返回整个产品簇；而生成器模式的主要目的是按照构造算法，一步一步来构建一个复杂的产品对象，桐城要等到整个构建过程结束以后没才会得到最终的产品对象。
 
     组合使用：在生成器模式的Builder实现中，需要创建各个部件对象，而这些部件对象是有关联的，通常是构成一个复杂对象的部件对象。也就是说，Builder实现中，需要获取构成一个复杂对象的产品簇，就可以使用抽象工厂模式来实现。有抽象工厂模式负责部件对象创建，Builder实现里面则主要负责产品对象整体的构建了。
+
+## 策略模式
+
+策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。
+
+```js
+var strategies = {
+    "S": function( salary ){
+        return salary * 4;
+    },
+    "A": function( salary ){
+        return salary * 3;
+    },
+    "B": function( salary ){
+        return salary * 2;
+    };
+var calculateBonus = function(level, salary){
+    return strategies[level](salary);
+};
+console.log(calculateBonus('S', 20000));
+console.log(calculateBonus('A', 10000));
+// 输出:80000 // 输出:30000
+```
