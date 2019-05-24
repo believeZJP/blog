@@ -51,7 +51,11 @@ ssh-keygen -t rsa
 
 ### 查看公钥
 
-cat .ssh/id_rsa.pub
+cat ~/.ssh/id_rsa.pub
+
+mac中直接复制到剪贴板
+
+pbcopy < ~/.ssh/id_rsa.pub
 
 ### 复制id_rsa.pub里的公钥到服务器上的authorized_keys文件
 

@@ -7,6 +7,8 @@ tags:
   - iTerm2
 ---
 
+[TOC]
+
 mac 自带的终端实在是差劲，改用 iTerm2 可以 6 到飞起~~~
 
 # 安装
@@ -218,6 +220,8 @@ rm -
 ```
 
 # git 快捷键
+
+[插件git.plugin.zsh地址](https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh)
 
 ```bash
 cd ~/.oh-my-zsh/plugins/git
