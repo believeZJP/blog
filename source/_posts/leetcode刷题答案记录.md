@@ -5,6 +5,8 @@ updated: 2019-04-28 14:59:22
 tags:
 ---
 
+[TOC]
+
 # LeetCode刷题答案记录
 
 ## 第一题 求和，在数组中找两个元素加起来等于一个数
@@ -158,3 +160,18 @@ function lengthOfLongestSubstring(s) {
 }
 
 ```
+
+## 4. 寻找两个有序数组的中位数
+
+两个有序数组求中位数，
+问题一般化为，求两个有序数组的第k个数，当k = (m+n)/2时为原问题的解。
+
+怎么求第k个数？分别求出第一个和第二个数组的第 k / 2个数 a 和 b，然后比较 a 和 b，
+当a < b ，说明第 k 个数位于 a数组的第 k / 2个数后半段，
+或者b数组的 第 k / 2 个数前半段，问题规模缩小了一半，然后递归处理就行。 时间复杂度是 O(log(m+n))
+
+[链接](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/zhen-zheng-ologmnde-jie-fa-na-xie-shuo-gui-bing-pa/)
+
+[解法二](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-shu/)：
+
+将两个数组合成一个数组，用二分法查找中间位置的元素。(因为二分法的复杂度是O(log(m+n)))
