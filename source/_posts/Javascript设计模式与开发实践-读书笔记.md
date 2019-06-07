@@ -172,3 +172,78 @@ var brew = param.brew || function(){
 模板方法模式常被架构师用于搭建项目的框架，架构师定好了框架的骨架， 程序员继承框架的结构之后，负责往里面填空，
 
 钩子方法(hook)用来解决一些特殊的子类，不符合父类的执行顺序等。
+
+## 享元模式(flyweight)
+
+是一种用时间换空间的优化模式，为解决性能而生
+
+核心: 运用共享技术来有效支持大量细粒度的对象
+
+目标: 尽量减少共享对象的数量
+
+享元模式要求将对象的属性分为内部状态和外部状态。划分内外部状态规则：
+
+- 内部状态存储于对象内部
+- 内部状态可以被一些对象共享
+- 内部状态独立于具体的场景，通常不会变
+- 外部状态取决于具体的场景，根据场景而变，外部状态不能共享
+
+使用场景：
+
+- 一个程序中使用了大量的相似对象
+- 由于使用了大量的相似对象，造成很大的内存开销
+- 对象的大多数状态都可以变为外部状态
+- 剥离出对象的外部状态后，可以用相对较少的共享对象取代大量对象
+
+思考：
+
+创建出的共享对象在每次绑定事件后会执行自己的绑定时间还是会覆盖
+
+## 职责链模式
+
+定义: 使多个对象都有机会处理请求，避免请求的发送者和接收者之间的耦合关系，将这些对象连成一条链，
+连着这条链传递该请求，直到有一个对象处理它为止。
+
+把大函数拆成小函数，去掉许多嵌套的条件分支语句
+
+此外 Chain 的 prototype 中还有两个函数，它们的作用如下所示: // Chain.prototype.setNextSuccessor 指定在链中的下一个节点
+// Chain.prototype.passRequest 传递请求给某个节点
+
+```js
+var Chain = function( fn ){
+    this.fn = fn;
+    this.successor = null;
+};
+Chain.prototype.setNextSuccessor = function( successor ){
+    return this.successor = successor;
+};
+Chain.prototype.passRequest = function(){
+    var ret = this.fn.apply( this, arguments );
+    if ( ret === 'nextSuccessor' ){
+        return this.successor && this.successor.passRequest.apply( this.successor, arguments );
+    }
+    return ret;
+};
+
+
+// 使用
+var chainOrder500 = new Chain( order500 );
+var chainOrder200 = new Chain( order200 );
+var chainOrderNormal = new Chain( orderNormal );
+
+chainOrder500.setNextSuccessor( chainOrder200 );
+chainOrder200.setNextSuccessor( chainOrderNormal);
+
+```
+
+优点：
+
+- 解耦了请求发送者和N个接收者之间的复杂关系
+
+- 链中的节点可以灵活的拆分重组
+
+- 可以手动指定起始节点
+
+- 可以在链尾增加一个保底的接受者节点处理前面无法处理的请求
+
+要避免过长的职责链带来的性能损耗
