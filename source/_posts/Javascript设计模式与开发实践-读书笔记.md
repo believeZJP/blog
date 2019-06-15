@@ -247,3 +247,7 @@ chainOrder200.setNextSuccessor( chainOrderNormal);
 - 可以在链尾增加一个保底的接受者节点处理前面无法处理的请求
 
 要避免过长的职责链带来的性能损耗
+
+## 中介者模式
+
+
