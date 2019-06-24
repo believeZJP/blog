@@ -1858,4 +1858,34 @@ new webpack.HotModuleReplacementPlugin()
 - [hard-source-webpack-plugin](https://www.npmjs.com/package/hard-source-webpack-plugin)
 提升打包效率非常明显
 
+## webpack之监测配置文件的修改而自动构建
 
+在webpack的自动构建中，一般情况下我们只是监测到源文件的变化，如果修改webpack的配置文件就不会发生自动构建。通过使用node的nodemon模块来达到目的。
+
+一、安装nodemon
+
+```js
+// 全局安装
+npm install -g nodemon
+// 本地安装
+npm install --save-dev nodemon
+```
+
+二、使用nodemon
+
+`nodemon --watch config dev.js`
+
+解释：
+
+– watch config 表示监测config目录下的文件变化
+– dev.js则为webpack本来的通过 node dev.js形式执行的构建起始文件
+总体意思就是：监测config中的文件变化并重新执行dev.js文件
+
+如果nodemon是本地安装需要如下处理：
+```js
+// 在package.json中scripts中加如下配置
+"startNodemon":"nodemon --watch config dev.js"
+
+//在命令行中执行
+npm run startNodemon
+```
