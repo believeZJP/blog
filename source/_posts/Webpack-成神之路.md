@@ -1873,7 +1873,7 @@ npm install --save-dev nodemon
 
 二、使用nodemon
 
-`nodemon --watch config dev.js`
+`nodemon --watch ./config/webpack.dev.js`
 
 解释：
 
@@ -1889,3 +1889,17 @@ npm install --save-dev nodemon
 //在命令行中执行
 npm run startNodemon
 ```
+在package.json中的配置
+```json
+{
+    "scripts": {
+        "start": "webpack ..."
+        "dev": "nodemon --watch config dev.js --exec npm run start"
+    }
+}
+```
+
+说明
+
+- --exec 执行某个命令
+- --watch 监听某个文件变化
