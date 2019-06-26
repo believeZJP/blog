@@ -1877,8 +1877,8 @@ npm install --save-dev nodemon
 
 解释：
 
-– watch config 表示监测config目录下的文件变化
-– dev.js则为webpack本来的通过 node dev.js形式执行的构建起始文件
+    – watch config 表示监测config目录下的文件变化
+    – dev.js则为webpack本来的通过 node dev.js形式执行的构建起始文件
 总体意思就是：监测config中的文件变化并重新执行dev.js文件
 
 如果nodemon是本地安装需要如下处理：
@@ -1901,5 +1901,14 @@ npm run startNodemon
 
 说明
 
-- --exec 执行某个命令
-- --watch 监听某个文件变化
+- --exec 配置运行的命令
+- --watch 监听些文件变化，当变化的时候自动重启
+
+node服务器app.js自动重启
+```js
+"scripts": {
+    "dev": "nodemon  app.js "
+},
+```
+
+实际使用中，如果package.json中的main配置了，但是路径不对，会报错找不到文件导致无法自动重启
