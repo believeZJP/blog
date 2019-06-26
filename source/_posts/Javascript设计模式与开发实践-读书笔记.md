@@ -407,7 +407,6 @@ SRP 原则在很多设计模式中都有着广泛的运用，例如代理模式�
 
 <!-- TODO -->
 
-
 ## 代码重构
 
 1. 提炼函数
@@ -421,19 +420,19 @@ SRP 原则在很多设计模式中都有着广泛的运用，例如代理模式�
 2. 合并重复的条件片段
 3. 把条件分支语句提炼成函数
 
-```js
-if ( date.getMonth() >= 6 && date.getMonth() <= 9 ){ // ...
-}
-// 提炼出来
-var isSummer = function(){
-    var date = new Date();
-    return date.getMonth() >= 6 && date.getMonth() <= 9;
-};
+    ```js
+    if ( date.getMonth() >= 6 && date.getMonth() <= 9 ){ // ...
+    }
+    // 提炼出来
+    var isSummer = function(){
+        var date = new Date();
+        return date.getMonth() >= 6 && date.getMonth() <= 9;
+    };
 
-if (isSummer) {
-    // ...
-}
-```
+    if (isSummer) {
+        // ...
+    }
+    ```
 
 4. 合理使用循环
 
