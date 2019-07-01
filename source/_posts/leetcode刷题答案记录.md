@@ -269,3 +269,51 @@ var twoSum = function(nums, target) {
         return res;
     };
     ```
+
+## 852. 山脉数组的峰顶索引  Peak Index in a Mountain Array
+
+我们把符合下列属性的数组 A 称作山脉：
+
+A.length >= 3
+存在 0 < i < A.length - 1 使得A[0] < A[1] < ... A[i-1] < A[i] > A[i+1] > ... > A[A.length - 1]
+给定一个确定为山脉的数组，返回任何满足 A[0] < A[1] < ... A[i-1] < A[i] > A[i+1] > ... > A[A.length - 1] 的 i 的值。
+
+    ```js
+    var peakIndexInMountainArray = function(A) {
+        let start = 0;
+        let end = A.length -1;
+        debugger
+        while(start <= end) {
+            const mid = Math.floor(start + (end - start) / 2);
+            if (A[mid] < A[mid + 1]) {
+                start = mid + 1;
+            } else if (A[mid] < A[mid - 1]) {
+                end = mid - 1;
+            } else {
+                return mid;
+            }
+
+        }
+    };
+    // 递归解法
+    const peakIndexInMountainArray = function(A) {
+        function recursive(i, j) {
+            const mid = (i + j) >> 1
+            if (A[mid - 1] < A[mid] && A[mid] > A[mid + 1]) {
+            return mid
+            } else if (A[mid] < A[mid + 1]) {
+            return recursive(mid + 1, j)
+            } else {
+            return recursive(i, mid - 1)
+            }
+        }
+        return recursive(1, A.length - 1)
+    }
+
+    // reduce 解法
+    var peakIndexInMountainArray = function(A) {
+        return A.reduce((acc, curr, i) => ('undefined' === typeof acc || A[acc] < curr ? i : acc), undefined);
+    };
+
+    ```
+## 475. 供暖器  Heaters
