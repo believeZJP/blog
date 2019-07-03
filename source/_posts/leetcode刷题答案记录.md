@@ -334,3 +334,115 @@ A.length >= 3
 输入: [1,2,3,4],[1,4]
 输出: 1
 解释: 在位置1, 4上有两个供暖器。我们需要将加热半径设为1，这样所有房屋就都能得到供暖。
+
+    ```js
+    // 第一种，没通过
+    var findRadius = function(houses, heaters) {
+        // 现将房屋和加热器从小到大排序
+        houses.sort(sortNum);
+        heaters.sort(sortNum);
+
+        const housesL = houses.length;
+        const heatersL = heaters.length;
+        // 先定义半径为0
+        let radius = 0;
+
+        // 循环每个house
+        for(let i=0; i<housesL; i++) {
+            // 比较房间和加热器最大值，取最大值作为最小值？
+            let min = houses[housesL - 1] > heaters[heatersL - 1] ? houses[housesL - 1] : heaters[heatersL - 1];
+            // 比较house到每个heater的距离
+            for(let j=0; j<heatersL; j++) {
+                // 计算当前house到当前heater的绝对距离
+                const diff = Math.abs(heaters[j] - houses[i]);
+                // 最小值大于绝对值，取绝对值，反之取最小值
+                min = min >= diff? diff : min;
+                // 如果绝对值大于最小值，跳出循环
+                if (diff > min) {
+                    break;
+                }
+
+                // 如果半径小于最小值，用最小值，反之用当前半径
+                radius = radius < min ? min : radius;
+
+            }
+            // 循环结束，返回最小的radius
+            return radius;
+        }
+
+    };
+
+    function sortNum(a, b) {
+        return a - b;
+    }
+
+    // 第二种，可以通过
+    var findRadius = function(houses, heaters) {
+        houses.sort((a, b) => a - b);
+        heaters.sort((a, b) => a - b);
+        const n = houses.length;
+        const m = heaters.length;
+        let radius = 0;
+        let j = 0;
+
+        for (let i = 0; i < n; i++) {
+            let temp = Infinity;
+            for (let k = j; k < m; k++) {
+            // console.log('check!!', houses[i], heaters[k]);
+            temp = Math.min(temp, Math.abs(heaters[k] - houses[i]));
+            if (heaters[k] < houses[i]) {
+                j = k;
+            }
+            if (heaters[k] > houses[i]) {
+                if (j > 0) temp = Math.min(temp, Math.abs(houses[i] - heaters[j - 1]));
+                break;
+            }
+            }
+            radius = Math.max(radius, temp);
+            // console.log('==', temp, radius);
+        }
+        return radius;
+    };
+
+    // 最优解
+    var findRadius = function(houses, heaters) {
+        heaters.sort((a, b) => a - b);
+
+        let dist = 0;
+        let left;
+        let right;
+        let mid;
+        let target;
+
+        for (let i = 0, size = houses.length; i < size; i++) {
+            target = houses[i];
+            left = 0;
+            right = heaters.length - 1;
+
+            while (left <= right) {
+            mid = left + ((right - left) >> 1);
+            if (heaters[mid] === target) {
+                break;
+            } else if (heaters[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+            }
+            if (left <= right) continue;
+
+            let distLeft =
+            left >= 0 && left < heaters.length
+                ? Math.abs(houses[i] - heaters[left])
+                : Number.MAX_SAFE_INTEGER;
+            let distRight =
+            right >= 0 && right < heaters.length
+                ? Math.abs(houses[i] - heaters[right])
+                : Number.MAX_SAFE_INTEGER;
+
+            dist = Math.max(dist, Math.min(distLeft, distRight));
+        }
+
+        return dist;
+    };
+    ```
