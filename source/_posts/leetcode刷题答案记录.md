@@ -389,12 +389,15 @@ A.length >= 3
             let temp = Infinity;
             for (let k = j; k < m; k++) {
             // console.log('check!!', houses[i], heaters[k]);
+            // 获取当前heaters到每个屋子的最小值
             temp = Math.min(temp, Math.abs(heaters[k] - houses[i]));
+            // 如果heater的值小于house的值，从heater当前的值开始循环
             if (heaters[k] < houses[i]) {
                 j = k;
             }
+            // 如果heater的值大于house的值，取当前house到heater的距离和当前tmp的最小值，并跳出循环
             if (heaters[k] > houses[i]) {
-                if (j > 0) temp = Math.min(temp, Math.abs(houses[i] - heaters[j - 1]));
+                if (j > 0) temp = Math.min(temp, Math.abs(houses[i] - heaters[j - 1]);
                 break;
             }
             }
