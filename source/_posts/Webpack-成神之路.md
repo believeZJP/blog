@@ -1912,3 +1912,17 @@ node服务器app.js自动重启
 ```
 
 实际使用中，如果package.json中的main配置了，但是路径不对，会报错找不到文件导致无法自动重启
+
+## webpack npm install 报错解决
+
+执行`npm install` 报错: `npm ERR! Cannot read property 'match' of undefined`
+
+解决办法:
+
+依次执行以下命令
+```bash
+rm -rf node_modules
+rm package-lock.json
+npm cache clear --force
+npm install
+```
