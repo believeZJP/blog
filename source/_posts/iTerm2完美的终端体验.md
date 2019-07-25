@@ -254,3 +254,30 @@ cat /etc/shells
 ```bash
 git config --global core.quotepath false
 ```
+
+# rz/sz上传下载文件
+
+1. 安装lrzsz `brew install lrzsz`
+
+2. 下载配置iTerm2的相关脚本
+
+    [脚本地址](https://github.com/luxihk/iterm2-zmodem)
+
+    在/usr/local/bin目录下直接执行：
+
+    `wget https://raw.githubusercontent.com/mmastrac/iterm2-zmodem/master/iterm2-send-zmodem.sh https://raw.githubusercontent.com/mmastrac/iterm2-zmodem/master/iterm2-recv-zmodem.sh`
+    赋予可执行权限
+    `chmod +x /usr/local/bin/iterm2-send-zmodem.sh /usr/local/bin/iterm2-recv-zmodem.sh`
+
+3. 配置ITerm2
+
+    Term2的配置项：iTerm2的Preferences-> Profiles -> Default -> Advanced -> Triggers的Edit按钮。
+
+    然后配置项如下：
+
+    |Regular Expression|Action|Parameters|Instant|
+    |--|--|--|--|
+    |rz waiting to receive.\\*\\*B0100|Run Silent Coprocess|/usr/local/bin/iterm2-send-zmodem.sh|checked|
+    |\\*\\*B00000000000000|Run Silent Coprocess|/usr/local/bin/iterm2-recv-zmodem.sh|checked|
+
+    注意最后一项需要你将Instant选项勾上，否则将不生效
