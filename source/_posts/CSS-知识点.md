@@ -220,3 +220,13 @@ CSS语法:
 word-break: break-all;
 word-break: break-word;
 ```
+
+# max-width 和 !important
+
+max-width在比width小时，即使width使用!important来加权，仍会max-width生效；
+
+以下代码宽度为300px
+```html
+<img src="1.jpg" style="width:480px!important; max-width: 300px">
+<img src="1.jpg" style="width:480px!important; transform: scale(0.625, 1);" >
+```
