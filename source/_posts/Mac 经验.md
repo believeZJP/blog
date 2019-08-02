@@ -278,6 +278,11 @@ brew install wget
 
 详见[百度经验链接](https://jingyan.baidu.com/article/3052f5a1081d4397f31f862c.html)
 
+## mac浏览器全屏地址栏被隐藏
+
+左上角视图--> 在全屏模式下始终显示工具栏gst
+gst
+
 ## mac常用软件下载地址
 
 [mac-torrent-download](https://mac-torrent-download.net/)
