@@ -87,3 +87,13 @@ tar -zvxf node-v4.5.0.tar.gz
 make
 sudo make install
 ```
+
+## git提交commit后，想撤回重新commit
+
+`git reset --soft HEAD^`
+
+这样就成功的撤销了你的commit
+注意，仅仅是撤回commit操作，您写的代码仍然保留。
+
+`--hard`
+会删除本地修改代码，回到上次commit状态

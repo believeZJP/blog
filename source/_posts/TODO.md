@@ -54,3 +54,7 @@ JS 精度问题
 ## [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/project/modules.html)
 
 ## [MDN javascript中高级教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+
+## 「中高级前端」高性能渲染十万条数据
+
+[「中高级前端」高性能渲染十万条数据](https://juejin.im/post/5d76f469f265da039a28aff7)
