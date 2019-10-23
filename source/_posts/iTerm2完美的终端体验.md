@@ -11,11 +11,11 @@ tags:
 
 mac 自带的终端实在是差劲，改用 iTerm2 可以 6 到飞起~~~
 
-# 安装
+## 安装
 
 [直接下载](https://www.iterm2.com/)安装即可。
 
-# 安装[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+## 安装[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
 via curl
 
@@ -33,7 +33,7 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 
 <!--- more --->
 
-# 配置主题
+## 配置主题
 
 修改 ZSH_THEME="主题名"
 
@@ -52,7 +52,7 @@ ZSH_THEME="ys"
 
 [主题配置库](https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes)
 
-# 代码高亮([zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md))
+## 代码高亮([zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md))
 
 ```bash
 # 1 安装
@@ -61,7 +61,7 @@ brew install zsh-syntax-highlighting
 plugins=(zsh-syntax-highlighting git)
 ```
 
-# 自动提示命令([zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions))
+## 自动提示命令([zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions))
 
 先进到 oh-my-zsh 的 plugins 目录
 
@@ -81,7 +81,7 @@ plugins=(
 source ~/.zshrc
 ```
 
-# autojump
+## 自动切换目录([autojump](https://github.com/wting/autojump))
 
 ```bash
 brew install autojump
@@ -95,22 +95,35 @@ brew install autojump
 
 刚开始装了不会有效果，需多进几个目录，就可以看到效果
 
-快捷键 j
+### 快捷键 j
 
 按 tab 可以选择下拉里提示的内容
 
-常用命令
+权重值越高，优先级越高
+要调整某个目录的优先级，需要先进入到文件目录下，进行调整
 
+### 常用命令
+
+```bash
+# 显示数据库中的统计数据, (前面的数字是权重值)
+j -s
+
+# 增加某个目录的权重
+j -i 10
+
+# 降低某个目录权重
+j -d 10
+
+# 清除无用数据
+j --purge
 ```
-要跟踪所有这些改变，输入：
-autojump -s
 
+### 使用中发现的问题
 
-显示数据库中的统计数据
-autojump --purge
-```
+如果两个目录后面的文件夹名相同，例如`/home/abc/de`和`/home/de`，权重级别不一样，
+直接用`j de`不会每次都跳转到权重高的目录，如果不是想要的可以再次执行`j de`即可
 
-# homebrew 更新
+## homebrew 更新
 
 ```bash
 brew update
@@ -122,7 +135,7 @@ brew update
 
 网上还有说法是更换 brew 镜像源---没试过。
 
-# 启动问候语设置
+## 启动问候语设置
 
 ```bash
 cd /etc
@@ -135,7 +148,7 @@ control+x
 
 打开新标签页，即可看到提示语
 
-# 安装 iTerm2 后替换为系统自带的 bash
+## 安装 iTerm2 后替换为系统自带的 bash
 
 打开 iTerm2->prefrences->profiles-command
 选择 command 输入`/bin/bash`即可
@@ -148,7 +161,7 @@ chsh -s /bin/zsh
 chsh -s /bin/bash
 ```
 
-# 常用快捷键
+## 常用快捷键
 
 ```bash
 # 打开新标签
@@ -192,7 +205,7 @@ command + ;
 command + shift + h
 ```
 
-# 自动补全插件 incr ---如果提示多了会卡的很严重，曾经用过，后来替换成 zsh-autosuggestions
+## 自动补全插件 incr ---如果提示多了会卡的很严重，曾经用过，后来替换成 zsh-autosuggestions
 
 下载此插件：
 
@@ -207,7 +220,7 @@ source ~/.oh-my-zsh/plugins/incr/incr*.zsh
 source ~/.zshrc
 ```
 
-# 命令参数提示
+## 命令参数提示
 
 举个栗子，之前偶尔需要用到删除文件夹的操作，rm -r [path]，但是常常会忘记中间的参数是什么，现在我只需要这么做：
 
@@ -219,7 +232,7 @@ rm -
 -i      -- prompt before every removal
 ```
 
-# git 快捷键
+## git 快捷键
 
 [插件git.plugin.zsh地址](https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh)
 
@@ -230,14 +243,14 @@ less git.plugin.zsh
 
 在这里可以看到常用的git命令别名
 
-# [官方插件列表](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview)
+## [官方插件列表](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview)
 
 看别人在用的插件
 
 - fasd
 - history
 
-# 常用命令
+## 常用命令
 
 ```bash
 #  查看当前所用的 Shell
@@ -247,7 +260,7 @@ echo $SHELL
 cat /etc/shells
 ```
 
-# iterm中git status 显示字符，不显示中文
+## iterm中git status 显示字符，不显示中文
 
   解决方法：在命令行执行命令
 
@@ -255,7 +268,7 @@ cat /etc/shells
 git config --global core.quotepath false
 ```
 
-# rz/sz上传下载文件
+## rz/sz上传下载文件
 
 1. 安装lrzsz `brew install lrzsz`
 
