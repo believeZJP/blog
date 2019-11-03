@@ -9,10 +9,9 @@ tags:
 
 # 客户端推荐
 
-- [SmartGit](https://www.syntevo.com/smartgit/)✨✨✨✨✨
-
-- [Sourcetree](https://www.sourcetreeapp.com/)✨✨✨
-因为需要账户登录什么的，虽然也注册了账号，但是习惯了用 SmartGit. 所以没怎么用
+- [SmartGit](https://www.syntevo.com/smartgit/)✨✨✨(开始用的，后来放弃)
+- [Sourcetree](https://www.sourcetreeapp.com/)✨✨✨✨✨(现在用的这个，需要翻墙注册)
+- [GitKraken](https://www.gitkraken.com/) 没用过，全平台免费
 
 # github contributions 展示问题
 
