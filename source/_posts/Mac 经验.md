@@ -75,6 +75,10 @@ mac 下 vim 快捷键
 不在编辑状态下按 dd 删除行
 [链接](https://www.jianshu.com/p/6f13474d36ac)
 
+## 查看mac内存和cpu占用
+
+系统自带APP--活动监视器, 可以查看
+
 ## mac 添加任何来源允许权限
 
 在命令行执行
@@ -85,7 +89,7 @@ mac 下 vim 快捷键
 
 输入密码,再回到隐私里，就能看到任何来源.
 
-## 如何卸载 paragon NTFS for mac ?
+## 如何卸载 paragon NTFS for mac
 
 ```bash
 找到 /Library/Application Support/Paragon Software 目录
