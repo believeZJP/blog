@@ -83,6 +83,12 @@ eg: `> cd /`
 
 `quit` 加空格
 
+## alfred 每次开机运行后都提示是否允许访问通讯录
+
+在终端输入如下命令解决
+
+`sudo codesign -f -d -s - /Applications/Alfred\ 3.app/Contents/Frameworks/Alfred\ Framework.framework/Versions/A/Alfred\ Framework`
+
 ## 常用
 
 open用来打开文件，find用来显示文件所在位置
@@ -97,6 +103,14 @@ trash废纸篓，emptytrash清空废纸篓
 
 shutdown关机，restart重启，logout注销
 
-# 好的链接推荐
+## workflow 查询本机IP
+
+[下载地址](https://github.com/zenorocha/alfred-workflows/blob/master/ip-address/ip-address.alfredworkflow)
+
+双击导入， 输入ip，即可查询本机ip，按cmd+c可以复制
+
+## 好的链接推荐
+
 [5分钟上手Mac效率神器Alfred以及Alfred常用操作](https://www.jianshu.com/p/e9f3352c785f)
 [Alfred Workflow教程与实例](https://blog.csdn.net/sinat_32023305/article/details/78739118)
+[Workflow列表](http://www.alfredworkflow.com/)
