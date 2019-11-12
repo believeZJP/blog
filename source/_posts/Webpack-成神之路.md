@@ -5,42 +5,43 @@ updated: 2018-12-05 14:47:39
 tags:
 - Webpack
 - 学习笔记
+- webpack4
+- 补充慕课网webpack4.0视频笔记--第二章完结
 ---
 
 [TOC]
 
-# 慢慢来 其实比较快
-
-# 学习尽量做到知其然知其所以然
+> 慢慢来 其实比较快
+ 学习尽量做到知其然知其所以然
 
 - [视频教程来源](http://jspang.com/post/webpack3x.html)
 这篇笔记是jspang教程的学习笔记
 
-# 第01节：认识WebPack的作用
+## 第01节：认识WebPack的作用
 
-# 什么是WebPack？
+## 什么是WebPack
 
-> WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Sass，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。在3.0出现后，Webpack还肩负起了优化项目的责任。
-
+> WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Sass，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。在4.0出现后，Webpack还肩负起了优化项目的责任。
 
 ## 重点
 
-* 打包：可以把多个Javascript文件打包成一个文件，减少服务器压力和下载带宽。
-* 转换：把拓展语言转换成为普通的JavaScript，让浏览器顺利运行。
-* 优化：前端变的越来越复杂后，性能也会遇到问题，而WebPack也开始肩负起了优化和提升性能的责任。
+1. 打包：可以把多个Javascript文件打包成一个文件，减少服务器压力和下载带宽。
+2. 转换：把拓展语言转换成为普通的JavaScript，让浏览器顺利运行。
+3. 优化：前端变的越来越复杂后，性能也会遇到问题，而WebPack也开始肩负起了优化和提升性能的责任。
 
 <!--more-->
 
-# 安装
+## 安装
+
 ## 前提
 
 必须先安装node(node -v来查看node安装情况和版本)
 
 ### 全局安装
 
-webpack官方是不推荐的。这会将您项目中的 webpack 锁定到指定版本，并且在使用不同的 webpack 版本的项目中，可能会导致构建失败。
+webpack官方**不推荐全局安装**。这会将您项目中的 webpack 锁定到指定版本，并且在使用不同的 webpack 版本的项目中，可能会导致构建失败。
 
-```
+```bash
 npm install -g webpack
 ```
 
@@ -49,84 +50,94 @@ npm install -g webpack
 1. 先对项目进行初始化
 2. 然后在项目目录中进行安装
 3. 用webpack -v 查看版本
+
 > --save 保存到package.json文件中
   dev 保存到开发环境中而生产环境中不使用
 
-
-```
+```bash
 npm init
 
-npm install --save-dev webpack
-
+npm install --save-dev webpack webpack-cli
+npm install --D webpack webpack-cli
+# 安装指定版本
+npm install webpack@4.16.5
 ```
-webpack -v
 
-3.8.1
+查看webpack版本
+`npx webpack -v`
+
+### npx
+
+解决的主要问题就是调用项目内部安装的模块,还能避免全局安装的模块
+
+npx 的原理很简单，就是运行的时候，会到node_modules/.bin路径和环境变量$PATH里面，检查命令是否存在。
+
+由于 npx 会检查环境变量$PATH，所以系统命令也可以调用。
+
+4.39.3
 
 #### 小知识
+
 **开发环境and生产环境：**
 
-* 开发环境：在开发时需要的环境，这里指在开发时需要依赖的包。
-* 生产环境：程序开发完成，开始运行后的环境，这里指要使项目运行，所需要的依赖包。
+> 开发环境：在开发时需要的环境，这里指在开发时需要依赖的包。
+> 生产环境：程序开发完成，开始运行后的环境，这里指要使项目运行，所需要的依赖包。
 
-# 第二节 快速上手一个Demo
+## 第二节 快速上手一个Demo
 
 ## 建立基本项目结构
 
 创建一个项目目录，进入后在根目录建立两个文件夹，分别是src文件夹和dist文件夹：
 
-* src文件夹：用来存放我们编写的javascript代码(源代码)
-* dist文件夹：用来存放供浏览器读取的文件，这个是webpack打包成的文件。
-
+> src文件夹：用来存放我们编写的javascript代码(源代码)
+> dist文件夹：用来存放供浏览器读取的文件，这个是webpack打包成的文件。
 
 1. 在dist中新建index.html
 
-```
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>webpack tutorials</title>
-    </head>
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>webpack tutorials</title>
+        </head>
 
-    <body>
-        <div id="title"></div>
-        <script src="./bundle.js"></script>
-    </body>
-</html>
+        <body>
+            <div id="title"></div>
+            <script src="./bundle.js"></script>
+        </body>
+    </html>
 
+    ```
 
-```
-
-2. 在src中新建entry.js 
+2. 在src中新建entry.js
 
 src/entery.js
 
-```
+```js
 document.getElementById('title').innerHTML='Hello Webpack';
 ```
 
 > 这个文件的代码很简单，就是在\<div id=”title”>\</div>标签里写入Hello Webpack这句话。
 
-
-
 ### 第一次Webpack打包
 
 在终端中用命令行打包。 语法：
-```
+
+```js
 webpack {entry file} {destination for bundled file}
 ```
 
 在这个项目中，执行
-```
-webpack src/entry.js dist/bundle.js
 
+```bash
+webpack src/entry.js dist/bundle.js
 ```
+
 执行成功后，会在dist文件夹中出现bundle.js,用浏览器查看index.html可以查看效果
 
-
-### 总结：
+## 总结-第2节
 
 从这个Demo中你会了解到webpack的基本用法和使用过程，
 
@@ -134,44 +145,47 @@ webpack src/entry.js dist/bundle.js
 
 在这节文章的最后，还是要强调，你一定要把本节内容在自己的电脑上敲一遍，这样你才能深入了解。
 
-
-
 ## 在浏览器中用live-server访问文件
-### 用命令行
-1. 安装live-server 
 
-```
-npm install -g live-server
-```
+### 用命令行
+
+1. 安装live-server
+
+    ```bash
+    npm install -g live-server
+    ```
+
 2. 在该项目中用命令行
-```
+
+```bash
 live-server
 ```
-即可在浏览器中访问文件
 
+即可在浏览器中访问文件
 
 ### 用webpack的scripts命令封装
 
 1. 在package.json的scripts中
-```
-"scripts": {
-   "server": "live-server ./ --port=9090"
- }
-```
+
+    ```json
+    "scripts": {
+    "server": "live-server ./ --port=9090"
+    }
+    ```
 
 2. 执行
-```
+
+```bash
 npm run server
 ```
 
-
-
-# 第03节：配置文件：入口和出口
+## 第03节：配置文件：入口和出口
 
 这节课我们就学习配置文件的大体结构和入口出口文件的配置。
 
 ## 配置文件webpack.config.js
-```
+
+```js
 module.exports = {
     // 入口文件
     entry: {},
@@ -186,16 +200,17 @@ module.exports = {
 }
 ```
 
-* entry：配置入口文件的地址，可以是单一入口，也可以是多入口。
-* output：配置出口文件的地址，在webpack2.X版本后，支持多出口配置。
-* module：配置模块，主要是解析CSS和图片转换压缩等功能。
-* plugins：配置插件，根据你的需要配置不同功能的插件。
-* devServer：配置开发服务功能。
+> entry：配置入口文件的地址，可以是单一入口，也可以是多入口。
+> output：配置出口文件的地址，在webpack2.X版本后，支持多出口配置。
+> module：配置模块，主要是解析CSS和图片转换压缩等功能。
+> plugins：配置插件，根据你的需要配置不同功能的插件。
+> devServer：配置开发服务功能。
 
 ## entry选项（入口配置）
+
 配置要压缩的文件。一般是JavaScript，也可以是CSS文件。
 
-```
+```js
 // 入口文件配置
 entry: {
     // 里面的entry可以随便起名字，外面的是固定的
@@ -207,7 +222,7 @@ entry: {
 
 配置webpack最后打包文件的地址和名称。
 
-```
+```json
 // 出口文件配置
 output: {
     // 打包的文件位置
@@ -216,14 +231,17 @@ output: {
     filename: 'bundle.js'
 }
 ```
+
 需要在webpack.config.js头部引入path
-```
+
+```js
 const path = require('path');
 ```
+
 > path.resolve(__dirname, 'dist') 获取项目的绝对路径
 > filename: 打包后的文件名称。
 
-#### webpack单文件入口配置代码
+### webpack单文件入口配置代码
 
 ```JavaScript
 const path = require('path')
@@ -272,17 +290,22 @@ module.exports = {
     // 插件，用于生产模板和各项功能
     plugins: [],
     // 配置webpack开发服务功能
-    devServer: {}
+    devServer: {},
+    mode: 'production'
 }
 ```
+
+[mode]: webpack中新增的配置，分为开发，线上。可以在命令行后面添加
+    如: `webpack --mode=development`
 [name]： 根据入口文件的名称，打包成相同的名称，有几个入口文件，就打包成几个文件。
 
-## 总结：
-    任何项目的webpack都要执行这些操作。需要牢记。
+## 总结-第3节
 
+任何项目的webpack都要执行这些操作。需要牢记
 
-### 小知识
-#### 调试js文件
+> 小知识
+
+1. 调试js文件
 
 在js中写console.log()
 
@@ -292,19 +315,23 @@ node index.js，
 
 即可在终端查看打印内容
 
+## 第4节： 配置文件：服务和热更新
 
-# 第4节： 配置文件：服务和热更新
 热更新：所见即所得
 
 ## 设置webpack-dev-server
 
 1. 先安装webpack-dev-server
-```
+
+```bash
 npm install webpack-dev-server --save-dev
 ```
-2. 配置devServer
+
+1. 配置devServer
+
 webpack.config.js
-```
+
+```json
 devServer: {
     // 设置基本目录结构
     contentBase: path.resolve(__dirname, 'dist'),
@@ -317,15 +344,19 @@ devServer: {
 }
 ```
 
-3. 配置scripts
+1. 配置scripts
+
 package.json
-```
+
+```json
 "scripts": {
     "server": "webpack-dev-server --open"
   },
 ```
-### 在这里直接设置 --open即可自动打开浏览器！！！！！！
-4. 在终端里输入npm run server 打开服务器，在浏览器中输入http://localhost:8089即可看到结果。
+
+### 在这里直接设置 --open即可自动打开浏览器
+
+1. 在终端里输入npm run server 打开服务器，在浏览器中输入<http://localhost:8089>即可看到结果
 
 ## 支持热更新
 
@@ -333,15 +364,11 @@ npm run server 启动后，有一种监控机制(watch), 监控修改源码，�
 
 **注意**：webpack 3.6版本以后内置热更新功能，不需要额外操作。
 
-
-
-# 第5节： 模块：CSS文件打包
-
+## 第5节： 模块：CSS文件打包
 
 webpack在生产环境中的作用之一：减少http请求数，把多个文件打包到一个js文件中，请求数可以减少好多。
 
 学习css文件打包之前，**需要先对webpack.config.js里的Loaders配置项进行了解**。
-
 
 ## Loaders
 
