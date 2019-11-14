@@ -15,7 +15,7 @@ tags:
 > 慢慢来 其实比较快
  学习尽量做到知其然知其所以然
 
-- [视频教程来源](http://jspang.com/post/webpack3x.html)
+- [视频教程来源](http://jspang.com/post/webpack4x.html)
 这篇笔记是jspang教程的学习笔记
 
 ## 第01节：认识WebPack的作用
@@ -346,6 +346,8 @@ devServer: {
     port: 8089,
     // 默认打开浏览器，可以用字符串代替用哪个浏览器打开. 'Google Chrome', 可以代替--open
     open: true,
+    // 开启hotModuleReplace
+    hot: true,
     proxy: {
         '/api': 'http://localhost:3000'
     }
@@ -1355,26 +1357,30 @@ plugins: [
 
 ## 第15节： 给webpack增加babel配置
 
-虽然webpack3增加了ES6的语法支持，但实际效果并不好。
+虽然webpack4增加了ES6的语法支持，但实际效果并不好。
 所以还是要加babel-loader配置。
 
 这节学习如何增加Babel配置。
 
-## babel是什么
+## babel是什么 [官网](https://babeljs.io/)
 
 Babel 是一个 JavaScript 编译器。用他可以
 > 使用下一代的javaScript代码(ES6,ES7….)，即使这些标准目前并未被当前的浏览器完全支持。
  使用基于JavaScript进行了扩展的语言，比如React的JSX。
 
-### 1. Babel安装 [官网](https://www.npmjs.com/package/babel-loader)
+高级: 了解babel怎么把高级语法转换成浏览器能识别的代码
+
+### 1. Babel安装
 
 先一次性安装所有依赖包
 
 ```bash
-npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+npm install --save-dev babel-loader @babel/core @babel/preset-env
+# 避免polyfill 污染全局变量，会以闭包形式引入
+npm install -D @babel/plugin-transform-runtime
 ```
 
-这些包分别是：核心包，webpack使用的，es2015支持,react支持
+这些包分别是：核心包 babel-loader 8.x | babel 7.x
 
 ### 2.在webpack中配置Babel
 
@@ -1385,8 +1391,14 @@ npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-
         loader: 'babel-loader',
         options: {
             presets: [
-                'es2015', 'react'
-            ]
+               '@babel/preset-env',
+            //    用到哪个，加哪个polyfill
+                ['@babel/preset-env', {
+                    useBuiltIns: 'usage'
+                }]
+            ],
+            // 代码只是业务代码不用引入，如果是类库的代码，需要引入
+            plugins: ['@babel/plugin-transform-runtime']
         }
     },
     exclude: /node_modules/
@@ -1420,9 +1432,15 @@ babel的配置通常单独写在.babelrc文件里
 
 ```json
 {
-    "presets": [
-        "react", "es2015"
-    ]
+  "presets": [
+    ["@babel/preset-env", {
+      "loose": true,
+      "targets": {
+        "node": "6.9"
+      }
+    }],
+    "@babel/preset-react"
+  ]
 }
 ```
 
@@ -1990,36 +2008,52 @@ new copyWebpackPlugin([{
 
 这节课就学习如何在webpack环境中使用JSON.
 
-在webpack1或webpack2中，需要加载一个json-loader的loader，但在webpack3.x中，不需要额外引入。
+在webpack1或webpack2中，需要加载一个json-loader的loader，但在webpack4.x中，不需要额外引入。
 
 ## 读取JSON内容
 
 1. 在index.html中加个div，并给个id.
 
-```html
-    <div id="jsonArea"></div>
-```
+    ```html
+        <div id="jsonArea"></div>
+    ```
 
-1. 到src文件夹下，找到入口文件，entry.js,修改代码。如下：
+2. 到src文件夹下，找到入口文件，entry.js,修改代码。如下：
 
-```js
-let json = require('../config.json');
-document.getElementById('jsonArea').innerHTML = json.name;
-```
+    ```js
+    let json = require('../config.json');
+    document.getElementById('jsonArea').innerHTML = json.name;
+    ```
 
-引入json文件，并插入到dom中。
+    引入json文件，并插入到dom中。
 
 3. 运行npm run server ，就可以看到效果。
 
 ## 说说热更新
 
-在webpack3.x中，启用热加载很容易，只要加入HotModuleReplacementPlugin这个插件就可以了。
+在devServer中配置`hot: true`
+`hotOnly: true` 热更新失败时，不刷新整个页面
+
+在webpack4.x中，启用热加载很容易，只要加入HotModuleReplacementPlugin这个插件就可以了。
+
+在plugin里配置
 
 ```js
-new webpack.HotModuleReplacementPlugin()
+plugins: [
+    new webpack.HotModuleReplacementPlugin()
+]
 ```
 
 现在，启动npm run server后，修改index.html中的内容，浏览器就可以自动更新最新页面
+
+```js
+// 如果某个js模块更新了，只更新某个模块，而不是所有模块都更新
+if (module.hot) {
+    module.hot.accept('./number', () => {
+        number();
+    });
+}
+```
 
 ### 这里的热更新和平时写程序的热加载不是一回事，比如说我们Vue和React中的热更新，并不是刷新整个页面，而是一个局部的更新，而这里的更新是刷新了整个页面
 
@@ -2169,3 +2203,198 @@ scripts: {
     'server': 'node server.js'
 }
 ```
+
+## tree shaking
+
+只支持ES Module!!!
+
+`import { add } from './math.js';`
+
+底层是静态引入方式
+
+不支持
+
+`const add = require('./math.js);`
+
+commonJs 是动态引入, 不支持tree shaking
+
+webpack.config.js
+
+```js
+optimization: {
+    usedExports: true
+}
+```
+
+在package.json中
+
+对哪个文件不做筛选，在`sideEffects`里以数组的方式加入
+对css文件不做处理
+`sideEffects: ['*.css']`
+
+`false`为对所有文件筛选
+
+```js
+{
+    "sideEffects": false
+}
+```
+
+mode: 为development时，打包不会删除代码，会删除导出
+
+## webpack区分 开发模式和 production模式
+
+依赖webpack-merge
+
+`npm install webpack-merge -D`
+
+webpack.common.js 公共的配置
+
+```js
+const merge = require('webpack-merge');
+module.exports = {
+    entry: {
+        main: './src/index.js'
+    },
+    module: {
+
+    }
+    output: {
+
+    }
+}
+```
+
+webpack.prod.js, 保留线上独有的配置
+
+```js
+const merge = require('webpack-merge');
+const commConfig = require('./webpack.common.js');
+
+const prodConfig = {
+    mode: 'production',
+    devtool: 'cheap-module-source-map'
+}
+
+module.exports = merge(commonConfig, prodConfig);
+```
+
+webpack.dev.js, 保留开发环境独有的配置
+
+```js
+const merge = require('webpack-merge');
+const commConfig = require('./webpack.common.js');
+
+const devConfig = {
+    mode: 'development',
+    devServer: {
+        hot: true
+    }
+}
+module.exports = merge(commonConfig, devConfig);
+
+```
+
+package.json
+
+```json
+scripts: {
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+}
+```
+
+可以把所有配置文件都放到`build`文件夹里, 需要改package.json里的配置(output, scripts等)
+
+检查打包位置对不对，清除文件对不对
+
+## Code Splitting--有疑问
+
+[SplitChunksPlugin](https://webpack.js.org/plugins/split-chunks-plugin/#root)
+
+拆分代码，提升项目性能
+
+比如引入lodash之类的类库，打包生成的文件会多1MB左右
+
+将2MB的文件拆分成两个1MB的文件加载
+
+当业务逻辑发生改变时，只加载业务逻辑代码，不加载基础类库的代码
+
+在webpack.config.js中增加配置----同步代码
+
+```js
+optimization: {
+    splitChunks: {
+        chunks: 'all'
+    }
+}
+```
+
+异步代码（import,无需做任何配置会自动进行代码分割）
+
+代码支持异步import
+
+`npm install babel-plugin-dynamic-import-webpack --save-dev`
+
+## Lazy Loading 懒加载，Chunk 是什么--有疑问
+
+通过import异步加载模块
+
+可以让页面加载更快
+
+`babel-plugin-syntax-dynamic-import`
+
+点击页面才会加载getComponent
+
+```js
+function getComponent() {
+    return import(/** webpackChunkName: "lodash" */ 'lodash').then({ default: _ }) => {
+        var element = document.createElement('div');
+        element.innerHTML = _.join(['11', '22'], '-');
+        return element;
+    });
+}
+document.addEventListener('click', () => {
+    getComponent().then(element => {
+        document.body.appendChild(element);
+    })
+})
+```
+
+```js
+async function getComponent() {
+    const { default: _ } = await import(/** webpackChunkName: "lodash" */ 'lodash');
+    var element = document.createElement('div');
+    element.innerHTML = _.join(['11', '22'], '-');
+    return element;
+}
+```
+
+## 打包分析，Preloading, Prefetching
+
+[官方工具链接](https://webpack.js.org/guides/code-splitting/#bundle-analysis)
+
+webpack分析工具[analyse](https://github.com/webpack/analyse)
+
+生成打包描述文件
+package.json
+
+```json
+scripts: {
+    "analyze": 'webpack --profile --json > stats.json'
+}
+```
+
+[分析网站，需科学上网](http://webpack.github.com/analyse)
+
+[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+
+### 小知识-文件利用率
+
+command+shift+p 搜索coverage, 可以看文件利用率
+
+提高代码的使用率
+
+多写异步代码，性能才能得到提升
+
+chunks: 'async' 才能真正提升网站性能
