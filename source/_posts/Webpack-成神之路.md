@@ -8,6 +8,7 @@ tags:
 - webpack4
 - 补充慕课网webpack4.0视频笔记--第二章完结
 - 3-8完结 2019-11-13 20:27:45
+- 5-1完结 2019-11-15 19:36:48
 ---
 
 [TOC]
@@ -2441,5 +2442,35 @@ output: {
 }
 ```
 
-## 
+## library打包
 
+[文档地址](https://webpack.js.org/configuration/output/#outputlibrarytarget)
+
+[externals](https://webpack.js.org/configuration/externals/#root)
+开发类库的打包，供第三方以不同的方式(import, require, script)引入使用
+
+```js
+mode: 'production',
+// 如果遇到lodash库，不打包到代码里，业务里要用的话，先引用lodash，再引用library
+externals: ['lodash'],
+output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'library.js'
+    // 以script方式引入
+    library: 'library',
+    // 以import和require方式引入
+    libraryTarget: 'umd'
+}
+
+```
+
+package.json
+
+```json
+main: "./dist/index.js'
+```
+
+```bash
+npm adduser
+npm publish
+```
