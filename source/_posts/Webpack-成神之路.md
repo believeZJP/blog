@@ -1351,6 +1351,15 @@ plugins: [
 
 执行打包，查看dist中的index.css内容，会发现没有多余的css.
 
+### css文件代码分割
+
+把css单独打包到CSS文件中，webpack默认把css打包到js中。即css-in-js.
+[MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/#root)
+
+压缩打包出的css代码[ optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
+
+不能与
+
 ## 总结-第14节
 
 工作中一定要用这个插件，决定你的代码质量，非常有用。
@@ -1585,26 +1594,31 @@ npm install jquery
 
 ### 2.
 
-```
+```bash
 npm install jquery --save
 ```
 
 安装完成后，在package.json的dependencies中。是生产环境需要依赖的包。上线时需要依赖。
 
 ### 3.
-```
+
+```bash
 npm install jquery --save-dev
 ```
+
 安装完成后，在package.json的devDevpendencies中,是开发环境依赖的包，上线不需要这些包的依赖。
 
 ### 安装全部依赖包
-```
+
+```bash
 npm install
 ```
+
 会安装package.json中的所有包
 
 ### 安装生产环境依赖包
-```
+
+```bash
 npm install --production
 ```
 
@@ -1613,8 +1627,10 @@ npm install --production
 以前的配置中设置了一个变量website,用于静态资源找到正确路径。如果生产环境和测试环境不一样，需要来回切换，这时候可用下面的方法配置。
 
 ### 修改package.json命令
+
 添加dev何止，通过环境变量来区分。
-```
+
+```js
 "scripts": {
     "liveserver": "live-server ./ --port=9090",
     "dev": "set type=dev&webpack",
@@ -1624,8 +1640,10 @@ npm install --production
 ```
 
 ### 修改webpack.config.js文件
+
 利用node的语法读取type的值，然后根据type的值进行判断设置不同的变量。
-```
+
+```js
 
 if(process.env.type === 'build') {
     const website = {
@@ -1637,15 +1655,19 @@ if(process.env.type === 'build') {
     }
 }
 ```
+
 如果想看某个值，可以console.log打印出来
-```
+
+```js
 console.log(process.env.type)
 ```
+
 打印console.log( encodeURIComponent(process.env.type) );发现报错
 
 mac下的package.json设置
 mac电脑需要把set换成export，并且多加一个&,具体代码
-```
+
+```js
 "scripts": {
     "server": "webpack-dev-server --open",
     "dev":"export type=dev&&webpack",
@@ -1653,11 +1675,11 @@ mac电脑需要把set换成export，并且多加一个&,具体代码
 },
 ```
 
-## 总结
+## 总结-第17节
+
 通过配置不同的参数来区分不同的环境，从而达到不同环境打包不同代码。
 
-
-# 第18节： 实战技巧： webpack模块化配置
+## 第18节： 实战技巧： webpack模块化配置
 
 所有配置文件都放在webpack.config.js中会显得代码冗余，不利于维护。
 
@@ -1670,16 +1692,19 @@ mac电脑需要把set换成export，并且多加一个&,具体代码
 ## js的模块化实现
 
 先看一下es6中的模块化代码
-```
+
+```js
 function alertMsg (msg) {
     alert('info: ' + msg);
 }
 module.exports = alertMsg;
 ```
+
 声明一个alertMsg方法，并把这个方法用module.exports暴露出去。
 
 然后在其他文件中用import引入，并使用。
-```
+
+```js
 import alertMsg from './utils.js'
 alertMsg();
 ```
@@ -1722,10 +1747,11 @@ entry: entry.path,
 
 这时可以运行npm run dev进行测试，会发现正常运行
 
-## 总结
+## 总结-第18节
+
 模块化是必不可少的操作，一定要动手练习。
 
-## 第19节： 实战技巧： 优雅打包第三方类库
+## 第19节： 实战技巧： 优雅打包第三方类库-shimming
 
 有时候避免不了打包第三方类库，这时候该怎么操作。
 
@@ -1735,9 +1761,9 @@ entry: entry.path,
 
 ### 第一种
 
-### 安装
+### 安装jquery
 
-```
+```bash
 npm install --save jquery
 ```
 
@@ -1747,16 +1773,15 @@ juqery要在生产环境和开发环境用，所以要用--save安装
 
 安装好需要引入到entry.js中，这里直接用import引入
 
-```
+```js
 import $ from 'jquery'
-
 ```
 
 这里不需要写相对路径，因为jquery的包是在node_modules里，只要写一个包名，系统就会自动为我们查找。
 
 引入jQuery后就可以在文件中，使用jQuery，修改代码，测试
 
-```
+```js
 $('#gogo').animate({height : "150" } , 1000 )
     .animate({width : "300" } , 1000 )
     .hide(2000)
@@ -1789,16 +1814,18 @@ const webpack = require('webpack')
 
 ```js
 new webpack.ProvidePlugin({
-    $: 'jquery'
+    $: 'jQuery',
+    _: 'lodash',
+    _join: ['lodash', 'join']
 })
 
 ```
 
-配置好后，就可以在其他文件直接使用了。而不用再次引入。
+配置好后，就可以在其他文件直接使用$, 而不用在每个组件引入jQuery。
 
 这种全局的引入，在实际工作中也可以很好的规范项目所使用的第三方库。
 
-## 总结
+## 总结-第19节
 
 每个项目都可能引入第三方类库。像一些成熟的框架都有自己的webpack框架，如vue-cli。
 
@@ -2398,3 +2425,21 @@ command+shift+p 搜索coverage, 可以看文件利用率
 多写异步代码，性能才能得到提升
 
 chunks: 'async' 才能真正提升网站性能
+
+## webpack与浏览器缓存(Caching)
+
+`performace: false` 可以不提示性能问题
+
+通过文件名添加hash值来缓存
+
+生产环境
+
+```js
+output: {
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js'
+}
+```
+
+## 
+
