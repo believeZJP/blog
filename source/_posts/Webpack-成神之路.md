@@ -9,6 +9,7 @@ tags:
 - 补充慕课网webpack4.0视频笔记--第二章完结
 - 3-8完结 2019-11-13 20:27:45
 - 5-1完结 2019-11-15 19:36:48
+- 5-3完结 2019-11-18 19:55:00
 ---
 
 [TOC]
@@ -2474,3 +2475,54 @@ main: "./dist/index.js'
 npm adduser
 npm publish
 ```
+
+## PWA打包配置
+
+网站访问过一次之后，可以一直被缓存, serviceWorker
+
+[workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
+
+```js
+// Inside of webpack.config.js:
+const {GenerateSW} = require('workbox-webpack-plugin');
+
+module.exports = {
+  // Other webpack config...
+  plugins: [
+    // Other plugins...
+    new GenerateSW({
+      option: 'value',
+    })
+  ]
+};
+```
+
+## TypeScript 打包配置
+
+`npm install ts-loader typescript -D`
+
+```js
+rules: [{
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /node_modules/,
+}]
+```
+
+tsconfig.json
+
+```json
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "module": "es6",
+        "target": "es5",
+        "allowJs": true
+    }
+}
+```
+
+`npm install @types/lodash --save-dev`
+这样在代码中typescript可以识别lodash中的方法，并提示语法不规范等错误
+
+[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
