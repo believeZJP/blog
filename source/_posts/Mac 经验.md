@@ -7,7 +7,7 @@ tags: mac
 
 [TOC]
 
-# mac日常经验积累
+## mac日常经验积累
 
 记录日常经验
 
@@ -56,7 +56,7 @@ QuickTime Player
 
 二、启动
 执行启动命令 sudo sh ./startup.sh
-访问http://localhost:8080/
+访问<http://localhost:8080/>
 
 关闭
 
@@ -130,7 +130,7 @@ sudo vim /etc/hosts
 Homebrew的安装非常简单，打开终端复制、粘贴以下命令，回车，搞定(请放心使用，原汁原味的官方安装方法搬运）
 `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-## 新建管理员用户怎么弄？
+## 新建管理员用户怎么弄
 
 点击“系统偏好设置”-“用户与群组”,点解锁，输入密码，然后点击左下角的“+”新建一个管理员用户，然后回到电脑主屏幕，点击右上角菜单的当前用户，然后选择新建的用户切换进入使用。
 
@@ -141,7 +141,7 @@ Homebrew的安装非常简单，打开终端复制、粘贴以下命令，回车
 
 可用于锁屏，显示桌面
 
-## MAC 快捷键：
+## MAC 快捷键
 
 Mac中主要有四个修饰键，分别是Command，Control，Option和Shift。
 
@@ -220,11 +220,11 @@ Command-减号 缩小页面
 
 ## 如何重置 Mac 上的 NVRAM
 
-https://support.apple.com/zh-cn/HT204063
+<https://support.apple.com/zh-cn/HT204063>
 
 ## 重置 Mac 上的系统管理控制器 (SMC)
 
-https://support.apple.com/zh-cn/HT201295
+<https://support.apple.com/zh-cn/HT201295>
 
 ## UI 切图工具
 
@@ -254,7 +254,7 @@ udo kill -9 59296
 
 ## Windows虚拟机
 
-http://soft.macx.cn/6205.htm
+<http://soft.macx.cn/6205.htm>
 
 ## TODO
 
@@ -266,7 +266,7 @@ http://soft.macx.cn/6205.htm
 
 ## homebrew 软件下载安装利器
 
-[下载安装]https://brew.sh/index_zh-cn)
+[下载安装]<https://brew.sh/index_zh-cn)>
 [所有软件列表](https://formulae.brew.sh/formula/)
 安装
 

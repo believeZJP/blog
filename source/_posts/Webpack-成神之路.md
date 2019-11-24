@@ -376,6 +376,26 @@ npm run server 启动后，有一种监控机制(watch), 监控修改源码，�
 
 **注意**：webpack 3.6版本以后内置热更新功能，不需要额外操作。
 
+proxy设置
+
+```js
+proxy: {
+    '/react/api': 'http://www.dell-lee.com',
+    '/react/api': {
+        target: 'http://www.dell-lee.com'
+        // https接口需要配置这个
+        secure: false,
+        // 解决某些网站对源限制
+        changeOrigin: true,
+        // 在配置里请求转发，代码里请求header.json，实际去请求demo.json，省去修改代码里接口的麻烦
+        pathRewrite: {
+            'header.json': 'demo.json'
+        }
+    }
+
+}
+```
+
 ## 第5节： 模块：CSS文件打包
 
 webpack在生产环境中的作用之一：减少http请求数，把多个文件打包到一个js文件中，请求数可以减少好多。
