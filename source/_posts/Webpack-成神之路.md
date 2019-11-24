@@ -10,6 +10,7 @@ tags:
 - 3-8完结 2019-11-13 20:27:45
 - 5-1完结 2019-11-15 19:36:48
 - 5-3完结 2019-11-18 19:55:00
+- 5-8完结 2019-11-18 19:55:00
 ---
 
 [TOC]
@@ -348,8 +349,12 @@ devServer: {
     port: 8089,
     // 默认打开浏览器，可以用字符串代替用哪个浏览器打开. 'Google Chrome', 可以代替--open
     open: true,
+    // 路由代理打到前端框架
+    historyApiFallback: true,
     // 开启hotModuleReplace
     hot: true,
+    // 如果打包报错，直接在页面上展示错误，而不是在终端展示错误
+    overlay: true,
     proxy: {
         '/api': 'http://localhost:3000'
     }
@@ -369,6 +374,15 @@ package.json
 ### 在这里直接设置 --open即可自动打开浏览器
 
 1. 在终端里输入npm run server 打开服务器，在浏览器中输入<http://localhost:8089>即可看到结果
+
+### historyApiFallback
+
+webpack不配置这个的话，正常的react请求会直接请求到服务端，不会走react内部的路由
+
+[historyApiFallback](https://www.webpackjs.com/configuration/dev-server/#devserver-historyapifallback)就是解决这个问题
+
+TODO
+到了线上要配置NGINX，让路由打到项目里
 
 ## 支持热更新
 
@@ -537,8 +551,10 @@ module: {
 ```
 
 1. 用use+loader
-2. 
+
+2.
 这种最常用，因为每个都有不同的配置项！！
+
 ```
 module: {
     rules: [
@@ -724,6 +740,7 @@ You may need an appropriate loader to handle this file type.
 file-loader可以解析项目中的url引入(不局限于css), 根据配置，将图片拷贝到相应的路径，再根据配置，打包后文件引用路径，使之指向正确的文件。
 
 打包以后文件名保持不变，加hash值
+
 ```js
 module: {
     rules: {
@@ -1062,11 +1079,11 @@ npm install --save-dev less-loader less
 {
     test: /\.less$/,
     use: [{
-        loader: "style-loader" // creates style nodes from JS strings 
+        loader: "style-loader" // creates style nodes from JS strings
     }, {
-        loader: "css-loader" // translates CSS into CommonJS 
+        loader: "css-loader" // translates CSS into CommonJS
     }, {
-        loader: "less-loader" // compiles Less to CSS 
+        loader: "less-loader" // compiles Less to CSS
     }]
 }
 ```
@@ -1108,7 +1125,7 @@ import less from './css/black.less';
         }, {
             loader: "less-loader"
         }],
-        // use style-loader in development 
+        // use style-loader in development
         fallback: "style-loader"
     })
 }
@@ -1193,7 +1210,7 @@ import sass from './css/nav.scss';
         }, {
             loader: "sass-loader"
         }],
-        // use style-loader in development 
+        // use style-loader in development
         fallback: "style-loader"
     })
 }
@@ -1378,7 +1395,7 @@ plugins: [
 把css单独打包到CSS文件中，webpack默认把css打包到js中。即css-in-js.
 [MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/#root)
 
-压缩打包出的css代码[ optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
+压缩打包出的css代码[optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
 
 不能与
 
@@ -1606,7 +1623,7 @@ devtool: 'source-map',
 
 假如项目中使用jQuery库，一般有三种安装法。
 
-### 1. 
+### 1
 
 ```
 npm install jquery
@@ -1614,7 +1631,7 @@ npm install jquery
 
 安装完成后，package.json中并没有这个包的依赖。如果别人协同开发，直接npm install，项目无法正常运行，不推荐。
 
-### 2.
+### 2
 
 ```bash
 npm install jquery --save
@@ -1622,7 +1639,7 @@ npm install jquery --save
 
 安装完成后，在package.json的dependencies中。是生产环境需要依赖的包。上线时需要依赖。
 
-### 3.
+### 3
 
 ```bash
 npm install jquery --save-dev
@@ -2546,3 +2563,10 @@ tsconfig.json
 这样在代码中typescript可以识别lodash中的方法，并提示语法不规范等错误
 
 [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
+
+## webpack性能优化
+
+1. 跟上技术的迭代(npm, yarn, Node版本升级)
+2. 在尽可能少的模块上用loader
+    excludes或include
+3. plugin尽可能少，并保证可靠性
