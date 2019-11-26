@@ -2570,3 +2570,86 @@ tsconfig.json
 2. 在尽可能少的模块上用loader
     excludes或include
 3. plugin尽可能少，并保证可靠性
+4. resolve参数合理配置
+
+```js
+resolve: {
+    extendsions: ['.js', '.jsx'],
+    // 从哪个文件导入模块, 不要配置过多的
+    mainFields: ['index', 'main'],
+    // 创建 import 或 require 的别名
+    alias: {
+        'utils': path.resolve(__dirname, '../utils'),
+        'assets': path.resolve(__dirname, '../assets'),
+    }
+}
+```
+
+extendsions: 不要把所有后缀都加到这里, 如css, jpg等, 会增加文件查找复杂度
+5. 使用DLLPlugin提高打包速度
+
+webpack.dll.js
+
+```js
+const path = require('path');
+const fs = require('fs');
+const addAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+const webpack = require('webpack');
+const plugins = [
+    new HtmlWebpackPlugin({
+        template: 'src/index.html'
+    }),
+    new CleanWebpackPlugin(['dist'], {
+        root: path.resolve(__dirname, '../')
+    })
+]
+
+const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
+files.forEach(file => {
+    if (/.*\.dll.js/.test(file)) {
+        plugins.push(new addAssetHtmlWebpackPlugin({
+            filePath: path.resolve(__dirname, '../dll',file)
+        }))
+    }
+    if (/.*\.manifest.json/.test(file)) {
+        plugins.push(new webpack.DllReferencePlugin({
+            manifest: path.solve(__dirname, '../dll/', file)
+        }))
+    }
+})
+
+module.exports = {
+
+    entry: {
+        vendors: ['react', 'react-dom'],
+        lodash: ['lodash']
+    },
+    output: {
+        filename: '[name].dll.js',
+        path: path.resolve(__dirname, '..dll'),
+        // 可以在控制台使用的变量,通过全局变量暴露出来
+        library: '[name]'
+    },
+    plugins: [
+        new webpack.dllPlugin({
+            name: '[name]',
+            path: path.resolve(__dirname, '../dll/[name].manifest.json')
+        }),
+        // new addAssetHtmlWebpackPlugin({
+        //     filePath: path.resolve(__dirname, '../dll/vendors.dll.js')
+        // }),
+        // new webpack.DllReferencePlugin({
+        //     manifest: path.solve(__dirname, '../dll/vendors.manifest.json')
+        // })
+    ]
+}
+```
+
+`npm install add-asset-html-webpack-plugin --save`
+
+目标：
+第一次打包时把常用的库放到一个文件，再次引用不再从node_modules里找
+
+第三方模块只打包一次
+引入第三方模块时，用dll文件引入
+先打包`npm run build:dll` 打包`webpack.dll.js`，再运行`npm run build`
