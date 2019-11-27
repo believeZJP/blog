@@ -528,34 +528,33 @@ module: {
 
 1. 直接用use
 
-```js
-module: {
-    rules: [
-        {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-        }
-    ]
-}
-```
+    ```js
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        ]
+    }
+    ```
 
 2. 把use换成loader
 
-```js
-module: {
-    rules: [
-        test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
-    ]
-}
-```
+    ```js
+    module: {
+        rules: [
+            test: /\.css$/,
+            loader: ['style-loader', 'css-loader']
+        ]
+    }
+    ```
 
-1. 用use+loader
+3. 用use+loader
 
-2.
 这种最常用，因为每个都有不同的配置项！！
 
-```
+```js
 module: {
     rules: [
         {
@@ -716,7 +715,7 @@ css
 
 webpack 直接编译，报错
 
-```
+```bash
 ERROR in ./src/images/img.png
 Module parse failed: Unexpected character '�' (1:0)
 You may need an appropriate loader to handle this file type.
@@ -912,7 +911,7 @@ module: {
 
 可以在这里先build一下看下效果。图片不会显示
 
-**最好的解决方案，使用publicPath解决**
+> **最好的解决方案，使用publicPath解决**
 
 publicPath: 是在webpack.config.js文件中的output选项中，主要作用就是处理静态文件路径的。
 
@@ -992,7 +991,7 @@ webpack.config.js
 
 三节课的时间，讲了webpack图片中的坑，所有问题应该都可以解决了.
 
-## 小知识
+## 小知识 npm run build
 
 ### 没有打包npm run build，直接npm run server,无法看到最新结果
 
@@ -1218,7 +1217,7 @@ import sass from './css/nav.scss';
 
 至此，可以愉快的写sass代码了。
 
-## 小知识
+## 小知识-D
 
 -D 等于--save-dev
 
@@ -1583,7 +1582,7 @@ webpack打包后，代码无法调试。怎么解决？
 带inline的，会把打包的代码放到代码中
 cheap,只考虑业务代码，不考虑module里的代码
 
-## 配置webpack.config.js
+## 配置webpack.config.js的devtool
 
 可以根据不同情况修改对应的值
 
@@ -1598,7 +1597,7 @@ output: {
 devtool: 'source-map',
 ```
 
-## 总结
+## 总结-第16节
 
 这节学习了配置devtool，方便在开发环境调试代码。
 [一篇讲的不错的博客](http://www.cnblogs.com/hhhyaaon/p/5657469.html)
@@ -1625,7 +1624,7 @@ devtool: 'source-map',
 
 ### 1
 
-```
+```bash
 npm install jquery
 ```
 
@@ -2013,7 +2012,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
 配置好后，在控制台用npm run build 打包。jquery和Vue被抽离出来了。
 
-## 总结
+## 总结-第21节
 
 在项目开发中，会使用很多第三方类库，比较好的做法就是把这些第三方类库全部抽离处理，这样在项目维护和性能上都是不错的选择。学了这个技巧后，在工作中要会使用。
 
@@ -2064,7 +2063,7 @@ new copyWebpackPlugin([{
 
 配置好后，运行webpack，会发现图片按照配置打包到了指定目录。
 
-## 总结
+## 总结-第22节
 
 现在学起来已经很容易了，已经掌握了webpack的基本知识，剩下的就是不断练习和在实际项目中发现新的需求，然后找到新的loader或者plugin来解决问题。
 
@@ -2572,84 +2571,211 @@ tsconfig.json
 3. plugin尽可能少，并保证可靠性
 4. resolve参数合理配置
 
-```js
-resolve: {
-    extendsions: ['.js', '.jsx'],
-    // 从哪个文件导入模块, 不要配置过多的
-    mainFields: ['index', 'main'],
-    // 创建 import 或 require 的别名
-    alias: {
-        'utils': path.resolve(__dirname, '../utils'),
-        'assets': path.resolve(__dirname, '../assets'),
+    ```js
+    resolve: {
+        extendsions: ['.js', '.jsx'],
+        // 从哪个文件导入模块, 不要配置过多的
+        mainFields: ['index', 'main'],
+        // 创建 import 或 require 的别名
+        alias: {
+            'utils': path.resolve(__dirname, '../utils'),
+            'assets': path.resolve(__dirname, '../assets'),
+        }
     }
-}
-```
+    ```
 
-extendsions: 不要把所有后缀都加到这里, 如css, jpg等, 会增加文件查找复杂度
+    extendsions: 不要把所有后缀都加到这里, 如css, jpg等, 会增加文件查找复杂度
 5. 使用DLLPlugin提高打包速度
 
-webpack.dll.js
+    每一次引入第三方包都会进行分析，消耗时间
+
+    webpack.dll.js
+
+    ```js
+    const path = require('path');
+    const webpack = require('webpack');
+
+    module.exports = {
+        entry: {
+            vendors: ['react', 'react-dom'],
+            lodash: ['lodash']
+        },
+        output: {
+            filename: '[name].dll.js',
+            path: path.resolve(__dirname, '../dll'),
+            // 可以在控制台使用的变量,通过全局变量暴露出来
+            library: '[name]'
+        },
+        plugins: [
+            new webpack.dllPlugin({
+                name: '[name]',
+                path: path.resolve(__dirname, '../dll/[name].manifest.json')
+            })
+        ]
+    }
+    ```
+
+    webpack.common.js
+
+    ```js
+    const path = require('path');
+    const fs = require('fs');
+    const addAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+    const webpack = require('webpack');
+    const plugins = [
+        new HtmlWebpackPlugin({
+            template: 'src/index.html'
+        }),
+        new CleanWebpackPlugin(['dist'], {
+            root: path.resolve(__dirname, '../')
+        })
+    ];
+
+    const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
+    files.forEach(file => {
+        if (/.*\.dll.js/.test(file)) {
+            plugins.push(new addAssetHtmlWebpackPlugin({
+                filePath: path.resolve(__dirname, '../dll',file)
+            }))
+        }
+        if (/.*\.manifest.json/.test(file)) {
+            plugins.push(new webpack.DllReferencePlugin({
+                manifest: path.solve(__dirname, '../dll/', file)
+            }))
+        }
+    });
+
+    module.exports = {
+
+        entry: {
+            vendors: ['react', 'react-dom'],
+            lodash: ['lodash']
+        },
+        output: {
+            filename: '[name].dll.js',
+            path: path.resolve(__dirname, '..dll'),
+            // 可以在控制台使用的变量,通过全局变量暴露出来
+            library: '[name]'
+        },
+        plugins
+    }
+    ```
+
+    `npm install add-asset-html-webpack-plugin --save`
+
+    目标：
+    第一次打包时把常用的库放到一个文件，再次引用不再从node_modules里找
+
+    第三方模块只打包一次
+    引入第三方模块时，用dll文件引入
+    先打包`npm run build:dll` 打包`webpack.dll.js`，再运行`npm run build`
+
+    ```json
+    "scripts": {
+    "build": "webpack --progress --colors --devtool cheap-module-source-map",
+    "build:dll": "webpack --config webpack.dll.config.js"
+    },
+    ```
+
+6. 控制包文件大
+7. thread-loader, paraller-webpack, happypack多进程打包
+8. 合理使用sourceMap
+9. 结合stats分析打包结果
+10. 开发环境内存编译
+11. 开发环境无用插件剔除(开发环境没必要压缩之类的)
+
+## 多页面打包配置
+
+多个entry对应多个html文件
+
+webpack.common.js
 
 ```js
-const path = require('path');
-const fs = require('fs');
-const addAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
-const webpack = require('webpack');
-const plugins = [
-    new HtmlWebpackPlugin({
-        template: 'src/index.html'
-    }),
-    new CleanWebpackPlugin(['dist'], {
-        root: path.resolve(__dirname, '../')
-    })
-]
-
-const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
-files.forEach(file => {
-    if (/.*\.dll.js/.test(file)) {
-        plugins.push(new addAssetHtmlWebpackPlugin({
-            filePath: path.resolve(__dirname, '../dll',file)
-        }))
-    }
-    if (/.*\.manifest.json/.test(file)) {
-        plugins.push(new webpack.DllReferencePlugin({
-            manifest: path.solve(__dirname, '../dll/', file)
-        }))
-    }
-})
-
-module.exports = {
-
-    entry: {
-        vendors: ['react', 'react-dom'],
-        lodash: ['lodash']
-    },
-    output: {
-        filename: '[name].dll.js',
-        path: path.resolve(__dirname, '..dll'),
-        // 可以在控制台使用的变量,通过全局变量暴露出来
-        library: '[name]'
-    },
-    plugins: [
-        new webpack.dllPlugin({
-            name: '[name]',
-            path: path.resolve(__dirname, '../dll/[name].manifest.json')
+const makePlugins = (configs) => {
+    const plugins = [
+        new CleanWebpackPlugin(['dist'], {
+            root: path.resolve(__dirname, '../')
+        })
+    ];
+    Object.keys(configs.entry).forEach(item => {
+        plugins.push(
+            new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            filename: `${item}.html`,
+            chunks: ['runtime', 'vendors', item]
         }),
-        // new addAssetHtmlWebpackPlugin({
-        //     filePath: path.resolve(__dirname, '../dll/vendors.dll.js')
-        // }),
-        // new webpack.DllReferencePlugin({
-        //     manifest: path.solve(__dirname, '../dll/vendors.manifest.json')
-        // })
-    ]
+        )
+    });
+    // dllplugins
+
+    return plugins;
+}
+const configs = {
+    entry: {
+        index: './src/index.js',
+        list: './src/list.js'
+    },
+    plugins
+};
+
+config.plugins = makePlugins(config);
+
+module.exports = config;
+```
+
+## 如何编写一个loader
+
+常用功能: 国际化替换中英文, 捕获异常(在function外加trycatch)
+
+[loader API](https://www.webpackjs.com/api/loaders/)
+
+replaceLoader.js
+
+```js
+const loaderUtils = require('loader-utils');
+
+module.exports = function(source) {
+    const options = loaderUtils.getOptions();
+    const result = source.replace('hello ', options.name);
+
+    // 等于 return result
+    this.callback(null, result);
 }
 ```
 
-`npm install add-asset-html-webpack-plugin --save`
+webpack.config.js
 
-目标：
-第一次打包时把常用的库放到一个文件，再次引用不再从node_modules里找
+```js
+resolveLoader: {
+    // path.resolve(__dirname, './loaders/replaceLoader.js)可以不用写这么多,直接写name
+    modules: ['node_modules', './loaders']
+},
+module: {
+    rules: [{
+        test: /\.js/,
+        use: [{
+            loader: 'replaceLoader',
+            options: {
+                name: 'lee'
+            }
+        }]
+    }]
+}
+```
 
-第三方模块只打包一次
-引入第三方模块时，用dll文件引入
-先打包`npm run build:dll` 打包`webpack.dll.js`，再运行`npm run build`
+复杂的replaceLoader.js
+
+```js
+const loaderUtils = require('loader-utils');
+
+module.exports = function(source) {
+    const options = loaderUtils.getOptions();
+    const callback = this.async();
+    setTimeout(() => {
+        const result = source.replace('dell', options.name);
+        callback(null, result);
+    }, 1000);
+}
+```
+
+## 如何编写一个Plugin
