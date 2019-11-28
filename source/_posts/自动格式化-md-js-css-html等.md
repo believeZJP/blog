@@ -180,7 +180,7 @@ rules: 是对应的详细规则，有些规则查不到的可以先查询报错�
         "author": "believeZJP",
     },
     "fileheader.configObj": {
-        "autoAdd": true, // 默认开启
+        "autoAdd": false,
         "language": {
         "js": {
             "head": "/**",
@@ -191,5 +191,7 @@ rules: 是对应的详细规则，有些规则查不到的可以先查询报错�
 ```
 
 配置自定义时发现对全局修改不生效，必须指定语言进行修改，如上的`js`。
+
+`autoAdd`设成`false`比较好，这个插件不能自动识别文件里是否已经存在注释，会添加多个
 
 需要注意的是，每次修改settings.json后要重启VSCode
