@@ -2779,3 +2779,58 @@ module.exports = function(source) {
 ```
 
 ## 如何编写一个Plugin
+
+打包的某个时刻，是插件生效的场景，比如打包之前，清除dist目录
+[compiler hooks](https://www.webpackjs.com/api/compiler-hooks)
+copyright-webpack-plugin.js
+
+```js
+class CopyrightWebpackPlugin {
+    constructor(options) {
+        console.log('插件被使用了', options);
+    }
+    apply(compiler) {
+        // 同步写法
+        compiler.hooks.emit.tap('CopyrightWebpackPlugin', () => {
+
+        });
+        //  异步写法
+        compiler.hooks.emit.tapAsync('CopyrightWebpackPlugin', (compilation, cb) => {
+            // compilation.assets为打包后的文件
+            compilation.assets['copyright.txt'] = {
+                source: function() {
+                    return 'copyright by hello world'
+                },
+                size: function() {
+                    return 21;
+                }
+            }
+            // 一定要加回调
+            cb();
+        })
+    }
+}
+module.exports = CopyrightWebpackPlugin;
+```
+
+webpack.config.js
+
+```js
+const copyrightWebpackPlugin = require('./plugins/copyright-webpack-plugin');
+
+plugins: [
+    new copyrightWebpackPlugin({
+        name: 'world'
+    })
+]
+```
+
+### 用node调试工具调试webpack
+
+```json
+"scripts": {
+    "debug": "node --inspect --inspect-brk node_modules/webpack/bin/webpack.jss"
+}
+```
+
+在插件中写debugger，会自动跳到该断点
