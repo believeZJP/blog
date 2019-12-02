@@ -2834,3 +2834,11 @@ plugins: [
 ```
 
 在插件中写debugger，会自动跳到该断点
+
+## [CreateReactApp](<https://github.com/facebook/create-react-app）项目Webpack解析>
+
+`npm run eject`查看webpack配置
+
+## [Vue项目配置](https://cli.vuejs.org/config/#global-cli-config)
+
+新建vue.config.js配置
