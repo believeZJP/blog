@@ -7,7 +7,7 @@ tags:
 - antDesign
 ---
 
-# 记录踩过的坑
+## 记录踩过的坑
 
 数组必须要key的解决办法
 
@@ -48,26 +48,30 @@ this.props.match.params.couponBatchId
 ## 路由跳转
 
 ## 多级对象setState
+
 可以单独取出来，修改后再整体放进去
 
 ## 一个组件是modal，打开就查询一次，在哪执行查询
 
-    在componentWillReceiveProps里
-    componentWillReceiveProps(nextProps){
-        // 这里的nextProps为修改后的状态值
+在componentWillReceiveProps里
 
-        用this.props可以获取到修改之前的props
+```js
+componentWillReceiveProps(nextProps){
+    // 这里的nextProps为修改后的状态值
 
-        通过this.props和nextProps两者对比可以看是否需要更新和操作
-    }
+    用this.props可以获取到修改之前的props
 
-    componentwillreceiveprops会自动接收参数，导致页面不断渲染
-    需要配合this.props使用
-    componentDidMount不会触发
+    通过this.props和nextProps两者对比可以看是否需要更新和操作
+}
+```
 
-    lodash.has
+componentwillreceiveprops会自动接收参数，导致页面不断渲染
+需要配合this.props使用
+componentDidMount不会触发
 
-## select 用setFieldsValue赋值，类型要一样，数字就是数字，字符串就是字符串，才能正常显示。
+lodash.has
+
+## select 用setFieldsValue赋值，类型要一样，数字就是数字，字符串就是字符串，才能正常显示
 
 ## form表单重置按钮
 

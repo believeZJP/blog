@@ -170,6 +170,13 @@ command+t
 # 关闭标签
 command+w
 
+# 同一个Tab内的分屏切换
+Command + [
+
+# Tab之间的切换
+Command + 数字
+
+
 # 垂直切分窗口
 command+d
 
@@ -203,6 +210,18 @@ command + ;
 
 # 查看剪贴板历史
 command + shift + h
+
+# 命令搜索
+Ctrl + r
+
+# 清除当前行命令
+Ctrl + u
+
+# 跳转到行首
+Ctrl + a
+
+# 跳转到行尾
+Ctrl + e
 ```
 
 ## 自动补全插件 incr ---如果提示多了会卡的很严重，曾经用过，后来替换成 zsh-autosuggestions
