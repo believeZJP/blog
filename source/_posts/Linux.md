@@ -9,9 +9,9 @@ tags:
 
 参考:[链接](https://segmentfault.com/a/1190000011048277)
 
-# 一、命令基本格式
+## 一、命令基本格式
 
-http://www.cnblogs.com/ShaYeBlog/p/5576601.html
+<http://www.cnblogs.com/ShaYeBlog/p/5576601.html>
 
 git 打tag
 
@@ -22,7 +22,7 @@ git 打tag
     2. 有多个选项，可以写在一起
     3. 简写：-a == -all, ll == ls -l
 
-## 1.1 ls
+### 1.1 ls
 
 * ls -a 显示所有文件，包括隐藏文件
 * ls -l 显示详细信息
@@ -30,7 +30,7 @@ git 打tag
 * ls -h 人性化显示文件大小 ，K/M
 * ls -i 显示inode
 
-## 1.2 文件权限(10位)
+### 1.2 文件权限(10位)
 
 >第一位是文件类型，后面每3位一组
 
@@ -44,11 +44,11 @@ git 打tag
 
 <!-- more -->
 
-# 二、文件处理命令
+## 二、文件处理命令
 
 linux中一切皆文件。目录为目录文件。普通文件用来保存数据，目录文件用来保存目录。
 
-## 2.1 常用目录介绍及作用
+### 2.1 常用目录介绍及作用
 
 1. / 根目录
 2. /sbin ，/bin 命令保存目录
@@ -70,7 +70,7 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
     * /usr/bin/ 系统命令 (普通用户)
     * /usr/sbin/ 系统命令 (超级用户)
 
-## 2.2 目录处理文件命令
+### 2.2 目录处理文件命令
 
 * mkdir -p [目录名]
     -p 递归创建
@@ -92,7 +92,7 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
 * pwd 查看当前所在目录位置
     print working directory
 
-## 2.3 文件处理命令
+### 2.3 文件处理命令
 
 * rmdir [目录名] 删除空目录
 
@@ -136,7 +136,7 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
 
 * date 查看当前系统时间
 
-# 2.4 链接命令
+### 2.4 链接命令
 
 * 格式化硬盘
 ??
@@ -173,37 +173,37 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
 
 [硬链接与软链接图](https://www.processon.com/view/link/59b296fae4b0d3fbea262c6c")
 
-# 三、文件搜索命令
+## 三、文件搜索命令
 
-## 3.1 locate 文件名
+### 3.1 locate 文件名
 
     速度快，但只能按照文件名搜索，不能进行更复杂的搜索
 
-## 3.2 whereis
+### 3.2 whereis
 
     用于搜索命令所在的路径已经帮助文档所在的位置
     -b: 只查找可执行文件
     -m: 只查找帮助文件
 
-## 3.3 which
+### 3.3 which
 
     能看到命令的路径，如果有别名，还能看到别名的说明
     只能看到外部安装的命令，如pwd.
 
-## 3.4 $PATH
+### 3.4 $PATH
 
     类似于Windows的环境变量，执行命令时，从path定义的目录中寻找
     echo $PATH
 
-## 3.5 whoami
+### 3.5 whoami
 
     显示当前用户
 
-## 3.6 whatis
+### 3.6 whatis
 
     查询一个命令执行什么功能，并将结果打印到终端上
 
-## 3.7 find [搜索范围] [搜索条件]
+### 3.7 find [搜索范围] [搜索条件]
 
 >1. 默认完全匹配
 >2. 避免大范围搜索，非常浪费资源，建议不在直接'/'目录下搜索
@@ -216,7 +216,7 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
     但还是有特殊的，内核产生的文件，就没有所属者，一般在proc和sys目录下；
     还有外来文件，u盘拷入的文件也会忽略所有者
 
-### 模糊查询
+#### 模糊查询
 
     通配符有3种
     1. * 匹配任何字符
@@ -228,7 +228,7 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
         find /home -name "[12]*" 显示1或2开头的文件
         find /home -name "*[12]" 显示所有1或2结尾的文件
 
-### find 按文件时间搜索
+#### find 按文件时间搜索
 
     1. find /home -mtime +10 在home目录下，查找10天前修改的文件
     2. find /home -mtime 10                    10天前当天的文件
@@ -236,7 +236,7 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
 
     atime 文件访问时间  ctime 改变文件属性 mtime 修改文件内容
 
-### find 目录 -size 大小
+#### find 目录 -size 大小
 
     小写k和大写M
     find /etc -size +20k -a -size -50k  查找/etc/目录下大于20k并且小于50k的文件
@@ -249,7 +249,7 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
 
     固定格式：-exec {} \\ ，表示直接对前面的搜索结果进行后面的命令处理。？？？
 
-## grep [选项] 字符串 文件名
+#### grep [选项] 字符串 文件名
 
     -i 忽略大小写
     -v 排除指定字符串
@@ -259,13 +259,13 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
     find: 在系统中搜索符合条件的文件名，如果需要匹配，使用通配符，为完全匹配
     grep: 在文件中搜索符合条件的字符串，如果需要匹配，使用正则表达式，为包含匹配
 
-# 四、帮助命令
+## 四、帮助命令
 
-## 4.1 man 命令名称  manual
+### 4.1 man 命令名称  manual
 
 进入man命令操作，q退出；输入: / -d 搜索'-d'字符串；按n往下搜，shfit+n 网上搜
 
-## 4.2 其他帮助命令？？？
+### 4.2 其他帮助命令
 
 * 命令 --help
 
@@ -278,59 +278,59 @@ linux中一切皆文件。目录为目录文件。普通文件用来保存数据
     -p 进入上一个帮助小节
     -q 退出
 
-# 五、压缩与解压缩命令
+## 五、压缩与解压缩命令
 
 >.zip .gz .bz2 .tar.gz .tar.bz2
 
-## 5.1 zip
+### 5.1 zip
 
-```bash
-zip 压缩文件名 源文件 # 压缩文件
-zip -r 压缩目录名 源目录 # 压缩目录
+    ```bash
+    zip 压缩文件名 源文件 # 压缩文件
+    zip -r 压缩目录名 源目录 # 压缩目录
 
-unzip 压缩文件 # 解压缩文件
-```
+    unzip 压缩文件 # 解压缩文件
+    ```
 
-## 5.2 gz
+### 5.2 gz
 
-```bash
-    gzip 源文件 # 压缩为.gz格式的压缩文件，源文件会消失
-    gzip -c 源文件>压缩文件 # 压缩为.gz格式，源文件会保留
-    gzip -r 目录 # 压缩目录下所有的文件夹，但不能压缩目录
+    ```bash
+        gzip 源文件 # 压缩为.gz格式的压缩文件，源文件会消失
+        gzip -c 源文件>压缩文件 # 压缩为.gz格式，源文件会保留
+        gzip -r 目录 # 压缩目录下所有的文件夹，但不能压缩目录
 
-    gzip -d 压缩文件 # 解压缩文件
-    gunzip 压缩文件 # 解压缩文件
-```
+        gzip -d 压缩文件 # 解压缩文件
+        gunzip 压缩文件 # 解压缩文件
+    ```
 
-## 5.3 bzip格式
+### 5.3 bzip格式
 
 bzip 不能压缩目录
 
-```bash
-    bzip2 源文件 # 压缩文件 源文件会消失
-    bzip2 -k 源文件 # 压缩后 保留源文件
+    ```bash
+        bzip2 源文件 # 压缩文件 源文件会消失
+        bzip2 -k 源文件 # 压缩后 保留源文件
 
-    bzip -d 压缩文件 # 解压bzip2文件
-    bunbzip 压缩文件 # 解压文件
-```
+        bzip -d 压缩文件 # 解压bzip2文件
+        bunbzip 压缩文件 # 解压文件
+    ```
 
-## 5.4 tar.gz tar.bz2
+### 5.4 tar.gz tar.bz2
 
-```bash
-    tar -cvf 打包文件名 源文件 # 压缩为tar格式
-    tar -zvcf 压缩包名.tar.gz 源文件 # 压缩为.tar.gz格式
-    tar -jvcf 压缩包名.tar.bz2 源文件 # 压缩为.tar.bz2格式
-    # -c 打包
-    # -v 显示过程
-    # -f 指定打包后的文件名
+    ```bash
+        tar -cvf 打包文件名 源文件 # 压缩为tar格式
+        tar -zvcf 压缩包名.tar.gz 源文件 # 压缩为.tar.gz格式
+        tar -jvcf 压缩包名.tar.bz2 源文件 # 压缩为.tar.bz2格式
+        # -c 打包
+        # -v 显示过程
+        # -f 指定打包后的文件名
 
-    tar -xvf 打包文件名 # 解压tar格式
-    tar -zxvf 压缩包名.tar.gz # 解压.tar.gz格式
-    tar -jxvf 压缩包名.tar.bz2 # 解压.tar.bz2格式
-    # -x 解压包
-    # -z 压缩为tar.gz格式
-    # -j 压缩为.tar.bz2格式
-```
+        tar -xvf 打包文件名 # 解压tar格式
+        tar -zxvf 压缩包名.tar.gz # 解压.tar.gz格式
+        tar -jxvf 压缩包名.tar.bz2 # 解压.tar.bz2格式
+        # -x 解压包
+        # -z 压缩为tar.gz格式
+        # -j 压缩为.tar.bz2格式
+    ```
 
 >其他用法
 
@@ -341,30 +341,30 @@ bzip 不能压缩目录
     3. 查看压缩包内文件，不解压
     tar -ztvf 压缩包文件名
 
-```bash
-tar –cvf jpg.tar *.jpg # 将目录里所有jpg文件打包成tar.jpg
-tar –czf jpg.tar.gz *.jpg # 将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz
-tar –cjf jpg.tar.bz2 *.jpg # 将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2
-tar –cZf jpg.tar.Z *.jpg # 将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z
-rar a jpg.rar *.jpg # rar格式的压缩，需要先下载rar for linux
-zip jpg.zip *.jpg # zip格式的压缩，需要先下载zip for linux
-```
+    ```bash
+    tar –cvf jpg.tar *.jpg # 将目录里所有jpg文件打包成tar.jpg
+    tar –czf jpg.tar.gz *.jpg # 将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz
+    tar –cjf jpg.tar.bz2 *.jpg # 将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2
+    tar –cZf jpg.tar.Z *.jpg # 将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z
+    rar a jpg.rar *.jpg # rar格式的压缩，需要先下载rar for linux
+    zip jpg.zip *.jpg # zip格式的压缩，需要先下载zip for linux
+    ```
 
 解压
 
-```bash
-tar –xvf file.tar # 解压 tar包
-tar -xzvf file.tar.gz # 解压tar.gz
-tar -xjvf file.tar.bz2 # 解压 tar.bz2
-tar –xZvf file.tar.Z # 解压tar.Z
-unrar e file.rar # 解压rar
-unzip file.zip # 解压zip
+    ```bash
+    tar –xvf file.tar # 解压 tar包
+    tar -xzvf file.tar.gz # 解压tar.gz
+    tar -xjvf file.tar.bz2 # 解压 tar.bz2
+    tar –xZvf file.tar.Z # 解压tar.Z
+    unrar e file.rar # 解压rar
+    unzip file.zip # 解压zip
 
-```
+    ```
 
-# 六、关机和重启命令
+## 六、关机和重启命令
 
-## 6.1 关机和重启
+### 6.1 关机和重启
 
 > shutdown [选项] 时间
 
@@ -372,7 +372,7 @@ unzip file.zip # 解压zip
     这时，如果当前用户按下ctrl+c ，可以取消本次关机或重启的操作；
     而其他用户按下ctrl+c，不会取消关机或重启，但可以中断退出，继续其他操作。
 
-#### 选项：
+#### 选项
 
     -h 关机
     -r 重启
@@ -392,7 +392,7 @@ unzip file.zip # 解压zip
     shutdown -r now 立即重启
     shutdown -c 取消前一个关机或重启命令
 
-## 6.2 系统运行级别
+### 6.2 系统运行级别
 
     runlevel 查看运行级别 前级别 当前级别
     logout 注销
@@ -405,9 +405,9 @@ unzip file.zip # 解压zip
     5    //图形界面
     6    //重启
 
-# 七、挂载与卸载命令
+## 七、挂载与卸载命令
 
-## 7.1 挂载(可理解为分配盘符)
+### 7.1 挂载(可理解为分配盘符)
 
 (1)查询与自动挂载
 
@@ -419,7 +419,7 @@ mount -a 依据配置文件/etc/fstab的内容，自动挂载
 (2) 挂载命令的格式
 >mount [-t 文件系统] [-o 特殊选项][设备文件名][挂载点]
 
-#### 选项
+#### mount选项
 
 -t 文件系统：加入文件系统类型来指定挂载的类型，ext3,ext4,光盘：iso9660等文件系统
 -o 特殊选项：可以指定挂载的额外选项
@@ -439,41 +439,36 @@ mount -t vfat /dev/sdb1 /mnt/usb/
     vfat 指的是fat32文件系统，单个文件不超过4G
     Linux默认不支持NTFS文件系统，可以下载ntfs-3g软件安装
 
-# 八、用户登录查看命令
+## 八、用户登录查看命令
 
-## 8.1 w
+### 8.1 w
 
     查看系统当前信息(负载和开机时间等信息) 当前已经登录的用户及用什么终端进入。
 
 > load average: X.XX X.XX X.XX 表示系统在1分钟内 5分钟内 15分钟内 的平均负载(CPU内存)
 > USER: 用户
 > TTY:登录终端 pts/0 第一个远程终端
-
 > LOGIN@: 登录时间
-
 > IDLE: 用户闲置时间
-
 > JCPU: 指的是和该终端连接的所有进程占用的时间。
-
 > PCPU: 指当前进程所占用的时间
-
 > WHAT: 当前正在运行的命令
 
-## 8.2 who 与w类似，但信息有所简化
+### 8.2 who 与w类似，但信息有所简化
 
     会显示登录来源IP地址
 
-## 8.3 last
+### 8.3 last
 
     查看当前登录和过去登录的用户信息
     可以看到reboot时间，实际是查看/var/log/wtmp但必须用last命令才能看
 
-## 8.4 lastlog
+### 8.4 lastlog
 
     查看所有用户最后一次登录时间
     /var/log/lastlog 不能直接看，也是用lastlog看
 
-# 编辑器
+## 编辑器
 
 * :w 报错
 * :q 退出

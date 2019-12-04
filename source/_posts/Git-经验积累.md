@@ -5,15 +5,16 @@ updated: 2018-12-03 14:58:57
 tags:
 - Git
 - SmartGit
+- GitKraken
 ---
 
-# 客户端推荐
+## 客户端推荐
 
 - [SmartGit](https://www.syntevo.com/smartgit/)✨✨✨(开始用的，后来放弃)
 - [Sourcetree](https://www.sourcetreeapp.com/)✨✨✨✨✨(现在用的这个，需要翻墙注册)
 - [GitKraken](https://www.gitkraken.com/) 没用过，全平台免费
 
-# github contributions 展示问题
+## github contributions 展示问题
 
 正常情况下会将每天的提交记录展示到图表中。
 有天突然发现之前好多提交记录没展示，查看原因发现是提交账号和github的账号不一致的原因导致的。
@@ -32,7 +33,7 @@ GitHub默认只有账号绑定的邮箱提交的commits才会展示.
 
     用smartGit客户端，选择目录-->右键-->setting-->修改用户名，邮箱
 
-# centos安装git
+## centos安装git
 
 ## 安装
 
@@ -64,7 +65,7 @@ pbcopy < ~/.ssh/id_rsa.pub
 
 yum install -y nodejs //行不通，版本太旧了
 
-参考：http://wiki.jikexueyuan.com/project/nodejs-guide/install.html
+参考：<http://wiki.jikexueyuan.com/project/nodejs-guide/install.html>
 
 ## 卸载
 
