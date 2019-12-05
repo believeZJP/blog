@@ -5,6 +5,8 @@ updated: 2019-12-03 15:57:18
 tags:
 ---
 
+[插件列表](https://github.com/varHarrie/Dawn-Blossoms/issues/10)
+
 ## 主命令框
 
 `Command+Shift+P`: 打开命令面板。在打开的输入框内，可以输入任何命令，例如：
@@ -48,3 +50,91 @@ Editor之间的互相切换： `Shift + Command + [(])`
 ### 2.2.3、终端区的快捷键
 
 `Ctrl + ``打开终端
+
+主题：
+winter is coming
+Dracula 主题
+espresso 主题    这个是左侧黑色，编辑区白色的~~
+monokai light
+sunrise
+woolen
+theme-bluloco-dark
+theme-bluloco-light
+github   非常给力
+
+快捷键：
+
+ctrl + p 快速打开一个文件
+ctrl + G 跳转到指定行
+ctrl + F 在当前文件中搜索
+ctrl + shift + k 删除当前行
+
+home 跳转到行的开始
+end 跳转到行的结尾
+
+ctrl + home 跳转到文件的开始
+ctrl + end 跳转到文件的结尾
+
+ctrl + shift + [  折叠一个代码块
+ctrl + shift + ]  展开一个代码块
+
+f3/shift + f3  发现下一处/发现上一处
+ctrl + D 可以批量选中同一个元素，然后进行变量或方法名的重命名
+ctrl + shift + o 在当前文件查找一个方法
+ alt + shift + f 格式化代码
+ F12 跳转到定义处
+ ctrl + i  选中当前行
+
+另外，通过路径
+        File -> Preferences -> Keyboard Shortcuts中的链接，可以打开keybindings.json文件，定义自己的快捷键
+     例如：定义把所有字符转化为大写/小写，修改文件keybindings.json文件。然后，通过 ctrl+shift+u 快捷键就可以把一个变量修改为大写。通过ctrl+shift+l把大写的变量变成小写。
+8405da39ed76ac45f91c7ac4261fa687eb7566a2
+
+Settings Sync   同步插件
+插件：
+ESLint   //js文件规范化
+HTML CSS Support   //html,css
+html css snippets  html,css 提示，自动补全
+
+Vetur  //vue文件支持
+vscode-icons 文件前显示图标
+mithril emmet  // zen coding
+Path Autocomplete
+PHP IntelliSense
+
+waka Time //统计写代码时间
+ 自动闭合标签
+Auto Close Tag
+颜色变值的实际颜色
+Color Highlight
+括号高亮
+Bracket Pair Colorizer，，
+
+markdown preview enhanced 预览markdown非常好
+Prettier - Code formatter 自动格式化代码 ，可以自动格式化
+"editor.formatOnSave": true
+
+VS Code 终端字体间距过宽
+解决办法：
+终端用VSCode的默认字体，编辑器可以用自定义的字体
+终端使用的字体不能是等宽字体，否则会出现这样的问题
+
+vscode自动给所有的import改为实际路径而不是相对路径，解决办法
+自动更新 import 语句的路径
+
+默认用户设置
+// 启用或禁用在 VS Code 中重命名或移动文件时自动更新 import 语句的路径。可选值有: "prompt" (在每次重命名时提示)、"always" (始终自动更新路径) 和 "never" (从不重命名路径且不要提示)。要求工作区使用高于 2.9 版本的 TypeScript。
+"typescript.updateImportsOnFileMove.enabled": "prompt"
+
+如果把这个值改成always
+，就会自动修改所有的import
+
+- VS Code setting Sync插件配置经验：
+ 按照教程提示按shift+alt+u 会弹出输入框要求输入github中的token，第一次可以输入
+ 如果输入错误，再次按快捷键会不断提示token过期或错误。
+ 
+ 解决办法: 找到settings.json文件同目录下的syncLocalSettings.json
+ 查找办法，鼠标放到setting.json的打开标签上会显示文件目录，右键可打开所在目录。
+ C:\Users\zhaojianpeng3\AppData\Roaming\Code\User
+ 
+ 修改文件中的token为github中对应的token，保存文件。重新按快捷键即可启用。

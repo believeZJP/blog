@@ -11,7 +11,7 @@ categories:
 ---
 [TOC]
 
-# http 方法，每个方法分别什么情况下用
+## http 方法，每个方法分别什么情况下用
 
 put和get有什么相同点
 [链接](https://www.jianshu.com/p/ce44e5f4623a)
@@ -30,7 +30,7 @@ HEAD 类似于get请求，只不过返回的响应中没有具体的内容，用
 
 <!-- more -->
 
-# HTTP2 与 HTTP1.1 区别
+## HTTP2 与 HTTP1.1 区别
 
 - http2 使用二进制传送，http1.x 使用文本(字符串)传送
   > 二进制传送单位是帧和流，帧组成了流，同时流还有流 ID 标识
@@ -41,7 +41,7 @@ HEAD 类似于get请求，只不过返回的响应中没有具体的内容，用
 - http2 支持服务器推送
   > 支持在客户端未经请求许可的情况下，主动向客户端推送内容
 
-# http 方法，每个方法分别什么情况下用
+## http 方法，每个方法分别什么情况下用
 
 put 和 get 有什么相同点
 [链接](https://www.jianshu.com/p/ce44e5f4623a)
@@ -67,7 +67,7 @@ HEAD 类似于 get 请求，只不过返回的响应中没有具体的内容，�
 - TRACK：追踪路径
 - CONNECT：要求用隧道协议连接代理
 
-# ajax 状态值
+## ajax 状态值
 
 ```
 0 代表未初始化。 还没有调用 open 方法
@@ -77,7 +77,7 @@ HEAD 类似于 get 请求，只不过返回的响应中没有具体的内容，�
 4 代表完成。响应发送完毕
 ```
 
-# 7 层模型
+## 7 层模型
 
 #### 7 应用层
 
@@ -116,7 +116,7 @@ HEAD 类似于 get 请求，只不过返回的响应中没有具体的内容，�
 
     连接头、针、针的使用、电流、电流、编码及光调制等都属于各种物理层规范中的内容。
 
-### OSI 分层的优点
+#### OSI 分层的优点
 
 （1）人们可以很容易的讨论和学习协议的规范细节。
 
@@ -128,7 +128,7 @@ HEAD 类似于 get 请求，只不过返回的响应中没有具体的内容，�
 
 （5）每层利用紧邻的下层服务，更容易记住个层的功能。
 
-# get 和 post 区别
+## get 和 post 区别
 
 ### 最直观的区别
 
@@ -158,22 +158,22 @@ HEAD 类似于 get 请求，只不过返回的响应中没有具体的内容，�
 
 2).GET 产生一个 TCP 数据包;POST 产生两个 TCP 数据包;对于 GET 方式的请求，浏览器会把 http header 和 data 一并发送出去，服务器响应 200(返回数据);而对于 POST，浏览器先发送 header，服务器响应 100 continue，浏览器再发送 data，服务器响应 200 ok(返回数据)。因为 ==POST 需要两步，时间上消耗的要多一点，看起来 GET 比 POST 更有效。== 因此 Yahoo 团队有推荐用 GET 替换 POST 来优化网站性能。
 
-# HTTPS 和 HTTP 的区别
+## HTTPS 和 HTTP 的区别
 
 1. https 协议需要到 ca 申请证书，一般免费证书较少，因而需要一定费用。
 2. http 是超文本传输协议，信息是明文传输，https 则是具有安全性的 ssl 加密传输协议。
 3. http 和 https 使用的是完全不同的连接方式，用的端口也不一样，前者是 80，后者是 443。
 4. http 的连接很简单，是无状态的；HTTPS 协议是由 SSL+HTTP 协议构建的可进行加密传输、身份认证的网络协议，比 http 协议安全。
 
-# 浏览器缓存
+## 浏览器缓存
 
-## 协商缓存
+### 协商缓存
 
 Last-Modify/If-Modify-Since
 
 ETag/If-None-Match
 
-## 强缓存
+### 强缓存
 
 Expires 或者 Cache-Control
 
@@ -247,7 +247,7 @@ Cache-Control 是 http1.1 时出现的 header 信息，主要是利用该字段�
 7. max-age 数据经过 max-age 设置的秒数后就会失效，相当于 HTTP/1.0 中的 Expires 头。如果在一次响应中同时设置了 max-age 和 Expires，那么 max-age 将具有较高的优先级。
 8. s-maxage 与 max-age 相似，不同的是用来指示共享缓存。
 
-# 三次握手
+## 三次握手
 
 主机 A 向主机 B 发出连接请求数据包：
 
@@ -262,7 +262,7 @@ Cache-Control 是 http1.1 时出现的 header 信息，主要是利用该字段�
 
 首先 Client 端发送连接请求报文，Server 段接受连接后回复 ACK 报文，并为这次连接分配资源。Client 端接收到 ACK 报文后也向 Server 段发生 ACK 报文，并分配资源，这样 TCP 连接就建立了。
 
-# 四次握手
+## 四次握手
 
 Client 端发起中断连接请求，也就是发送 FIN 报文。
 
@@ -280,9 +280,9 @@ Client 端收到 FIN 报文后，就知道可以关闭连接了，但是他还�
 
 Server 端收到 ACK 后，"就知道可以断开连接了"。Client 端等待了 2MSL 后依然没有收到回复，则证明 Server 端已正常关闭，那好，我 Client 端也可以关闭连接了。Ok，TCP 连接就这样关闭了！
 
-# 长连接，短链接，长轮询，websocket
+## 长连接，短链接，长轮询，websocket
 
-- ## 长连接
+- ### 长连接
 
   在 HTTP 1.1，客户端发出请求，服务端接收请求，双方建立连接，在服务端没有返回之前保持连接，当客户端再发送请求时，它会使用同一个连接。这一直继续到客户端或服务器端认为会话已经结束，其中一方中断连接。
 
@@ -296,16 +296,16 @@ server 端采取策略：
 1. 关闭一些长时间没有请求发生的连接，这样可以避免一些恶意连接导致 server 端服务受损
 2. 如果条件允许则可以限制每个客户端的最大长连接数，避免恶意的客户端拖垮整体后端服务
 
-- ## 短连接
+- ### 短连接
 
   在 HTTP1.0 中，客户端发送请求，服务器接收请求，双方建立连接，服务器响应资源，请求结束。
   劣势： 请求频繁，在 TCP 的建立和关闭操作上浪费较多时间和带宽。
 
-- ## 长轮询
+- ### 长轮询
 
   客户端像传统轮询一样从服务器请求数据。然而，如果服务器没有可以立即返回给客户端的数据，则不会立刻返回一个空结果，而是保持这个请求等待数据到来（或者恰当的超时），之后将数据作为结果返回给客户端。
 
-- ## WebSocket
+- ### WebSocket
 
   是 HTML5 一种新的协议。它实现了浏览器与服务器全双工通信(full-duplex)。一开始的握手需要借助 HTTP 请求完成。
 
@@ -401,7 +401,7 @@ WebSocket 则是一个典型的应用层协议。
 
 Socket 是传输控制层协议，WebSocket 是应用层协议。
 
-# 缓存
+## 缓存
 
 一、资源内容不变 + 设置长时间 max-age
 // 设置缓存时间为 1 年
@@ -417,7 +417,7 @@ Cache-Control 是关于浏览器缓存的最重要的设置，
 
 Mainfest 可以缓存一个应用，pwa 中有 Mainfest 和 Service Worker 可以实现缓存
 
-# HTTP request 报文结构是怎样的
+## HTTP request 报文结构是怎样的
 
 ```
 rfc2616中进行了定义：
@@ -461,7 +461,7 @@ If-Modified-Since: Wed, 01 Sep 2004 13:24:52 GMT
 name=qiu&age=25
 ```
 
-# HTTP response 报文结构是怎样的
+## HTTP response 报文结构是怎样的
 
 ```
 rfc2616中进行了定义：
@@ -493,7 +493,7 @@ Content-Type: text/html; charset=iso-8859-1
 {"name": "qiu", "age": 25}
 ```
 
-# Promise 封装 Ajax
+## Promise 封装 Ajax
 
 ```
 function getJSON(url){
@@ -525,7 +525,7 @@ function getJSON(url){
 }
 ```
 
-# URL 详解
+## URL 详解
 
 [链接](http://caibaojian.com/http-protocol.html)
 
@@ -553,7 +553,7 @@ Query String: name=sviergn&x=true
 Anchor: stuff
 ```
 
-# http 常见状态码有哪些
+## http 常见状态码有哪些
 
 ```
 1XX：信息状态码-表示请求已接收，继续处理。
@@ -724,7 +724,7 @@ HTTP 500-15 - 不允许请求 global.asa Error
 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常
 ```
 
-# HTML5 离线缓存
+## HTML5 离线缓存
 
 典型的 manifest 文件代码结构:
 
@@ -787,7 +787,7 @@ FALLBACK:
  /404.html
 ```
 
-# Service Worker 与缓存及离线缓存
+## Service Worker 与缓存及离线缓存
 
 网络请求首先到达的是 SW 脚本中，如果未命中再转发给 HTTP 缓存。
 
@@ -818,7 +818,7 @@ self.addEventListener('fetch', event => {
 
 在 SW 的 install 阶段我们将 script.js 和 styles.css 放入缓存中；而在请求发起的 fetch 阶段，通过资源的 URL 去缓存内查找匹配，成功后立刻返回，否则走正常的网络请求流程。
 
-# PageCache 与 Ajax 可缓存
+## PageCache 与 Ajax 可缓存
 
 PageCache 其实是 facebook 提出的，解决 ajax 缓存的一种方案！简单的说，就是将访问过的页面缓存在客户端。
 
