@@ -35,15 +35,15 @@ GitHub默认只有账号绑定的邮箱提交的commits才会展示.
 
 ## centos安装git
 
-## 安装
+### 安装
 
 yum install -y git
 
-## 检查版本
+### 检查版本
 
 git --version
 
-## 生成公钥并复制到服务器上
+### 生成公钥并复制到服务器上
 
 ### 生成公钥
 
@@ -63,9 +63,7 @@ pbcopy < ~/.ssh/id_rsa.pub
 
 ## 安装nodejs
 
-yum install -y nodejs //行不通，版本太旧了
-
-参考：<http://wiki.jikexueyuan.com/project/nodejs-guide/install.html>
+参考：<https://nodejs.org/>
 
 ## 卸载
 
@@ -98,12 +96,12 @@ sudo make install
 `--hard`
 会删除本地修改代码，回到上次commit状态
 
-查看分支 git branch -a (可以查看所有分支)
-创建分支 git branch name
-切换分支 git checkout name
-创建并切换 git checkout -b name
-合并某分支到当前分支 git merge name 用于合并指定分支到当前分支
-删除分支 git branch -d name
+查看分支 `git branch -a` (可以查看所有分支)
+创建分支 `git branch name`
+切换分支 `git checkout name`
+创建并切换 `git checkout -b name`
+合并某分支到当前分支 `git merge name` 用于合并指定分支到当前分支
+删除分支 `git branch -d name`
 
 注，合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支记录，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
 9.团队多人开发协作
@@ -165,20 +163,15 @@ git log常用命令以及技巧
 
 当git出现
 
-# Please enter a commit message to explain why this merge is necessary
-
-# especially if it merges an updated upstream into a topic branch
-
-#
-
-# Lines starting with '#' will be ignored, and an empty message aborts
-
-# the commit
-
+> Please enter a commit message to explain why this merge is necessary
+ especially if it merges an updated upstream into a topic branch
+ Lines starting with '#' will be ignored, and an empty message aborts
+ the commit
 ~
 ".git/MERGE_MSG" 7L, 293C
 这个画面时：
-        type i to insert a comment then press esc and type :wq
+
+type i to insert a comment then press esc and type :wq
 
 vi编辑模式：
 进入：
@@ -222,10 +215,6 @@ git 合并：
     1.先git pull 将远程的文件更新过来
     2.有冲突的，会在文件中有
 
-<<<<<<<HEAD
-
-=======
->>>>>>> feature1
 这样的提示，解决冲突，
     3.git add ，然后再commit
     4.git push origin master
@@ -326,10 +315,10 @@ git diff //查看修改的内容
 git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别
 git checkout -- readme.txt    丢弃工作区的修改
 
-            命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
-            一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
-            一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
-            总之，就是让这个文件回到最近一次git commit或git add时的状态。
+    命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+    一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+    一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+    总之，就是让这个文件回到最近一次git commit或git add时的状态。
 --很重要，没有--，就变成了“切换到另一个分支”的命令，
 git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 git reset HEAD readme.txt   可以把暂存区的修改撤销掉（unstage），重新放回工作区：
@@ -473,10 +462,96 @@ git push -u origin master
 git remote add origin <https://github.com/believeZJP/node-server.git>
 git push -u origin master
 
-
-
 git远程有分支，本地没有，解决办法
 git fetch 命令会更新 remote 索引。
 
 git fetch origin
 
+## git存储
+
+### git分区
+
+git存储分成四个部分
+
+- workspace：工作空间（我们的开发代码目录）
+- index： 暂存区，.git目录下的index文件
+- Repository：本地仓库，通过git clone将远程的代码下载到本地；代码库的元数据信息在根目录下的.git目录下
+- Remote：远程仓库（比如GitHub就是一个远程仓库）
+
+整个过程就是：
+
+1. 工作区--git add--暂存区--git commit--本地仓库-- git push--远程仓库
+
+2. 远程仓库区–-fetch–-使用refs\remotes下对应分支文件记录远程分支末端commit_id 和 本地仓库区 --merge–-工作区
+3. 远程仓库区–-pull–-使用refs\remotes下对应分支文件记录远程分支末端commit_id and 本地仓库区 and 工作区
+
+### git fetch和git pull的区别
+
+git fetch: 是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。具体操作如下:
+
+```bash
+git  fetch origin master:temp
+//本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支
+git diff temp
+//比较远程代码与本地代码的区别
+git merge temp
+//将temp分支合并到本地master分支
+git branch -d temp
+//如果不想保留分支，可以将其删除
+```
+
+git pull: 基于本地的FETCH_HEAD记录，比对本地的FETCH_HEAD与远程仓库的版本号，然后git fetch获得当前的远程分支的后续版本的数据，然后利用git merge将其与本地的分支合并，可以认为是git pull是git fetch和git merge两个步骤的合并。
+实际的git pull过程可以理解为：
+
+```bash
+git fetch origin master  //将远端的master分支拉取最新内容
+git merge FETCH_HEAD //将拉取的最新内容与当前分支合并
+```
+
+ git pull用法：
+
+```bash
+git pull <远程主机名>  <远程分支名>:<本地分支名>`
+// 将远程主机的某个分支，与本地的指定分支合并
+```
+
+ git pull合并后可能会出现冲突，需要手动解决冲突。
+出现的错误提示如下
+
+> error: Your local changes to the following files would be overwritten by merge:
+Please commit your changes or stash them before you merge.
+// 更新的代码与本地的修改代码有冲突，先提交你的改变或者先将本地修改暂存起来
+
+解决冲突的方式：先将本地的代码暂存
+
+```bash
+git stash //先将本地修改暂存起来
+git stash list  //查看保存信息
+git pull     //拉取内容
+git stash pop   //还原暂存的内容
+```
+
+## git status
+
+1. Changes to be committed：代表被add的文件，被加载到了暂存区
+2. Changes not staged for commit：代表在当前分支中被修改的文件，还没有被add，存储在工作区
+
+### git内部存储
+
+本地git项目里面的.git目录下的文件如下：
+
+1. refs：存储git各种引用的目录，包含分支、远程分支和标签
+2. objects：是存储git各种对象及备用的对象库，包含正常的压缩和压缩后的
+3. info：存储git信息的目录，比如判处特定后缀的文件
+4. index：暂存区
+5. hooks：存储git钩子的目录，钩子只在特定事件发生时触的脚本，比如：提交之前，提交之后
+6. description：项目描述
+7. config：代码库几倍的配置文件
+8. ORIG_HEAD：针对某些 危险操作 ，Git通过记录HEAD指针的上次所在的位置 ORIG_HEAD提供了回退的功能。当你发现某些操作失误了，比如错误的reset到了一个很早很早的版本，可以使用 git reset --hard ORIG_HEAD回退到上一次reset之前。
+9. HEAD：代码库当前分支的指向
+10. FETCH_HEAD： 是一个版本链接，记录在本地的一个文件中，指向着目前已经从远程仓库取下来的分支的末端版本。
+11. COMMIT_EDITMSG：commit编辑
+
+git 常用插件
+
+1. [commitizen](https://github.com/commitizen/cz-cli) 规范commit message

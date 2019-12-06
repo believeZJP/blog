@@ -148,7 +148,7 @@ tags: [hexo,github] #文章标签，多于一项时用这种格式
 
 会自动隔断，添加阅读全文按钮。(注意, 是在文章列表页有阅读全文按钮)
 
-# 展示摘要？？？
+# 展示摘要
 
 # 字数统计和阅读时长
 
@@ -404,7 +404,7 @@ search:
 
 # 来必力评论
 
-https://www.livere.com/一定要用这个注册, 中文版(http://www.laibili.com.cn/)失效！！！！
+<https://www.livere.com/一定要用这个注册,> 中文版(<http://www.laibili.com.cn/)失效！！！！>
 注册完成后, 填写相应信息, 即可获取到 data-uid.
 next/\_config.yml 中搜索`livere_uid`, 填入对应 data-uid
 **注意:**
@@ -427,8 +427,10 @@ livere_uid: fsdfs343==
 注意: 这里一定要用绝对路径, 因为图片在根目录下
 
 ## 不用根目录的图片添加
+
 用`hexo n '文章标题'`创建文章后，会生成与文章标题相同的文件夹，可以把图片放到对应文件夹中
 在md中引用方式
+
 ```md
 ![添加自定义search](/posts/Alfred/addbaidu.png)
 ![设置百度内容](/posts/Alfred/addbaidu-input.png)
@@ -490,11 +492,11 @@ npm i hexo-offline --save
 
 [官方文档](https://hexo.io/zh-cn/docs/permalinks.html)
 
-默认文章链接是http://localhost:4000/2018/10/18/hello-world/
+默认文章链接是<http://localhost:4000/2018/10/18/hello-world/>
 
 有年月日层级太深，不利于 SEO
 
-修改为http://localhost:4000/posts/hello-world/
+修改为<http://localhost:4000/posts/hello-world/>
 
 在\_config.yml 中搜索`permalink`,修改如下
 
@@ -579,6 +581,7 @@ npm install --save-dev husky
 subject是 commit 目的的简短描述，不超过50个字符，且结尾不加句号（.）
 
 eg:
+
 ```
 chore: run tests on travis ci
 fix(server): send cors headers
@@ -604,12 +607,14 @@ feat(blog): add comment section
 # 生成changelog
 
 Change log 就可以用脚本自动生成。生成的文档包括以下三个部分：
+
 - New features
 - Bug fixes
 - Breaking changes.
 
 [onventional-changelog](https://github.com/conventional-changelog/conventional-changelog) 就是生成 Change log 的工具，运行下面的命令即可。
 用到的是其中的[cli工具](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli)
+
 ```bash
 npm install -g conventional-changelog-cli
 conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0
@@ -624,6 +629,7 @@ conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0
     }
 }
 ```
+
 以后，直接运行下面的命令即可：
 
 ```bash
@@ -631,6 +637,7 @@ npm run changelog
 ```
 
 # 新建草稿
+
 草稿相当于很多博客都有的“私密文章”功能。
 `hexo new draft "new draft"`
 会在source/_drafts目录下生成一个new-draft.md文件。但是这个文件不被显示在页面上，链接也访问不到。
@@ -645,7 +652,6 @@ npm run changelog
 filename为不包含md后缀的文章名称。它的原理只是将文章从 source/_drafts 移动到 source/_posts 而已。
 
 > 若日后想将正式文章转为为草稿，只需手动将文章从 source/_posts 目录移动到 source/_drafts 目录即可。
-
 
 # hexo 命令
 
@@ -674,3 +680,4 @@ hexo d == hexo deploy
 # 参考文章
 
 [Hexo 进阶高级教程](http://tigerliu.site/2017/06/hexo-1/)
+[Hexo+Github: 个人博客网站搭建完全教程](https://www.cnblogs.com/shwee/p/11421156.html)
