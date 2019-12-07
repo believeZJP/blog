@@ -4,7 +4,7 @@ date: 2019-12-05 16:54:36
 updated: 2019-12-05 16:54:36
 tags:
 ---
-# express [官网](http://www.expressjs.com.cn/)
+## express [官网](http://www.expressjs.com.cn/)
 
 ## [pexpress 应用生成器](http://www.expressjs.com.cn/starter/generator.html)
 
@@ -12,13 +12,13 @@ tags:
 
 ## 1. 安装
 
-```
+```bash
 npm install express-generator -g
 ```
 
 express -h 查看可用的命令行选项
 
-```
+```bash
 express -h
 
   Usage: express [options] [dir]
@@ -37,14 +37,14 @@ express -h
 
 ## 2. 创建应用
 
-```
+```bash
 express node-server
 ```
 
 会自动创建好多文件
 各文件含义
 
-```
+```bash
 ├── app.js
 ├── bin
 │   └── www // 启动服务，并监听端口
@@ -67,26 +67,26 @@ express node-server
 
 先进入项目路径
 
-```
+```bash
 cd node-server
 ```
 
 安装所有依赖包
 
-```
+```bash
 npm install
 ```
 
 ## 启动应用
 
-```
+```bash
 DEBUG=node-server npm start
 
 ```
 
 官网提示windows需要用下面的命令，实际测试，用上面的就可以。
 
-```
+```bash
 set DEBUG=node-server & npm start
 ```
 
@@ -96,13 +96,13 @@ set DEBUG=node-server & npm start
 
 安装node-dev
 
-```
+```bash
 npm install -g node-dev
 ```
 
 修改package.json的scripts，增加dev命令
 
-```
+```bash
 "scripts": {
     "start": "node ./bin/www",
     "dev": "node-dev ./bin/www"
@@ -119,7 +119,7 @@ npm install -g node-dev
 
 node读写文件api
 
-```
+```js
 readFile()
 
 writeFile()
@@ -135,21 +135,6 @@ createWriteStream()
 writestream的区别和例子没看到
 ```
 
-# vscode 调试node搞不定啊，~~~~~~~~~
-
-es6 从数组中查找一个元素
-
-```
-let users = data.users
-result = users.find(ele => {
-    return ele.username === username && ele.password === password
-})
-```
-
-从数组中删除某个元素
-
-```
-splice(index, 1)
-```
+## vscode 调试node搞不定啊，~~~~~~~~~
 
 ## 用express生成token 供权限校验

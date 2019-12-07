@@ -3,6 +3,7 @@ title: Koa2 进阶
 date: 2019-12-05 16:52:32
 updated: 2019-12-05 16:52:32
 tags:
+-Koa
 ---
 
 > Koa2是现在最流行的基于Node.js平台的web开发框架，它很小，但扩展性很强。Koa给人一种干净利落的感觉，体积小、编程方式干净。
@@ -11,55 +12,55 @@ tags:
 前置知识：
 js,ES6,node ,npm
 
-# 第一节 Koa开发环境搭建
+## 第一节 Koa开发环境搭建
 
 1. 新建目录
 
-```
-mkdir koa2Tutorial
-cd koa2Tutorial
-```
+    ```bash
+    mkdir koa2Tutorial
+    cd koa2Tutorial
+    ```
 
 2. 生成package.json 文件
 
-```
-npm init -y
-```
+    ```bash
+    npm init -y
+    ```
 
 3. 安装koa包
 
-```
-npm install --save koa
-```
+    ```bash
+    npm install --save koa
+    ```
 
 4. coding
 
-开始编写koa启动代码
+    开始编写koa启动代码
 
-```
-const Koa = require('koa')
-const app = new Koa()
+    ```js
+    const Koa = require('koa')
+    const app = new Koa()
 
-app.use( async (ctx) => {
-  ctx.body = 'Hello Koa2'  
-})
+    app.use( async (ctx) => {
+    ctx.body = 'Hello Koa2'  
+    })
 
-app.listen(8040)
-console.log('[demo] start quick is starting at port 8040')
+    app.listen(8040)
+    console.log('[demo] start quick is starting at port 8040')
 
-```
+    ```
 
 5. 启动
 
 在命令行输入
 
-```
+```bash
 node index.js
 ```
 
 在浏览器中输入： localhost:8040就能看到结果了
 
-# 第2节 async/await 使用方法
+## 第2节 async/await 使用方法
 
 什么是async和await
 
@@ -77,7 +78,7 @@ async是让方法变成异步，关键是他的返回值是什么，得到后如
 
 看一下async方法的返回值
 
-```
+```js
 async function testAsync() {
     return 'Hello Async'
 }
@@ -88,7 +89,7 @@ console.log(result)
 
 在终端中运行node testAsync.js，发现返回的是Promise
 
-```
+```js
 node test.js
 Promise { 'Hello async' }
 ```
@@ -97,7 +98,7 @@ Promise { 'Hello async' }
 
 await一般是在等async方法执行完毕。但其实await等待的只是一个表达式(Promise对象)，也可以接收普通值。看代码：
 
-```
+```js
 
 function getSomething(){
     return 'something'
@@ -124,7 +125,7 @@ test()
 
 通过前面两个例子，已经分别了解到async和await。现在做个虚假的例子，看下等待问题。
 
-```
+```js
 function takeLongTime(){
     return new Promise(resolve => {
         setTimeout(() => {
@@ -141,7 +142,7 @@ async function test(){
 test()
 ```
 
-# 第3节 Get请求接收
+## 第3节 Get请求接收
 
 这节课看一下Koa如何处理get请求
 
@@ -156,7 +157,7 @@ test()
 
 demo1.js
 
-```
+```js
 const Koa = require('koa')
 const app = new Koa()
 
@@ -180,13 +181,11 @@ console.log('[demo] start quick is starting at port 8040')
 
 在终端用node demo1.js启动服务，在浏览器输入查看页面效果
 
-```
-http://localhost:8040/?user=admin&age=18
-```
+`http://localhost:8040/?user=admin&age=18`
 
 页面输出的结果
 
-```
+```js
 {"url":"/?user=admin&age=18","req_query":{"user":"admin","age":"18"},"req_querystring":"user=admin&age=18"}
 ```
 
@@ -196,13 +195,13 @@ http://localhost:8040/?user=admin&age=18
 
 还可以直接从ctx中得到Get请求。
 
-```
+```js
 const Koa = require('koa')
 const app = new Koa()
 
 app.use( async (ctx) => {
  let url = ctx.url
- 
+
  // 从 request 中获取GET请求
  let request = ctx.request
  let req_query = ctx.request.query
@@ -239,7 +238,7 @@ console.log('[demo] start quick is starting at port 8040')
     1. request
     2. requeststring
 
-# 第4节 POST请求如何接收(1)
+## 第4节 POST请求如何接收(1)
 
 这节学习POST请求的接收方法。
 
@@ -252,7 +251,6 @@ console.log('[demo] start quick is starting at port 8040')
 3. 将字符串转换成JSON
 
 ctx.request和ctx.req区别
--
 
 - ctx.request:是Koa2中context经过封装的请求对象，用起来更简单直观
 - ctx.req: 是context提供的node.js原生HTTP请求对象。可以得到更多的内容。
@@ -263,7 +261,7 @@ Koa2提供了ctx.method属性，来获取请求类型。根据不同类型编写
 
 先做个小例子。根据请求类型获取不同的页面内容。GET请求时得到表单填写页面，POST请求时，得到POST处理页面。
 
-```
+```js
 const Koa = require('koa')
 const app = new Koa()
 
@@ -297,14 +295,14 @@ app.listen(8040)
 console.log('[demo] start quick is starting at port 8040')
 ```
 
-写完执行node index.js，在浏览器中输入<http://localhost:8040/，第一次展现的是表单页面，点击提交后，返回接收到的请求。输入其他地址，返回404.>
+写完执行node index.js，在浏览器中输入`http://localhost:8040/`，第一次展现的是表单页面，点击提交后，返回接收到的请求。输入其他地址，返回404.
 
-## 总结
+## 总结-4
 
 这节课理论上学习了如何获取POST请求参数。
 学习了如何获取请求类型，ctx.method,并编写了一个小案例。
 
-# 第5节 POST请求如何接收参数(2)
+## 第5节 POST请求如何接收参数(2)
 
 这节课具体学习怎么解析POST参数。
 
@@ -312,7 +310,7 @@ console.log('[demo] start quick is starting at port 8040')
 
 先声明一个对象，用Promise对象解析。这里使用ctx.req.on接收事件。
 
-```
+```js
 function parsePostData(ctx) {
     return new Promise((resolve, reject) => {
         try{
@@ -333,7 +331,7 @@ function parsePostData(ctx) {
 
 修改上节接收POST请求的处理方法，如下
 
-```
+```js
 // ctx.body = '接收到的请求'
 let postData = await parsePostData(ctx)
 ctx.body = postData
@@ -345,7 +343,7 @@ ctx.body = postData
 
 上面返回的是字符串，这里写一个封装JSON对象的方法
 
-```
+```js
 function parseQueryStr(queryStr) {
     let queryData = {}
     let queryStrList = queryStr.split('&')
@@ -361,8 +359,7 @@ function parseQueryStr(queryStr) {
 
 修改parsePostData中resolve返回前的调用
 
-```
-
+```js
 // 处理post参数，合并为字符串
 function parsePostData(ctx) {
     return new Promise((resolve, reject) => {
@@ -386,7 +383,7 @@ function parsePostData(ctx) {
 
 现在返回的是json对象。
 
-# 第6节 koa-bodyparser中间件
+## 第6节 koa-bodyparser中间件
 
 上面已经学会如何自己编写代码接收并解析POST请求。有现成的工具可以直接使用，koa-bodyparser.
 
@@ -394,22 +391,21 @@ function parsePostData(ctx) {
 
 1. 安装中间件
 
-```
-npm install --save koa-bodyparser
-```
+    ```bash
+    npm install --save koa-bodyparser
+    ```
 
 2. 引用
 
-```
-const bodyParser = require('koa-bodyparser')
+    ```js
+    const bodyParser = require('koa-bodyparser')
 
-app.use(bodyParser)
-```
+    app.use(bodyParser)
+    ```
 
 3. 直接用ctx.request.body获取POST请求参数，中间件自动做了解析
 
-```
-
+```js
 const Koa = require('koa')
 const app = new Koa()
 const bodyParser = require('koa-bodyparser')
@@ -454,11 +450,11 @@ console.log('[demo] start quick is starting at port 8040')
 
 注意在引用时，切记 ==app.use(bodyParser())== 中的括号，不写括号会报错
 
-```
+```js
 koa-bodyparser ctx.onerror is not a function
 ```
 
-# 第7节 Koa2原生路由实现
+## 第7节 Koa2原生路由实现
 
 路由用来根据不同的url切换显示的页面内容。这节课不借助中间件，用原生方法实现简单路由。
 
@@ -468,7 +464,7 @@ koa-bodyparser ctx.onerror is not a function
 
 通过一个简单的例子，了解如何通过ctx.request.url来获取访问路径。
 
-```
+```js
 const Koa = require('koa')
 const app = new Koa()
 
@@ -483,7 +479,7 @@ app.use( async (ctx) => {
 app.listen(8040)
 ```
 
-这时，访问<http://localhost:8040/demo,页面输出/demo。>
+这时，访问`http://localhost:8040/demo`,页面输出/demo。
 
 根据这个，可以获取到不同的请求链接。
 
@@ -500,7 +496,7 @@ app.listen(8040)
 case中写选项时，要注意url的全路径，刚开始写的'todo', '404' 这是不生效的，
 要写成'/todo', '/404'
 
-```
+```js
 const fs = require('fs')
 const Koa = require('koa')
 const app = new Koa()
@@ -554,32 +550,32 @@ console.log('[demo] start quick is starting at port 8040')
 
 ```
 
-## 总结
+## 总结-7
 
-    这节课了解了如何原生实现路由。
+这节课了解了如何原生实现路由。
 
-# 第8节 Koa-router中间件入门(1)
+## 第8节 Koa-router中间件入门(1)
 
 上节写的路由只是很简单的例子，实际项目中都会用开源的中间件来完成路由配置。
 
 这节课用koa-router来实现。
 
-## 1. 安装koa
+## 1. 安装koa-router
 
-```
+```bash
 npm install --save koa-router
 ```
 
-## 2. koa基础案例
+## 2. koa-router基础案例
 
-先写一个最简单的koa例子。
+先写一个最简单的koa-router例子。
 
 1. 引入
 2. 新建一个实例
 3. 不同路由配置
 4. use
 
-```
+```js
 const Koa = require('koa')
 const Router = require('koa-router')
 
@@ -598,11 +594,11 @@ app.listen(8040, ()=>{
 })
 ```
 
-## 多页面配置
+### 多页面配置
 
 多页面配置，只需要加get,post即可。现在增加一个todo页面。
 
-```
+```js
 const Koa = require('koa')
 const Router = require('koa-router')
 
@@ -626,17 +622,17 @@ app.listen(8040, ()=>{
 
 ```
 
-分别访问<http://localhost:8040> 和<http://localhost:8040/todo，可以看到不同的结果。>
+分别访问`http://localhost:8040` 和`http://localhost:8040/todo`，可以看到不同的结果。
 
-# 第9节 Koa-router中间件 层级(2)
+## 第9节 Koa-router中间件 层级(2)
 
-## 设置前缀
+### 设置前缀
 
-有时需要把所有路径前加一个层级，例如， <http://localhost:8040/todo> 加一个demo层级，变成<http://localhost:8040/demo/todo.>
+有时需要把所有路径前加一个层级，例如， `http://localhost:8040/todo` 加一个demo层级，变成`http://localhost:8040/demo/todo`.
 
 路由在创建时可以指定一个前缀。这个前缀会被添加到路由最顶层。
 
-```
+```js
 const router = new Router({
     prefix: '/demo'
 })
@@ -645,19 +641,19 @@ const router = new Router({
 
 访问：
 
-<http://localhost:8040/demo/todo>
+`http://localhost:8040/demo/todo`
 
-http://localhost:8040/demo
+`http://localhost:8040/demo`
 
 可以看到页面，访问原来的路径，会提示Not Found
 
-## 路由层级
+### 路由层级
 
 上面是为全局设置层级，这里为单个页面设置层级，只要在use时，使用路径就可以了。
 
 这里演示两个不同层级的路由设置。一个是home,一个是page,通过use赋予不同的前层级。
 
-```
+```js
 // 使用koa-router
 
 const Koa = require('koa')
@@ -696,15 +692,15 @@ app.listen(8040, ()=>{
 })
 ```
 
-分别访问/home/todo,/home/koa,/page/todo, /page/koa可以看到结果。
+分别访问`/home/todo`,`/home/koa`,`/page/todo`, `/page/koa`可以看到结果。
 
-# 第10节 Koa-router 中间件参数 (3)
+## 第10节 Koa-router 中间件参数 (3)
 
 这节学习如何传参
 
 用ctx.query接收参数
 
-# 第11节 Koa中使用Cookie
+## 第11节 Koa中使用Cookie
 
 这节学习操作cookie。
 
@@ -713,11 +709,11 @@ Koa的上下文(ctx)直接提供了读取和写入的方法。
 - ctx.cookies.get(name, [options]): 读取cookie
 - ctx.cookies.set(name, value, [options]): 写入cookie
 
-这里的cookie是写入浏览器中了？？？
+这里的cookie是写入浏览器中了
 
 代码
 
-```
+```js
 // 操作cookie
 
 const Koa = require('koa')
@@ -739,7 +735,7 @@ app.listen(8040, ()=>{
 })
 ```
 
-访问localhost:8040/index ，按F12可以看到cookies
+访问`localhost:8040/index` ，按F12可以看到cookies
 
 ### Cookie选项
 
@@ -752,7 +748,7 @@ app.listen(8040, ()=>{
 - httpOnly: 是否只从http请求中获取
 - overwrite: 是否允许重写
 
-```
+```js
 ctx.cookies.set('name', 'Hello Koa',{
     domain:'localhost', // 写cookie所在的域名
     path:'/index',       // 写cookie所在的路径
@@ -767,7 +763,7 @@ ctx.cookies.set('name', 'Hello Koa',{
 
 用ctx.cookies.get()来读取
 
-```
+```js
 if(ctx.cookies.get('name')){
     ctx.body = ctx.cookies.get('name')
 }else{
@@ -778,7 +774,7 @@ if(ctx.cookies.get('name')){
 注意，如果上面的path设置的是index的话，访问localhost:8040是获取不到name这个cookie的,
 需要将path设为''
 
-# 第12节 Koa2 的模板初识 (ejs)
+## 第12节 Koa2 的模板初识 (ejs)
 
 开发不可能把所有的html代码全加载到JS里，也没办法完成大型web开发。必须借用模板来帮助我们开发。
 
@@ -786,7 +782,7 @@ if(ctx.cookies.get('name')){
 
 ### 安装中间件
 
-```
+```bash
 npm install --save koa-views
 ```
 
@@ -794,7 +790,7 @@ npm install --save koa-views
 
 ejs是著名并且强大的模板引擎，可以单独安装。
 
-```
+```bash
 npm install --save ejs
 ```
 
@@ -804,7 +800,7 @@ npm install --save ejs
 
 views/index.ejs
 
-```
+```bash
 // 引用ejs模板
 
 const Koa = require('koa')
@@ -830,11 +826,11 @@ app.listen(8040, ()=>{
 })
 ```
 
-## 总结
+## 总结-12
 
 这里只是简单的讲解了koa2的模板机制。
 
-# 第13节： koa-static静态资源中间件
+## 第13节： koa-static静态资源中间件
 
 开发中不只要处理业务逻辑请求，也会有很多静态资源请求，如js, css, jpg, png 这些静态请求。有时候也会访问静态资源路径
 
@@ -842,7 +838,7 @@ app.listen(8040, ()=>{
 
 ### 安装koa-static
 
-```
+```bash
 npm install --save koa-static
 ```
 
@@ -853,7 +849,7 @@ koa.png, test.js, style.css
 
 ### 使用koa-static
 
-```
+```js
 // 引用静态资源
 
 const Koa = require('koa')

@@ -690,13 +690,17 @@ robbyrussell
 
 # linux 用命令启动服务不掉线
 
-    创建control.sh
+创建control.sh
   运行./control.sh
 
-  ```
+```bash
   #!/bin/bash
   
   nohup npm start ./ 1>>log 2>&1 &
 
-  ```
+```
   
+---
+cat access.log | cut -d' ' -f7 | sort | uniq -c | sort -nr | head -n30
+
+---

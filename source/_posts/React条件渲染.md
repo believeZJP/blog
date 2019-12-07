@@ -12,7 +12,8 @@ tags:
 
 先罗列常见方式:
 
-# IF/ELSE
+## IF/ELSE
+
 ```javascript
 function render() {
   if (flag) {
@@ -26,8 +27,10 @@ function render() {
 
 <!--- more --->
 
-# return null
+## return null
+
 不需要返回可以返回null, 代替空div, 提升效率
+
 ```javascript
 function render() {
   if (flag) {
@@ -39,8 +42,10 @@ function render() {
 
 ```
 
-# 组件变量
+## 组件变量
+
 将组件赋值给变量，可以在return前任意修改
+
 ```javascript
 function render() {
   let component = null;
@@ -54,24 +59,31 @@ function render() {
 
 ```
 
-# 三元操作符
+## 三元操作符
+
 逻辑不复杂可以避免if else
+
 ```javascript
 function render() {
   return flag ? <Component1 /> : null;
 }
 ```
 
-# &&
+## &&
+
 最方便!!!
+
 ```javascript
 function render() {
   return flag && <Component1 />;
 }
 
 ```
-# IIFE
+
+## IIFE
+
 立即执行函数
+
 ```javascript
 (function myFunction(/* arguments */) {
   // ...
@@ -93,8 +105,11 @@ function render() {
 }
 
 ```
-# 子组件
+
+## 子组件
+
 将一大块的逻辑拆分成子组件
+
 ```javascript
 function render() {
   return (
@@ -113,14 +128,18 @@ function SubRender() {
 }
 
 ```
-# IF 组件--什么时候用？？？
+
+## IF 组件--什么时候用
+
 做一个条件渲染组件 IF 代替 js 函数的 if：
+
 ```javascript
 <If condition={true}>
   <span>Hi!</span>
 </If>
 
 ```
+
 这个组件实现也很简单
 
 ```javascript
@@ -134,9 +153,11 @@ const If = props => {
 
 ```
 
-# 高阶组件
+## 高阶组件
+
 返回一个新组件的函数，并且接收一个组件作为参数
 在高阶组件里写条件语句，返回不同的组件即可：
+
 ```javascript
 function higherOrderComponent(Component) {
   return function EnhancedComponent(props) {
@@ -150,7 +171,7 @@ function higherOrderComponent(Component) {
 
 ```
 
-# 理解
+## 理解
 
 要不要封装，怎么封装，取决于应用复杂度。
 
@@ -158,6 +179,7 @@ function higherOrderComponent(Component) {
 
 假定无论如何代码的复杂度都是恒定不变的，下面这段代码，连接复杂度为0，而对于render函数而言，
 逻辑复杂度是100.
+
 ```javascript
 function render() {
   if (flag) {
@@ -169,6 +191,7 @@ function render() {
 ```
 
 拆分成两个函数，逻辑复杂度对render, SubComponent来说都是50，但连接复杂度是50:
+
 ```javascript
 function render() {
     if (flag) {
@@ -182,6 +205,7 @@ function SubComponent() {
     return isOk ? <Component1 /> : <Component2 />
 }
 ```
+
 可以看到，通过函数拆分，降低了每个函数的逻辑复杂度，却提高了连接复杂度。
 
 > 假设一个程序员可以一次性轻松记忆10个函数。如果再多，函数之间的调用关系会让人头大。
@@ -220,6 +244,7 @@ function render() {
 ```
 
 如果做了逻辑抽象，需面对1000个这种函数
+
 ```javascript
 function render() {
   if (renderComponent) {
@@ -236,7 +261,8 @@ function render() {
 
 这时做逻辑抽象是合适的。
 
-# 总结
+## 总结
+
 总的来说，推荐使用子函数，子组件，IF组件，高阶组件做条件渲染，因为这四种方式都能提高程序的抽象能力。
 
 往往抽象后的代码会更具有复用性，单个函数逻辑更清晰，在切面编程时更利于理解。
@@ -244,7 +270,7 @@ function render() {
 当项目很简单时，整个项目的理解成本都很低，抽象带来的复杂度反而让项目变成了需要切面编程时就得不偿失了。
 
 总结：
+
 - 当项目很简单，或条件渲染的逻辑确认无法复用时，推荐在代码中用 && 或三元运算符、IIFE等直接实现条件渲染。
 - 当项目复杂时，尽量使用子函数，子组件，IF组件，高阶组件等方式做更有抽象度的条件渲染。
 - 在做逻辑抽象时，考虑下项目的复杂度, 避免因为抽象带来的成本增加，让本可以整体理解的项目变得支离破碎。
-

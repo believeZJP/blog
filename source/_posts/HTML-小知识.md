@@ -7,21 +7,24 @@ tags:
 
 1.设置input 语法检查
 `spellcheck="false/true"`
+
 2.设置input是否自动补全
 `autocomplete="off/on"`
+
 3.页面加载时，自动获取焦点
 `autofocus="autofocus"`
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 ```
 
 上面代码的意思是，让布局视口的宽度等于理想视口的宽度，页面的初始缩放比例以及最大缩放比例都为1，且不允许用户对页面进行缩放操作。
 
 ### input标签只能输入数字js实现(且不能输入e或者其他各种符号)
 
-<span style="font-family: Arial, Helvetica, sans-serif;"><input id="xxx" type="number" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="width:475px;ime-mode: Disabled" ></span>
+```html
+<input id="xxx" type="number" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode: Disabled" >
+```
 
 ime-mode的语法解释如下：
 
@@ -40,127 +43,179 @@ disabled  : 完全禁用IME。对于有焦点的控件(如输入框)，用户不
 IME 是指 Input Method Editors 输入法编辑器
 
 慕课网学习
-  1.html基础
+
+## 1.html基础
+
   em标签：强调，斜体；strong:强调
- <address>斜体，用于显示地址
-<q>标签的真正关键点不是它的默认样式双引号，而是它的语义：引用别人的话。
+ `<address>`斜体，用于显示地址
+`<q>`标签的真正关键点不是它的默认样式双引号，而是它的语义：引用别人的话。
 
-<blockquote>的作用也是引用别人的文本。但它是对长文本的引用，如在文章中引入大段某知名作家的文字，这时需要这个标签。
+`<blockquote>`的作用也是引用别人的文本。但它是对长文本的引用，如在文章中引入大段某知名作家的文字，这时需要这个标签。
 
-html4.01版本 <hr>    <br>
-xhtml1.0版本 <hr />  <br/>
+html4.01版本 `<hr>    <br>`
+xhtml1.0版本 `<hr />  <br/>`
 
 显示代码段
-   一行---<code></code>
-   多行----<pre></pre>
+   一行---`<code></code>`
+   多行----`<pre></pre>`
 select 多选
-        <select multiple="multiple">
+    `<select multiple="multiple">`
 Label中的for事件
 label标签不会向用户呈现任何特殊效果，它的作用是为鼠标用户改进了可用性。如果你在 label 标签内点击文本，就会触发此控件。就是说，当用户单击选中该label标签时，浏览器就会自动将焦点转到和标签相关的表单控件上（就自动选中和该 label标签相关连的表单控件上）。
 placeholder属性
-<input type="email" id="email" placeholder="Enter email">
+`<input type="email" id="email" placeholder="Enter email">`
 
-css样式
+## css样式
 
 三种样式是有优先级的，记住他们的优先级：内联式 > 嵌入式 > 外部式
 
 类选择器和id选择器的相同、不同点
+
 相同点和不同点：
 相同点：可以应用于任何元素
+
 不同点：
 1、ID选择器只能在文档中使用一次。与类选择器不同，在一个HTML文档中，ID选择器只能使用一次，而且仅一次。而类选择器可以使用多次。
 2、可以使用类选择器词列表方法为一个元素同时设置多个样式。我们可以为一个元素同时设多个样式，但只可以用类选择器的方法实现，ID选择器是不可以的（不能使用 ID 词列表）。
+
 子选择器
 还有一个比较有用的选择器子选择器，即大于符号(>),用于选择指定标签元素的第一代子元素。如右侧代码编辑器中的代码：
-.food>li{border:1px solid red;}
+`.food>li{border:1px solid red;}`
+
 包含(后代)选择器
 包含选择器，即加入空格,用于选择指定标签元素下的后辈元素。如右侧代码编辑器中的代码：
-.first  span{color:red;}
+`.first  span{color:red;}`
 请注意这个选择器与子选择器的区别，子选择器（child selector）仅是指它的直接后代，或者你可以理解为作用于子元素的第一代后代。而后代选择器是作用于所有子后代元素。后代选择器通过空格来进行选择，而子选择器是通过“>”进行选择。
+
 总结：>作用于元素的第一代后代，空格作用于元素的所有后代。
+
 通用选择器  *
+
 伪类选择符
 更有趣的是伪类选择符，为什么叫做伪类选择符，它允许给html不存在的标签（标签的某种状态）设置样式，比如说我们给html中一个标签元素的鼠标滑过的状态来设置字体颜色：
-a:hover{color:red;}
+`a:hover{color:red;}`
+
 分组选择符
 当你想为html中多个标签元素设置同一个样式时，可以使用分组选择符（，），如下代码为右侧代码编辑器中的h1、span标签同时设置字体颜色为红色：
-h1,span{color:red;}
+`h1,span{color:red;}`
+
 继承
 CSS的某些样式是具有继承性的，那么什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。比如下面代码：如某种颜色应用于p标签，这个颜色设置不仅应用p标签，还应用于p标签中的所有子元素文本，这里子元素为span标签。
-p{color:red;}
+`p{color:red;}`
 
+```html
 <p>三年级时，我还是一个<span>胆小如鼠</span>的小女孩。</p>
 可见右侧结果窗口中p中的文本与span中的文本都设置为了红色。但注意有一些css样式是不具有继承性的。如border:1px solid red;
 p{border:1px solid red;}
 
 <p>三年级时，我还是一个<span>胆小如鼠</span>的小女孩。</p>
+```
+
 特殊性
 根据权值来判断使用哪种css样式的，权值高的就使用哪种css样式。
 下面是权值的规则：
 标签的权值为1，类选择符的权值为10，ID选择符的权值最高为100。例如下面的代码：
+
+```css
 p{color:red;} /*权值为1*/
 p span{color:green;} /*权值为1+1=2*/
 .warning{color:white;} /*权值为10*/
 p span.warning{color:purple;} /*权值为1+1+10=12*/
+
 # footer .note p{color:yellow;} /*权值为100+10+1=111*/
+```
+
 注意：还有一个权值比较特殊--继承也有权值但很低，有的文献提出它只有0.1，所以可以理解为继承的权值最低。
+
 层叠
 内联样式表（标签内部）> 嵌入样式表（当前文件中）> 外部样式表（外部文件中）。
 
 重要性
+
 样式优先级为：浏览器默认的样式 < 网页制作者样式 < 用户自己设置的样式，但记住!important优先级样式是个例外，权值高于用户自己设置的样式。
-  现在一般网页喜欢设置“微软雅黑”，如下代码：
-body{font-family:"Microsoft Yahei";}
+
+现在一般网页喜欢设置“微软雅黑”，如下代码：
+`body{font-family:"Microsoft Yahei";}`
+
 文字排版--斜体
 以下代码可以实现文字以斜体样式在浏览器中显示：
-p a{font-style:italic;}
+`p a{font-style:italic;}`
+
 文字排版--下划线
 有些情况下想为文字设置为下划线样式，这样可以在视觉上强调文字，可以使用下面代码来实现：
-p a{text-decoration:underline;}
+`p a{text-decoration:underline;}`
 删除线使用下面代码就可以实现：
- .oldPrice{text-decoration:line-through;}
+`.oldPrice{text-decoration:line-through;}`
+
 段落排版--缩进
 中文文字中的段前习惯空两个文字的空白，这个特殊的样式可以用下面代码来实现：
-p{text-indent:2em;}
+`p{text-indent:2em;}`
 注意：2em的意思就是文字的2倍大小
+
 段落排版--行间距
 这一小节我们来学习一下另一个在段落排版中起重要作用的行间距属性（line-height），如下代码实现设置段落行间距为1.5倍。
-p{line-height:1.5em;}
+`p{line-height:1.5em;}`
+
 段落排版--字间距、字母间距
 文字间隔、字母间隔设置：
 如果想在网页排版中设置文字间隔或者字母间隔就可以使用    letter-spacing来实现，如下面代码：
+
+```css
 h1{
     letter-spacing:50px;
 }
+```
+
 注意：这个样式使用在英文单词时，是设置字母与字母之间的间距。
 单词间距设置：
 如果我想设置英文单词之间的间距呢？可以使用word-spacing来实现。如下代码：
+
+```css
 h1{
     word-spacing:50px;
 }
+```
+
 段落排版--对齐
 想为块状元素中的文本、图片设置居中样式吗？可以使用text-align样式代码，如下代码可实现文本居中显示。(那么什么是块状元素呢？在后面的11-1、11-2小节中会讲到。)
+
+```
 h1{
     text-align:center;
 }
-元素分类
+```
+
+## 元素分类
+
 在讲解CSS布局之前，我们需要提前知道一些知识，在CSS中，html中的标签元素大体被分为三种不同的类型：块状元素、内联元素(又叫行内元素)和内联块状元素。
 常用的块状元素有：
-<div>、<p>、<h1>...<h6>、<ol>、<ul>、<dl>、<table>、<address>、<blockquote>
- 、<form>
+
+```html
+<div>、<p>、<h1>...<h6>、<ol>、<ul>、<dl>、<table>、<address>、<blockquote>、<form>
+```
+
 常用的内联元素有：
+
+```html
 <a>、<span>、<br>、<i>、<em>、<strong>、<label>、<q>、<var>、<cite>、<code>
+```
+
 常用的内联块状元素有：
+
+```html
 <img>、<input>
-元素分类--块级元素
-什么是块级元素？在html中<div>、 <p>、<h1>、<form>、<ul> 和 <li>就是块级元素。设置display:block就是将元素显示为块级元素。如下代码就是将内联元素a转换为块状元素，从而使a元素具有块状元素特点。
-a{display:block;}
+```
+
+* 元素分类--块级元素
+什么是块级元素？在html中`<div>、 <p>、<h1>、<form>、<ul> 和 <li>`就是块级元素。设置display:block就是将元素显示为块级元素。如下代码就是将内联元素a转换为块状元素，从而使a元素具有块状元素特点。
+`a{display:block;}`
 块级元素特点：
 1、每个块级元素都从新的一行开始，并且其后的元素也另起一行。（真霸道，一个块级元素独占一行）
 2、元素的高度、宽度、行高以及顶和底边距都可设置。
 3、元素宽度在不设置的情况下，是它本身父容器的100%（和父元素的宽度一致），除非设定一个宽度。
-元素分类--内联元素
-在html中，<span>、<a>、<label>、<input>、 <img>、 <strong> 和<em>就是典型的内联元素（行内元素）（inline）元素。当然块状元素也可以通过代码display:inline将元素设置为内联元素。如下代码就是将块状元素div转换为内联元素，从页使用div元素具有内联元素特点。
+
+* 元素分类--内联元素
+在html中，`<span>、<a>、<label>、<input>、 <img>、 <strong> 和<em>`就是典型的内联元素（行内元素）（inline）元素。当然块状元素也可以通过代码display:inline将元素设置为内联元素。如下代码就是将块状元素div转换为内联元素，从页使用div元素具有内联元素特点。
 内联元素特点：
 1、和其他元素都在一行上；
 2、元素的高度、宽度、行高及顶部和底部边距不可设置；
@@ -170,6 +225,8 @@ a{display:block;}
 行内元素之间会产生间隙bug问题的场景：
 1、当行内元素之间有“回车”、“tab”、“空格”时就会出现间隙。
 如下代码：
+
+```html
 <div>
 
    <a>1</a>
@@ -183,23 +240,35 @@ a{display:block;}
    <em>555555</em>
 
 </div>
+```
+
 解决方法：
 1、写在一行，之间不要有空格之类的符号。
+
+```html
 <div>
 
 <a>1</a><a>2</a><span>33333</span><span>44444</span><em>555555</em>
 
 </div>
-2、使用font-size:0
+```
+
+2、使用`font-size:0`
+
+```css
 div{font-size:0;}
 
 a,span,em{font-size:16px;}
+```
 
-元素分类--内联块状元素
-内联块状元素（inline-block）就是同时具备内联元素、块状元素的特点，代码display:inline-block就是将元素设置为内联块状元素。(css2.1新增)，<img>、<input>标签就是这种内联块状标签。
+* 元素分类--内联块状元素
+内联块状元素（inline-block）就是同时具备内联元素、块状元素的特点，代码display:inline-block就是将元素设置为内联块状元素。(css2.1新增)，`<img>、<input>`标签就是这种内联块状标签。
+
 inline-block元素特点：
 1、和其他元素都在一行上；
 2、元素的高度、宽度、行高以及顶和底边距都可设置。
+
+```html
 <!DOCTYPE HTML>
 
 <html>
@@ -243,18 +312,29 @@ a{
 </body>
 
 </html>
-内填充，外边距，边框，
+```
+
+## 内填充，外边距，边框
+
 盒模型--边框（一）
 盒子模型的边框就是围绕着内容及补白的线，这条线你可以设置它的粗细、样式和颜色(边框三个属性)。
+
+```css
 div{
     border:2px  solid  red;
 }
+```
+
 上面是border代码的缩写形式，可以分开写：
+
+```css
 div{
     border-width:2px;
     border-style:solid;
     border-color:red;
 }
+```
+
 注意：
 1、border-style（边框样式）常见样式有：
 dashed（虚线）| dotted（点线）| solid（实线）。
@@ -270,35 +350,44 @@ thin | medium | thick（但不是很常用），最常还是用象素（px）。
 元素的高度也是同理。
 盒模型--填充
 元素内容与边框之间是可以设置距离的，称之为“填充”。填充也可分为上、右、下、左(顺时针)。如下代码：
-div{padding:20px 10px 15px 30px;}
+`div{padding:20px 10px 15px 30px;}`
 顺序一定不要搞混。可以分开写上面代码：
+
+```css
 div{
    padding-top:20px;
    padding-right:10px;
    padding-bottom:15px;
    padding-left:30px;
 }
+```
+
 如果上、右、下、左的填充都为10px;可以这么写
-div{padding:10px;}
+`div{padding:10px;}`
 如果上下填充一样为10px，左右一样为20px，可以这么写：
-div{padding:10px 20px;}
+`div{padding:10px 20px;}`
 盒模型--边界
 元素与其它元素之间的距离可以使用边界（margin）来设置。边界也是可分为上、右、下、左。如下代码：
-div{margin:20px 10px 15px 30px;}
+`div{margin:20px 10px 15px 30px;}`
 也可以分开写：
+
+```css
 div{
    margin-top:20px;
    margin-right:10px;
    margin-bottom:15px;
    margin-left:30px;
 }
+```
 
 如果上右下左的边界都为10px;可以这么写：
-div{ margin:10px;}
+`div{ margin:10px;}`
 如果上下边界一样为10px，左右一样为20px，可以这么写：
-div{ margin:10px 20px;}
+`div{ margin:10px 20px;}`
 总结一下：padding和margin的区别，padding在边框里，margin在边框外。
-12-1 CSS布局模型
+
+## 12-1 CSS布局模型
+
 css布局模型
 清楚了CSS 盒模型的基本概念、 盒模型类型，
 我们就可以深入探讨网页布局的基本模型了。布局模型与盒模型一样都是 CSS 最基本、 最核心的概念。
@@ -314,6 +403,7 @@ s流动模型（一）
 流动布局模型具有2个比较典型的特征：
 第一点，块状元素都会在所处的包含元素内自上而下按顺序垂直延伸分布，因为在默认状态下，块状元素的宽度都为100%。实际上，块状元素都会以行的形式占据位置。如右侧代码编辑器中三个块状元素标签(div，h1，p)宽度显示为100%。
 块状元素的特点：“在默认状态下，块状元素的宽度都为100%”。
+
 12-3  流动模型二
 
 流动模型（二）
@@ -347,7 +437,7 @@ float  浮动
 
 3、固定定位(position: fixed)
 
-            12-6
+12-6
 层模型--绝对定位
 如果想为元素设置层模型中的绝对定位，需要设置position:absolute(表示绝对定位)，这条语句的作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口。
 12-7
@@ -358,6 +448,7 @@ float  浮动
 
 如下代码实现相对于以前位置向下移动50px，向右移动100px;
 
+```css
 # div1{
 
     width:200px;
@@ -369,14 +460,17 @@ float  浮动
 }
 
 <div id="div1"></div>
+```
 
 什么叫做“偏移前的位置保留不动”呢？
 
 大家可以做一个实验，在右侧代码编辑器的19行div标签的后面加入一个span标签，在标并在span标签中写入一些文字。如下代码：
 
+```html
 <body>
     <div id="div1"></div><span>偏移前的位置还保留不动，覆盖不了前面的div没有偏移前的位置</span>
 </body>
+```
 
 效果图：
 
@@ -397,29 +491,35 @@ Relative与Absolute组合使用
 
 1、参照定位的元素必须是相对定位元素的前辈元素：
 
+```html
 <div id="box1"><!--参照定位的元素-->
     <div id="box2">相对参照元素进行定位</div><!--相对定位元素-->
 </div>
+```
 
 从上面代码可以看出box1是box2的父元素（父元素当然也是前辈元素了）。
 
 2、参照定位的元素必须加入position:relative;
 
+```css
 # box1{
 
     width:200px;
     height:200px;
     position:relative;
 }
+```
 
 3、定位元素加入position:absolute，便可以使用top、bottom、left、right来进行偏移定位了。
 
+```css
 # box2{
 
     position:absolute;
     top:20px;
     left:30px;
 }
+```
 
 这样box2就可以相对于父元素box1定位了（这里注意参照物就可以不是浏览器了，而可以自由设置了）。
 
@@ -484,6 +584,7 @@ p{color: #369;}
 
 网页中的字体css样式代码也有他自己的缩写方式，下面是给网页设置字体的代码：
 
+```css
 body{
     font-style:italic;
     font-variant:small-caps;
@@ -492,12 +593,15 @@ body{
     line-height:1.5em;
     font-family:"宋体",sans-serif;
 }
+```
 
 这么多行的代码其实可以缩写为一句：
 
+```css
 body{
     font:italic  small-caps  bold  12px/1.5em  "宋体",sans-serif;
 }
+```
 
 注意：
 
@@ -519,15 +623,21 @@ body{
 宽度可以自适应，长度无限制
 
 2-1一列布局
+
+```html
 .main{width:800px;height:300px;margin:0 auto;background:#ccc;}
 <div class="main"></div>
+```
 
 三列布局
+
+```css
 .left{ width:200px; height:600px; background:#ccc; position:absolute; left:0; top:0}
 
 .main{ height:600px; margin:0 200px 0 200px; background:#9CF}
 
 .right{ height:600px; width:200px; position:absolute; top:0; position:absolute;right:0; background:#FCC;}
+```
 
 w3c倡导
 倡导结构、样式、行为分离
@@ -588,7 +698,7 @@ position属性
 
 设置偏移量
  偏移参照基准
-        无定位祖先元素，yi<html>为偏移参照标准
+        无定位祖先元素，以`<html>`为偏移参照标准
         有已定位祖先元素，以距其最近的已定位祖先元素为偏移参照基准
 
 使用absolute实现横向两列布局
@@ -626,22 +736,22 @@ transfrom属性向元素应用2D或3D转换。该元素允许我们对元素进�
 css 雪碧效果
 
 1.原则：
-        1.静态图片，不随用户信息变化而变化
+1.静态图片，不随用户信息变化而变化
 
-        2.小图片，图片容量比较小
+2.小图片，图片容量比较小
 
-        一些大图不建议拼成雪碧图
+一些大图不建议拼成雪碧图
 
 2.目的
-        1.减少 http请求数量
+1.减少 http请求数量
 
-        2.加速内容显示
+2.加速内容显示
 
 实现原理  background-position
 
-        控制一个层，可显示的区域范围大小，
+控制一个层，可显示的区域范围大小，
 
-        通过一个窗口，进行背景图的滑动
+通过一个窗口，进行背景图的滑动
 
 实现方式  1.ps手动拼图，
            2.使用sprite工具自动生成
@@ -668,7 +778,7 @@ border-radius
 
 浏览器私有前缀
 
-    解决浏览器显示差异，针对浏览器写私有前缀
+解决浏览器显示差异，针对浏览器写私有前缀
        IE内核：-ms-
         Firefox内核：-moz-
         谷歌浏览器、safari内核:-webkit-
@@ -682,7 +792,7 @@ border-radius
         对原有网站布局产生影响，用户判断未必精确
 设计原则：
 
-    移动优先：在设计的初期就要考虑页面如何在多终端展示
+移动优先：在设计的初期就要考虑页面如何在多终端展示
     渐进增强:充分发挥硬件设备的最大功能
 如何实现:响应式布局
     css3-Media query 最简单的方式
@@ -757,6 +867,3 @@ css3-Media Query
     一步步优化网站
 使用：
     按f12会出现在console之后
-    runtest
-      v2,22;v1,13;small,14
-    grade A-F
