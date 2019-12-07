@@ -5,8 +5,11 @@ updated: 2019-12-05 16:39:16
 tags:
 ---
 
+
+boolean值传到前端的时候转成了1
+
 PHP 脚本可放置于文档中的任何位置。
-PHP 脚本以 <?php 开头，以 ?> 结尾：
+PHP 脚本以 <?php 开头，以 `?>` 结尾：
 
 ```php
 <?php
@@ -46,12 +49,13 @@ echo " Hello World!";
 ```
 
 PHP 变量规则：
-变量以 $ 符号开头，其后是变量的名称
+变量以 `$` 符号开头，其后是变量的名称
 变量名称必须以字母或下划线开头
 变量名称不能以数字开头
 变量名称只能包含字母数字字符和下划线（A-z、0-9 以及 _）
-变量名称对大小写敏感（$y 与 $Y 是两个不同的变量）
-注释：PHP 变量名称对大小写敏感！
+变量名称对大小写敏感（`$y` 与 `$Y` 是两个不同的变量）
+==注释：PHP 变量名称对大小写敏感！==
+
 PHP 有三种不同的变量作用域：
 local（局部）
 global（全局）
@@ -69,41 +73,45 @@ function myTest() {
 }
 ```
 
-PHP echo 和 print 语句
+- echo 和 print 语句
+
 echo 和 print 之间的差异：
 echo - 能够输出一个以上的字符串
 print - 只能输出一个字符串，并始终返回 1
 
-并置运算符（Concatenation Operator）
+- 并置运算符（Concatenation Operator）
 在 PHP 中，只有一个字符串运算符。
-并置运算符 (.) 用于把两个字符串值连接起来。
-要把两个变量连接在一起，请使用这个点运算符 (.) ：
+并置运算符 `.` 用于把两个字符串值连接起来。
+要把两个变量连接在一起，请使用这个点运算符 `.`
+严格区别于其他语言的`+`
 
-使用 strlen() 函数
-strlen() 函数用于计算字符串的长度。
-使用 strpos() 函数
-strpos() 函数用于在字符串内检索一段字符串或一个字符。
+- `strlen()`和`strpos()`
+`strlen()` 函数用于计算字符串的长度。
+`strpos()` 函数用于在字符串内检索一段字符串或一个字符。
 
 PHP 的真正威力源自于它的函数。
 在 PHP 中，提供了超过 700 个内建的函数。
+
 创建 PHP 函数：
-所有的函数都使用关键词 "function()" 来开始
+所有的函数都使用关键词 `function()` 来开始
 命名函数 - 函数的名称应该提示出它的功能。函数名称以字母或下划线开头。
-添加 "{" - 开口的花括号之后的部分是函数的代码。
-插入函数代码
-添加一个 "}" - 函数通过关闭花括号来结束。
 
-$_REQUEST 变量
-PHP 的 $_REQUEST 变量包含了 $_GET, $_POST 以及 $_COOKIE 的内容。
-PHP 的 $_REQUEST 变量可用来取得通过 GET 和 POST 方法发送的表单数据的结果。
+`$_REQUEST` 变量
+PHP 的 `$_REQUEST` 变量包含了 `$_GET`, `$_POST` 以及 `$_COOKIE` 的内容。
+PHP 的 `$_REQUEST` 变量可用来取得通过 GET 和 POST 方法发送的表单数据的结果。
 
-mktime(hour,minute,second,month,day,year,is_dst)
-服务器端引用（Server Side Includes）
-通过 include() 或 require() 函数，您可以在服务器执行 PHP 文件之前在该文件中插入一个文件的内容。除了它们处理错误的方式不同之外，这两个函数在其他方面都是相同的。include() 函数会生成一个警告（但是脚本会继续执行），而 require() 函数会生成一个致命错误（fatal error）（在错误发生后脚本会停止执行）。
+`mktime()` 函数
+返回一个日期的 UNIX 时间戳
+`mktime(hour,minute,second,month,day,year,is_dst)`
 
-开始 PHP Session
-在您把用户信息存储到 PHP session 中之前，首先必须启动会话。
-注释：session_start() 函数必须位于 html 标签之前：
+- 服务器端引用（Server Side Includes）
+通过 `include()` 或 `require()` 函数，您可以在服务器执行 PHP 文件之前在该文件中插入一个文件的内容。
+
+除了它们处理错误的方式不同之外，这两个函数在其他方面都是相同的。include() 函数会生成一个警告（但是脚本会继续执行），而 require() 函数会生成一个致命错误（fatal error）（在错误发生后脚本会停止执行）。
+
+- `PHP Session`
+在您把用户信息存储到 `PHP session` 中之前，首先必须启动会话。
+注释：`session_start()` 函数必须位于 html 标签之前：
 
 ```php
 <?php session_start(); ?>

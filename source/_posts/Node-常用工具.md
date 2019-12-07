@@ -7,7 +7,7 @@ tags:
 - 进程管理
 ---
 
-# supervisor 监听Node改动
+## supervisor 监听Node改动
 
 [supervisor 官网](http://supervisord.org/)
 是一个进程控制系统：
@@ -39,7 +39,7 @@ tags:
 
 运行：`supervisor`
 
-# PM2 - Node进程管理
+## PM2 - Node进程管理
 
 [PM2- NPM](https://www.npmjs.com/package/pm2)
 [官网](https://pm2.io/doc/en/runtime/quick-start/)
@@ -62,13 +62,13 @@ supervisor 是监听单个进程的话，那么 PM2 就是监听多个进程。
 
 ## 参数说明
 
-- --watch：监听应用目录源码的变化，一旦发生变化，自动重启。如果要精确监听、不见听的目录，最好通过配置文件
-- -i --instances：启用多少个实例，可用于负载均衡。如果-i 0或者-i max，则根据当前机器核数确定实例数目，可以弥补node.js缺陷
-- --ignore-watch：排除监听的目录/文件，可以是特定的文件名，也可以是正则。比如--ignore-watch="test node_modules "some scripts"
+- `--watch`：监听应用目录源码的变化，一旦发生变化，自动重启。如果要精确监听、不见听的目录，最好通过配置文件
+- `-i --instances`：启用多少个实例，可用于负载均衡。如果-i 0或者-i max，则根据当前机器核数确定实例数目，可以弥补node.js缺陷
+- `--ignore-watch`：排除监听的目录/文件，可以是特定的文件名，也可以是正则。比如--ignore-watch="test node_modules "some scripts"
 - -n --name：应用的名称。查看应用信息的时候可以用到
-- -o --output <path>：标准输出日志文件的路径，有默认路径
-- -e --error <path>：错误输出日志文件的路径，有默认路径
-- --interpreter <interpreter>：the interpreter pm2 should use for executing app (bash, python...)。比如你用的coffee script来编写应用
+- `-o --output <path>`：标准输出日志文件的路径，有默认路径
+- `-e --error <path>`：错误输出日志文件的路径，有默认路径
+- `--interpreter <interpreter>`：the interpreter pm2 should use for executing app (bash, python...)。比如你用的coffee script来编写应用
 
 ## 通过yaml管理多个应用
 
@@ -129,7 +129,7 @@ pm2 start app.js -i max # 根据机器CPU核数，开启对应数目的进程
 2. 通过pm2 startup [platform]生成开机自启动的命令。例如：pm2 startup centeros
 3. 将步骤2生成的命令，粘贴到控制台进行，搞定。
 
-## 详细介绍
+## 详细介绍pm2
 
 ```bash
 pm2 -h # help

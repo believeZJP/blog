@@ -5,19 +5,19 @@ updated: 2017-12-28 15:57:18
 tags:
 ---
 
-# Vuex简介
+## Vuex简介
 
 >Vuex 是一个专为 Vue.js应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
->状态管理？ data中的属性 需要共享给其他vue组件使用的部分，就叫做状态。简单的说就是data中需要共用的属性。
+>状态管理data中的属性 需要共享给其他vue组件使用的部分，就叫做状态。简单的说就是data中需要共用的属性。
 >比如，用户的登录状态，用户名称等相关信息。如果不把这些属性设置为状态，每个页面遇到后，都会发送请求，从服务器端获取，再返回前端。在大型项目中会有很多共用的数据。所以提供了vuex.
 
-# 第一节 初出茅庐，来个demo
+## 第一节 初出茅庐，来个demo
 
 这个教程是基于vue-cli的项目做的开发。所以确保vue-cli，vue开发环境是ok的。
 
 ### 1. 安装vuex
 
-```
+```bash
 npm install vuex --save
 ```
 
@@ -27,7 +27,7 @@ npm install vuex --save
 
 src/store/index.js
 
-```
+```js
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -44,7 +44,7 @@ Vue.use(Vuex)
 
 store/index.js
 
-```
+```js
 const state = {
     count: 1
 }
@@ -52,7 +52,7 @@ const state = {
 
 ### 2. 用export default封装代码，让外部可以引用
 
-```
+```js
 export default new Vuex.Store({
     state
 })
@@ -62,7 +62,7 @@ export default new Vuex.Store({
 
 components/Count.vue
 
-```
+```js
 <template>
   <div>
       <h2>{{msg}}</h2>
@@ -90,7 +90,7 @@ components/Count.vue
 
 store/index.js
 
-```
+```js
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -121,7 +121,7 @@ export default new Vuex.Store({
 
 ### 5. 在Count.vue模板中加入两个按钮，并调用mutations中的方法
 
-```
+```html
 <button @click="$store.commit('add')"> 加分 </button>
 <button @click="$store.commit('reduce')"> 减分 </button>
 ```
@@ -130,7 +130,7 @@ export default new Vuex.Store({
 
 现在就可以对vuex中的count进行加减了。
 
-# 第二节 state访问状态对象
+## 第二节 state访问状态对象
 
 在第一节已经写了一个const state,这个就是我们说的访问状态对象，它就是我们SPA(单页应用程序)中共享值。
 
@@ -152,7 +152,7 @@ export default new Vuex.Store({
 
 Count.vue
 
-```
+```js
 import store from '@/store'
 export default{
     data () {
@@ -173,48 +173,48 @@ export default{
 
 在页面显示的地方替换为count
 
-```
+```html
 <!-- <h3>{{$store.state.count}}</h3> -->
-      <h3>{{count}}</h3>
+<h3>{{count}}</h3>
 ```
 
 ### 2. 通过mapState的对象来赋值
 
 1. 引入mapState
 
-```
-    import {mapState} from 'vuex'
-```
+    ```js
+        import {mapState} from 'vuex'
+    ```
 
 2. 在computed计算属性里写如下代码
 
-```
-computed: mapState({
-    count: state => state.count
-}),
-```
+    ```js
+    computed: mapState({
+        count: state => state.count
+    }),
+    ```
 
-这里我们用ES6的箭头函数来给count赋值。
+    这里我们用ES6的箭头函数来给count赋值。
 
 ### 3. 通过mapState的数组来赋值
 
-```
+```js
 computed: mapState(['count'])
 ```
 
 下面这种写法是错误的
 
-```
+```js
 computed: mapState['count'],
 ```
 
 这个算是最简单的写法，在实际项目开发中也经常这样用。
 
-## 总结
+### 总结
 
 这就是三种赋值方式，虽然简单，但实际项目中经常使用。一定要多练习。
 
-# 第三节 mutations修改状态
+## 第三节 mutations修改状态
 
 mutations修改state的数据
 
@@ -228,14 +228,14 @@ vuex提供了commit方法来修改状态
 
 Count.vue
 
-```
+```html
 <button @click="$store.commit('add')"> 加分 </button>
 <button @click="$store.commit('reduce')"> 减分 </button>
 ```
 
 store/index.js
 
-```
+```js
 const mutations = {
     add (state) {
         state.count ++
@@ -254,7 +254,7 @@ const mutations = {
 
 store/index.js
 
-```
+```js
 const mutations = {
     // 新增
     add (state, n) {
@@ -268,7 +268,7 @@ const mutations = {
 
 在Count.vue里修改按钮的commit()方法的参数，传10，即每次加10
 
-```
+```html
 <button @click="$store.commit('add', 10)"> 加分 </button>
 <button @click="$store.commit('reduce')"> 减分 </button>
 ```
@@ -285,51 +285,48 @@ const mutations = {
 
 1. 在组件Count.vue里用import引入mapMutations
 
-```
-    import { mapState, mapMutations } from 'vuex'
-```
+    ```js
+        import { mapState, mapMutations } from 'vuex'
+    ```
 
 2. 在组件的script标签里添加methods属性，并加入mapMutations
 
-```
-import store from '@/store'
-import { mapState, mapMutations } from 'vuex'
-export default{
-    data () {
-        return {
-            msg: 'Hello Vuex'
-        }
-    },
-    computed: mapState(['count']),
-    // 新增
-    methods: mapMutations(['add', 'reduce']),
-    store
-}
-```
+    ```js
+    import store from '@/store'
+    import { mapState, mapMutations } from 'vuex'
+    export default{
+        data () {
+            return {
+                msg: 'Hello Vuex'
+            }
+        },
+        computed: mapState(['count']),
+        // 新增
+        methods: mapMutations(['add', 'reduce']),
+        store
+    }
+    ```
 
 3. 在调用的地方改成直接用add和reduce.
 
-```
-<button @click="add(10)"> 加分 </button>
-<button @click="reduce"> 减分 </button>
-```
+    ```htmls
 
-### 这个是从别的地方看到的,怎么调用
+### action方式
 
 第二种方式：对象风格的传参方式
 
 提交 mutation 的另一种方式是直接使用包含 type 属性的对象：
 
-```
+```js
 store.commit({
   type: 'increment', // 事件名
   amount: 10
 })
 ```
 
-## 在 Vuex 中，mutation 都是同步函数
+### 在 Vuex 中，mutation 都是同步函数
 
-# 第四节 getters计算过滤操作
+## 第四节 getters计算过滤操作
 
 getters从字面上是获得的意思，获取state的数据。
 
@@ -343,7 +340,7 @@ Getters 也可以理解为 Vue 中的计算属性 (computed)。
 
 首先在store/index.js里用const声明getters属性
 
-```
+```js
 const getters = {
     count: function (state) {
         state.count += 100
@@ -354,7 +351,7 @@ const getters = {
 
 写好getters后，还需要在Vuex.store()里引入，由于之前已经引入state和mutations，所以这里有三个引入属性。如下
 
-```
+```js
 export default new Vuex.Store({
     state,
     mutations,
@@ -364,7 +361,7 @@ export default new Vuex.Store({
 
 在store里的配置完成了，需要到组件页对computed进行配置，在vue的构造器里只能有一个computed属性，如果写多个，只有最后一个computed属性可用，所以要对上节课的computed属性进行改造。改造时，使用ES6中的展开运算符'...'
 
-```
+```js
 computed: {
     ...mapState(['count']),
     count () {
@@ -381,26 +378,26 @@ state和mutations都有map的引用方法把我们的模板中的编码进行简
 
 用import引入mapGetters
 
-```
-    import { mapState, mapMutations, mapGetters } from 'vuex'
+```js
+import { mapState, mapMutations, mapGetters } from 'vuex'
 ```
 
 在computed属性中加入mapGetters
 
-```
+```js
 computed: {
     ...mapState(['count']),
     ...mapGetters(['count'])
 },
 ```
 
-## 总结
+### 总结-4
 
 到这里getters就学完了，还是要熟悉熟悉。
 注意mapGetters是写在computed中的。
 getter写的是函数，但我们应该把它当成计算属性来用。
 
-# 第5节 actions异步修改状态
+## 第5节 actions异步修改状态
 
 actions 和 mutations的功能基本一样，不同点是actions是异步的改变state的状态，而mutations是同步改变状态。
 
@@ -412,7 +409,7 @@ actions可以调用mutations里的方法。
 
 继续上节的代码，在actions里调用mutation里的add和reduce方法
 
-```
+```js
 const actions = {
     addAction (context) {
         context.commit('add', 10)
@@ -446,14 +443,14 @@ export default new Vuex.Store({
 
 复制之前的两个按钮，调用addAction和reduceAction
 
-```
+```html
 <button @click="addAction(10)"> 异步加分 </button>
 <button @click="reduceAction"> 异步减分 </button>
 ```
 
 改造methods，用扩展运算符把mapMutations和mapActions引入
 
-```
+```js
 methods: {
     ...mapActions(['addAction', 'reduceAction']),
     ...mapMutations(['add', 'reduce'])
@@ -462,7 +459,7 @@ methods: {
 
 ### 用dispatch调用action
 
-```
+```js
 store.dispatch('asyncAdd');
 
 store.dispatch('addAction', {
@@ -471,8 +468,6 @@ store.dispatch('addAction', {
 
 store.dispatch({ type: 'addAction', n: 10 });
 ```
-
-这个是jspang没讲的
 
 ### 增加异步校验
 
@@ -483,7 +478,7 @@ store.dispatch({ type: 'addAction', n: 10 });
 在addAction里使用setTimeout就行延迟执行。
 处理逻辑，先加10，隔500毫秒，减一
 
-```
+```js
 const actions = {
     addAction (context) {
         setTimeout(() => {
@@ -499,7 +494,7 @@ const actions = {
 }
 ```
 
-## 总结
+### 总结-5
 
 mutation和action都可以对store进行操作
 
@@ -507,7 +502,7 @@ mutation必须是同步操作，action可以是任何异步操作。
 
 action不直接更改状态，而是提交mutation
 
-# 第6节 module模块组
+## 第6节 module模块组
 
 随着项目复杂度的增加，共享的状态越来越多，这时候，需要把我们状态的操作进行分组，分组后，再按组编写。
 
@@ -515,7 +510,7 @@ action不直接更改状态，而是提交mutation
 
 每个module拥有自己的state、mutation，action，getter，甚至嵌套子模块。具体结构如下:(来自官网)
 
-```
+```js
 const moduleA = {
   state: { ... },
   mutations: { ... },
@@ -544,8 +539,8 @@ store.state.b // -> moduleB 的状态
 
 在store/index.js中，将之前定义好的state,getters，mutations，actions都提取到一个变量中，命名ModuleA。
 
-```
-之前导出是将这些都导出的
+```js
+// 之前导出是将这些都导出的
 export default new Vuex.Store({
     state,
     mutations,
@@ -556,7 +551,7 @@ export default new Vuex.Store({
 
 现在都装到moduleA中，导出moduleA
 
-```
+```js
 const moduleA = {
     state, mutations, getters, actions
 }
@@ -572,7 +567,7 @@ export default new Vuex.Store({
 
 在计算属性中引入
 
-```
+```js
 computed: {
     count () {
         return this.$store.state.a.count
@@ -586,24 +581,25 @@ computed: {
 
 ### TODO 后续需要将module单独抽离成一个文件
 
-# 总结
+### 总结-6
 
 可以看到， 一个vuex里包含
 
-* 1. state
+1. state
     用来定义通用的数据，类似于组件中的data
 
     mapState是获取state的辅助函数。获取state都是通过computed来获取的，如果获取多个会显得冗余，用mapState辅助函数可以帮助我们生成计算属性。
-* 2. getter
+
+2. getter
     可以认为是store的计算属性，类似于组件中的computed属性，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
 
     mapGetters是getter的辅助函数 将 store 中的 getter 映射到局部计算属性：
-* 3. mutation
+3. mutation
     更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。
 
     Mutation 必须是同步函数
 
-> Vuex 中的 mutation 也需要与使用 Vue 一样遵守一些注意事项：
+    > Vuex 中的 mutation 也需要与使用 Vue 一样遵守一些注意事项：
 
     1. 最好提前在你的 store 中初始化好所有所需属性。
 
@@ -613,28 +609,27 @@ computed: {
 
     以新对象替换老对象。例如，利用 stage-3 的对象展开运算符我们可以这样写：
 
-state.obj = { ...state.obj, newProp: 123 }
+    state.obj = { ...state.obj, newProp: 123 }
 
-* 4. action
+4. action
 
     类似于mutation
     区别:
     - Action 提交的是 mutation，而不是直接变更状态。
     - Action 可以包含任意异步操作。
-* 5. module (这个不一定)
+
+5. module (这个不一定)
     将一个大的store拆分成一个个子模块，即module
 
-# mutation 只管存，你给我（dispatch）我就存
+## mutation 只管存，你给我（dispatch）我就存
 
-# action只管中间处理，处理完我就给你，你怎么存我不管
+## action只管中间处理，处理完我就给你，你怎么存我不管
 
-# Getter 我只管取，我不改的
+## Getter 我只管取，我不改的
 
-[vuex不错的讲解](https://zhuanlan.zhihu.com/p/24357762)
+## Vuex 应用场景
 
-# Vuex 应用场景
-
-## Vuex应用场景有什么？什么时候适合使用Vuex，什么时候不适合
+### Vuex应用场景有什么？什么时候适合使用Vuex，什么时候不适合
 
 ### 一般回答
 
@@ -689,19 +684,23 @@ state.obj = { ...state.obj, newProp: 123 }
 
 那么：
 
-    1. 无论这个变量放在哪个组件里，其他组件调用都很麻烦
-    2. 即使存在于根组件，用this.$root.xx来获取这个变量，也是很麻烦的
+1. 无论这个变量放在哪个组件里，其他组件调用都很麻烦
+2. 即使存在于根组件，用this.$root.xx来获取这个变量，也是很麻烦的
 
 解决办法：
 
-1. 用global-event-bus来存储这个变量 ，会比较麻烦
-2. 使用Vuex
-    1. 通过$store.state.xxx来获取这个变量
-    2. 通过$store.commit()来提交修改(在某些条件下可禁止修改)
-    3. 可以通过$store.dispatch()获取其他风格样式，并通过$store.state和$store.getters来返回新风格样式
+1. 用`global-event-bus`来存储这个变量 ，会比较麻烦
+2. 使用`VueX`
+    1. 通过`$store.state.xxx`来获取这个变量
+    2. 通过`$store.commit()`来提交修改(在某些条件下可禁止修改)
+    3. 可以通过`$store.dispatch()`获取其他风格样式，并通过`$store.state`和`$store.getters`来返回新风格样式
 
-## 总结
+## 总结-使用场景
 
-    如果需要数据和组件分离，分别处理，那么使用Vuex非常合适。
-    相反，如果不需要分离处理，不使用Vuex也没关系。
-    比如某个数据只跟某组件交互，是强耦合的，其他组件用不到，那么这个组件就可以防止该组件的data属性中。
+如果需要数据和组件分离，分别处理，那么使用VueX非常合适。
+相反，如果不需要分离处理，不使用VueX也没关系。
+比如某个数据只跟某组件交互，是强耦合的，其他组件用不到，那么这个组件就可以防止该组件的data属性中。
+
+### 参考链接
+
+[vuex不错的讲解](https://zhuanlan.zhihu.com/p/24357762)
