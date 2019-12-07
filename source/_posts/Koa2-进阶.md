@@ -2,8 +2,8 @@
 title: Koa2 进阶
 date: 2019-12-05 16:52:32
 updated: 2019-12-05 16:52:32
-tags:
--Koa
+tags: 
+- Koa
 ---
 
 > Koa2是现在最流行的基于Node.js平台的web开发框架，它很小，但扩展性很强。Koa给人一种干净利落的感觉，体积小、编程方式干净。
@@ -873,8 +873,8 @@ app.listen(8040, ()=>{
 
 在浏览器中访问：
 
-<http://localhost:8040/style.css>
+`<http://localhost:8040/style.css>`
 
-<http://localhost:8040/test.js>
+`<http://localhost:8040/test.js>`
 
-<http://localhost:8040/koa.png>
+`<http://localhost:8040/koa.png>`

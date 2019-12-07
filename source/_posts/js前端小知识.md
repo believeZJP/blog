@@ -23,6 +23,7 @@ tags:
       .replace(/\\f/g, "\\f");
 ```
 
+<!-- more -->
 ## js获取options的列表和每个的文本和值
 
 `var opts=document.getElementById("option").options;`
@@ -264,7 +265,7 @@ function Person(){}
 
 5、综合方式（原型+构造函数方式搭配）
 
-```
+```js
   function Person(){
         this.username = new Array();//不被多个对象共享
         this.password = "123";
@@ -375,10 +376,10 @@ if (/['")-><&\\\/\.]/.test(key)) {
 
 ## 1.如何通过css使div 实现全屏效果
 
-    --全屏要素：
-        1.全屏的元素及其父元素都要设置为height:100%,
-        2.将html,body标签设置为height100%,
-    注：height:100%是跟随其父元素高度变化而变化的
+--全屏要素：
+    1.全屏的元素及其父元素都要设置为height:100%,
+    2.将html,body标签设置为height100%,
+注：height:100%是跟随其父元素高度变化而变化的
 
 ## jQuery插件的封装
 
@@ -433,8 +434,8 @@ $.fn.myPlugin = function(){
 
 代码说明：
 
-- return this 返回当前对象，来维护插件的链式调用
-- each 循环实现每个元素的访问
+* return this 返回当前对象，来维护插件的链式调用
+* each 循环实现每个元素的访问
 
 ## 单例模式
 
