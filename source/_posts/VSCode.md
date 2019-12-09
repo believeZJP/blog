@@ -25,6 +25,8 @@ tags:
   ○ `@` 根据分类跳转 symbol，查找属性或函数，也可以`Command+Shift+O`后输入:进入
   ○ `#` 根据名字查找 symbol，也可以 Command+T
 
+<!-- more -->
+
 ## 2.2、常用快捷键
 
 ### 2.2.1、编辑器与终端窗口管理
@@ -132,9 +134,9 @@ vscode自动给所有的import改为实际路径而不是相对路径，解决�
 - VS Code setting Sync插件配置经验：
  按照教程提示按shift+alt+u 会弹出输入框要求输入github中的token，第一次可以输入
  如果输入错误，再次按快捷键会不断提示token过期或错误。
- 
+
  解决办法: 找到settings.json文件同目录下的syncLocalSettings.json
  查找办法，鼠标放到setting.json的打开标签上会显示文件目录，右键可打开所在目录。
  C:\Users\zhaojianpeng3\AppData\Roaming\Code\User
- 
+
  修改文件中的token为github中对应的token，保存文件。重新按快捷键即可启用。

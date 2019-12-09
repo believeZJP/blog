@@ -12,6 +12,8 @@ tags:
 前置知识：
 js,ES6,node ,npm
 
+<!-- more -->
+
 ## 第一节 Koa开发环境搭建
 
 1. 新建目录

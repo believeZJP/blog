@@ -23,6 +23,8 @@ make
 make install
 ```
 
+<!-- more -->
+
 ### 版本管理
 
 使用[nvm](https://github.com/creationix/nvm) 或 [n](https://github.com/tj/n)

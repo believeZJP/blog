@@ -18,6 +18,8 @@ React起源于Facebook的内部项目，该公司积极尝试引入HTML5技术�
 
 [GitHub地址](https://github.com/facebook/react)
 
+<!-- more -->
+
 ### react 特点
 
 - 虚拟DOM: React也是以数据驱动的，每次数据变化React都会扫码整个虚拟DOM树，自动计算与上次虚拟DOM的差异变化，然后针对需要变化的部分进行实际的浏览器DOM更新。

@@ -25,6 +25,8 @@ const message = `say ${word}`;
 export default message;
 ```
 
+<!-- more -->
+
 word.js
 
 ```js

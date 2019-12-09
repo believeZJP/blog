@@ -24,6 +24,8 @@ tags:
 
 即可生效
 
+<!-- more -->
+
 ## js文件自动格式化
 
 尝试了用`Prettier`, 发现配置项没有直接用`ESLint`多，改用`ESLint`

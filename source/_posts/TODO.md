@@ -5,7 +5,7 @@ updated: 2019-01-11 20:22:57
 tags:
 ---
 
-# TODO
+## TODO
 
 JS 精度问题
 
@@ -19,6 +19,8 @@ JS 精度问题
 
 
 ```
+
+<!-- more -->
 
 [1](https://www.cnblogs.com/xinggood/p/6639022.html)
 [math.js]
@@ -427,7 +429,7 @@ easy-mock
 <https://segmentfault.com/a/1190000010716195>
 
 MVVM实现原理。
-https://segmentfault.com/a/1190000010744960
+<https://segmentfault.com/a/1190000010744960>
 
 React 学习教程
 <https://segmentfault.com/a/1190000005136764>

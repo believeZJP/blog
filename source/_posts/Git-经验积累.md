@@ -12,7 +12,9 @@ tags:
 
 - [SmartGit](https://www.syntevo.com/smartgit/)✨✨✨(开始用的，后来放弃)
 - [Sourcetree](https://www.sourcetreeapp.com/)✨✨✨✨✨(现在用的这个，需要翻墙注册)
-- [GitKraken](https://www.gitkraken.com/) 没用过，全平台免费
+- [GitKraken](https://www.gitkraken.com/) 很好用，可以替代SourceTree, 全平台免费
+
+<!-- more -->
 
 ## github contributions 展示问题
 

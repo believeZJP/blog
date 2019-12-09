@@ -35,6 +35,8 @@ express -h
     -f, --force         force on non-empty directory
 ```
 
+<!-- more -->
+
 ## 2. 创建应用
 
 ```bash
