@@ -6,11 +6,11 @@ tags:
 - JavaScript
 - 定时器
 ---
-# 一、定时器
+## 一、定时器
 
 ## setTimeout: 设置一个定时器，在定时器到期后，执行一段代码或代码段
 
-```
+```js
 var timeoutId = window.setTimeout(func[, delay, param1, param2, ... ]);
 var timeoutId = window.setTimeout(code[, delay]);
 
@@ -26,7 +26,7 @@ var timeoutId = window.setTimeout(code[, delay]);
 
 ## setInterval: 以固定时间间隔重复调用一个函数或代码段
 
-```
+```js
 var intervalId = window.setInterval(func, delay[, param1, param2, ...]);
 var intervalId = window.setInterval(code, delay);
 ```
@@ -40,7 +40,7 @@ var intervalId = window.setInterval(code, delay);
 
 setImmediate设计来是为保证让代码在下一次事件循环执行，以前setTimeout(0)这种不可靠的方式可以丢掉了。
 
-```
+```js
 var immediateId = setImmediate(func[, param1, param2, ...]);
 var immediateId = setImmediate(func);
 
@@ -60,7 +60,7 @@ var immediateId = setImmediate(func);
 
 ## requestAnimationFrame: 帧动画的API,根据浏览器的刷新频率而定
 
-```
+```js
 var requestId = window.requestAnimationFrame(func);
 ```
 
@@ -70,7 +70,7 @@ var requestId = window.requestAnimationFrame(func);
 
 es6中的异步模型。在setTimeout(0), setImmediate,requestAnimationFrame和Promise中，Promise优先级最高。
 
-```
+```js
 
 function testSetImmediate() {
     const label = 'setImmediate';
@@ -105,11 +105,11 @@ testPromise();
 > 事实上，Promise不会进入异步队列，而是直接在主线程队列尾强插一个任务，虽然不会阻塞主线程，但会阻塞异步任务的执行。如果有嵌套的process.nextTick，那异步任务就永远没机会被执行到了。
 使用的时候要谨慎。但Vue中的nextTick是这个实现的吗？？？
 
-# 二、 show me the code
+## 二、 show me the code
 
 ## 基本用法
 
-```
+```js
 var intervalId, timeoutId;
 timeoutId = setTimeout(function(){
     console.log(1);
@@ -133,7 +133,7 @@ intervalId = setInterval(function(){
 
 ## setInterval 和setTimeout 的区别
 
-```
+```js
 setTimeout(function(){
    console.log('timeout');
 }, 1000);
@@ -186,9 +186,9 @@ intervalId = setInterval(callback, delay);
     **setTimeout只在回调完成之后才回去调用下一次定时器**，
     而setInterval不管回调函数执行情况，**到达规定时间就会在事件队列中插入一个执行回调的事件**，所以，用setInterval时要谨慎，比如发送请求失败，会造成死链堆积。
 
-# show me what you can do
+## show me what you can do
 
-```
+```js
 //题目1
 var t = true;
 setTimeout(function(){
@@ -231,7 +231,7 @@ obj.waitAndShout();
 
 ```
 
-# The truth
+## The truth
 
 * 第一题：
 
@@ -249,7 +249,7 @@ setTimeout()调用的代码运行在与所在函数完全分离的执行环境�
 
 修改方案
 
-```
+```js
 var obj = {
     msg: 'obj',
     shout: function () {
@@ -266,7 +266,7 @@ obj.waitAndShout();
 
 ```
 
-# 需要注意
+## 需要注意
 
 * JS引擎基于事件循环，只有一个线程，会强制异步事件排队执行
 * 如果setInterval的回调执行时间长于指定的延迟，setInterval将无间隔的一个接一个执行
