@@ -84,4 +84,10 @@ Cookie修改工具
 
 ## Tampermonkey
 
-看着特别火，不知道能干嘛~~~
+安装后可以查找在[网站](https://www.tampermonkey.net/scripts.php)找想要的脚本安装
+
+[破解VIP会员视频集合](https://greasyfork.org/zh-CN/users/104201-%E9%BB%84%E7%9B%90)
+
+## Proxy SwitchyOmega
+
+代理切换工具
