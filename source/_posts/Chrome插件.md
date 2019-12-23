@@ -86,6 +86,12 @@ Cookie修改工具
 
 安装后可以查找在[网站](https://www.tampermonkey.net/scripts.php)找想要的脚本安装
 
+安装方法
+
+- chrome应用商店
+- [不翻墙可用](https://www.crx4chrome.com/)
+- [Tampermonkey下载地址]<https://www.crx4chrome.com/crx/755/>
+
 [破解VIP会员视频集合](https://greasyfork.org/zh-CN/users/104201-%E9%BB%84%E7%9B%90)
 
 ## Proxy SwitchyOmega
