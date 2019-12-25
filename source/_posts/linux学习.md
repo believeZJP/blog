@@ -510,6 +510,20 @@ ps -A | grep nginx
 
 如果返回结果的话，说明有nginx在运行，服务已经启动
 
+nginx -V 查看nginx安装目录
+
+cd /usr/local/etc/nginx 里有nginx.conf
+
+sudo nginx -s reload
+Sudo nginx -s stop
+
+openresty/nginx/coupon
+
+./sbin/nginx -s reload
+
+Nginx 命令
+service nginx stop/start/status/reload
+
 2、查看nginx.conf配置文件目录
 
 输入命令

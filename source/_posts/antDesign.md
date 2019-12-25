@@ -98,3 +98,39 @@ handleMouseOver = (key) => (e) => {
     this.setState({ display: key })
 }
 ```
+
+写了models一定要在common的router.js中getRouterData
+的dynamicWrapper
+中引入文件夹名字，才能自动引入到app._models中
+
+service 中的api要添加request.
+
+models中要添加reducer，
+
+在页面中要用redux定义好的state，需要在connect中引入
+@connect(({loading, coupons}) => ({
+    data: coupons,
+}))
+
+action调用成功后，在reducer里改了状态， 打印出来发生变化了，但页面没变化。
+
+在div中写的可以变化，在input或textarea中不会发生变化。
+
+加了mapPropsToFields后，修改的值回响应到textarea上，
+
+但所有输入框输入的值被清空了
+
+不想用redux，直接用组件里的state，怎么搞？
+
+在dispatch后添加callback.直接用
+
+this.props.form.setFieldsValue({
+    uids: payload.data.join()
+});
+
+ 一个页面多个form，点击每个form的提交，其他form的字段会跟着提交
+
+Form的FormItem如果是rangePicker，则设置style={{width:100%}}，可以让输入框响应容器
+
+Form的label和input输入框的宽度通过调节labelCol，wrapperCol
+来设置，总长度为24
