@@ -97,3 +97,7 @@ Cookie修改工具
 ## Proxy SwitchyOmega
 
 代理切换工具
+
+## [GoogleHelper](http://googlehelper.net/)
+
+安装可以访问Google
