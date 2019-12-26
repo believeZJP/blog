@@ -134,3 +134,12 @@ Form的FormItem如果是rangePicker，则设置style={{width:100%}}，可以让�
 
 Form的label和input输入框的宽度通过调节labelCol，wrapperCol
 来设置，总长度为24
+
+啊啊啊啊大经验啊！！！！
+
+nginx的proxy配置一定要前后路径一致
+    'POST /coupon/v1/(.*)': '<http://10.64.38.89:8081/coupon/v1/',>
+
+前面是coupon/v1后面也一定是coupon/v1,
+不能前面是coupon 后面是coupon/v1
+项目一定要放在www目录下

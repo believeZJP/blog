@@ -13,7 +13,7 @@ tags:
 
 - [写好CSS代码的70个专业建议](http://caibaojian.com/70-expert-ideas-for-better-css-coding.html)
 
-# 项目统一样式
+## 项目统一样式
 
 为了解决浏览器默认样式不统一的问题。
 
@@ -33,8 +33,9 @@ tags:
 - **解释代码**：用注释和详细的文档来
 
 <!--more-->
+用`overflow: auto` 必须给容器指定高度`height: 固定值`
 
-# 页面首次加载动画展示
+## 页面首次加载动画展示
 
 - [WOW中文文档](https://github.com/matthieua/WOW)
 
@@ -42,7 +43,7 @@ tags:
 
 - [Animate.css](https://daneden.github.io/animate.css/)
 
-# 常见布局方案整理
+## 常见布局方案整理
 
 - [CSS布局方案](https://segmentfault.com/a/1190000010989110)
 - [经典布局](https://juejin.im/entry/591dc015da2f60005d25e6b0)
@@ -51,7 +52,7 @@ tags:
 
 - [css负margin运用](http://www.admin10000.com/document/9351.html)
 
-# CSS3实现动画功能主要通过两个属性
+## CSS3实现动画功能主要通过两个属性
 
 1.transition
 2.animation
@@ -77,40 +78,40 @@ transition-timing-function
     ease-out    缓慢结束
     ease-in-out    缓慢开始，缓慢结束（和ease稍有区别）
 
-# CSS3创建3D场景
+## CSS3创建3D场景
 
 1. 属性介绍
 perspective:800    平面距离三维中方框的距离
 perspective-origin:50% 50%
 
 2. transform属性
---translete :位移操作
-translateX(X px)
-translateY(Y px)
-translateZ(Z px)
+    --translete :位移操作
+    translateX(X px)
+    translateY(Y px)
+    translateZ(Z px)
 
---rotate：旋转操作
-rotateX(X deg)
-rotateY(Y deg)
-rotateZ(Z deg)
+    --rotate：旋转操作
+    rotateX(X deg)
+    rotateY(Y deg)
+    rotateZ(Z deg)
 
 3. 设置3D
 
-transform-style:preserve-3d;
+    transform-style:preserve-3d;
 
-# 如何通过css使div 实现全屏效果
+## 如何通过css使div 实现全屏效果
 
 --全屏要素：
     1.全屏的元素及其父元素都要设置为height:100%,
     2.将html,body标签设置为height100%,
 注：height:100%是跟随其父元素高度变化而变化的
 
-# css中 link 和 @import 区别
+## css中 link 和 @import 区别
 
 @import 指令 会阻止浏览并行下载。
 link 加载外部样式表不会阻止并行下载。
 
-# px,em,rem的区别
+## px,em,rem的区别
 
 - PX特点
 
@@ -128,17 +129,17 @@ em是相对长度单位。
 2. em会继承父级元素的字体大小。
 所以我们在写CSS的时候，需要注意两点：
 
-1. body选择器中声明Font-size=62.5%;
-2. 将你的原来的px数值除以10，然后换上em作为单位;
-3. 重新计算那些被放大的字体的em数值。避免字体大小的重复声明。
-也就是避免1.2 * 1.2= 1.44的现象。比如说你在#content中声明了字体大小为1.2em，那么在声明p的字体大小时就只能是1em，而不是1.2em, 因为此em非彼em，它因继承#content的字体高而变为了1em=12px。
+   1. body选择器中声明Font-size=62.5%;
+   2. 将你的原来的px数值除以10，然后换上em作为单位;
+   3. 重新计算那些被放大的字体的em数值。避免字体大小的重复声明。
+   也就是避免1.2 * 1.2= 1.44的现象。比如说你在#content中声明了字体大小为1.2em，那么在声明p的字体大小时就只能是1em，而不是1.2em, 因为此em非彼em，它因继承#content的字体高而变为了1em=12px。
 
 - rem特点
 rem是CSS3新增的一个相对单位(root em，根em)，这个单位引起了广泛关注。这个单位与em有什么区别呢?区别在于使用rem为元素设定字体大小时，仍然是相对大小，但相对的只是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。
 一个例子：
 p {font-size:14px; font-size:.875rem;}
 
-# CSS3 动画性能问题
+## CSS3 动画性能问题
 
 <https://www.cnblogs.com/shytong/p/5419565.html>
 a、是否导致layout
@@ -156,14 +157,14 @@ transform 动画由GPU控制，支持硬件加速，并不需要软件方面的�
  -webkit-transform:transition3d(0,0,0) 或 -webkit-transform:translateZ(0); ，
 这两个属性都会开启 GPU硬件加速 模式，从而让浏览器在渲染动画时从CPU转向GPU，
 
-# 字体加粗用哪个
+## 字体加粗用哪个
 
 `<b></b>`标签的加粗只是为了加粗
 `<strong></strong>`标签加粗是为了突出重点
 在网页中使用`<strong></strong>`突出的内容更容易被网页搜索蜘蛛搜索到。
 盲人朋友使用阅读设备阅读网络时：`<strong>`会重读，`<b>`不会
 
-# CSS优先级算法如何计算
+## CSS优先级算法如何计算
 
 - 元素选择符： 1
 - class选择符： 10
@@ -174,19 +175,19 @@ transform 动画由GPU控制，支持硬件加速，并不需要软件方面的�
 如果优先级相同，则选择最后出现的样式。
 继承得到的样式的优先级最低。
 
-# box-sizing属性
+## box-sizing属性
 
 用来控制元素的盒子模型的解析模式，默认为content-box
 context-box：W3C的标准盒子模型，设置元素的 height/width 属性指的是content部分的高/宽
 border-box：IE传统盒子模型。设置元素的height/width属性指的是border + padding + content部分的高/宽
 inherit:   应从父元素继承 box-sizing 属性的值
 
-# 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的
+## 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的
 
 标准盒子模型：宽度=内容的宽度（content）+ border + padding + margin
 低版本IE盒子模型：宽度=内容宽度（content+border+padding）+ margin
 
-# nth-child与nth-of-type区别
+## nth-child与nth-of-type区别
 
 ```css
 .product-list .item:nth-child(2n) {
@@ -206,7 +207,7 @@ inherit:   应从父元素继承 box-sizing 属性的值
 > :nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，**不论元素的类型**。
 > :nth-of-type(n) 选择器匹配属于父元素的特定类型的第 N 个子元素的每个元素.
 
-# justify-content设置居左
+## justify-content设置居左
 
 CSS语法:
 `justify-content: flex-start|flex-end|center|space-between|space-around|initial|inherit;`
@@ -214,14 +215,14 @@ CSS语法:
 默认值为flex-start, 如果要居左可以设置这个值，
 > 注意：设置left不生效，因为没有left这个值。
 
-# css换行
+## css换行
 
 ```css
 word-break: break-all;
 word-break: break-word;
 ```
 
-# max-width 和 !important
+## max-width 和 !important
 
 max-width在比width小时，即使width使用!important来加权，仍会max-width生效；
 
@@ -259,7 +260,8 @@ overflow:visible妙用
 
 body/html 与滚动条
 
-    无论什么浏览器，默认滚动条均来自<html>，而不是<body>
+无论什么浏览器，默认滚动条均来自`<html>`，而不是`<body>`
+
 ie7- html{overflow-y:scroll;}
 ie8+  html{overflow:auto;}
 
@@ -441,18 +443,27 @@ ul<
 div<
 
 CSS：
+
+```css
 # layout{border:1px solid #333;}
+```
+
 ul{list-style:none;}
 代码非常简单，仅去除了ul的列表圆点。看下在IE和Firefox的预览效果：
 IE预览结果：
 Firefox预览结果：
 显示都很正常，关键在于我们对ul接下来的设置：
 修改后的CSS：
+
+```css
 # layout{border:1px solid #333;}
+
 ul{
     list-style:none;
     margin-left:0px;
 }
+```
+
 设置ul左外边距为0后。
 IE预览结果：
 
@@ -460,11 +471,16 @@ Firefox预览结果：
 
 预览后发现问题出现了。IE中的ul已与div靠齐，而Firefox中的ul却丝毫不动。这是为什么？不妨把样式修改下再看看。
 修改后的CSS：
+
+```css
 # layout{border:1px solid #333;}
+
 ul{
     list-style:none;
     padding-left:0px;
 }
+```
+
 这次我们把margin-left换成padding-left。再来看看预览结果。
 IE预览结果：
 
@@ -480,18 +496,24 @@ HTML：
 < span>div id="mydiv"<段落div<
 CSS：
 
-# left{
+```css
+#left{
+
     float:left;
     border:1px solid #333;
     width:100px;
     height:100px;
 }
-# mydiv{
+
+#mydiv{
+
     border:1px solid #f66;
     margin-left:130px;
 }
+```
 
-# left是引发Bug的一个浮动div，同时设置了边框便于观察。
+## left是引发Bug的一个浮动div，同时设置了边框便于观察
+
 IE预览结果：
 
 Firefox预览结果：
@@ -501,17 +523,22 @@ Firefox预览结果：
 是把#mydiv设置为display:inline-block。
 修改后CSS：
 
-# left{
+```css
+#left{
+
     float:left;
     border:1px solid #333;
     width:100px;
     height:100px;
 }
-# mydiv{
+
+#mydiv{
+
     border:1px solid #f66;
     margin-left:130px;
     +display:inline-block;
 }
+```
 
 用hack方法为IE单独设置display:inline-block后。
 IE各版本预览结果：
@@ -524,14 +551,19 @@ HTML：
 div<
 CSS：
 
-# box{
+```css
+#box{
+
     background-color:#eee;
 }
-# box p{
+
+#box p{
+
     margin-top:20px;
     margin-bottom:20px;
     text-align:center;
 }
+```
 
 看看代码做了什么，除了背景之外，#box仅是一个没有任何样式的div，而p加了2个关键属性margin-top:20px，margin-bottom:20px;，即上下外边距都是20px，p对象的高度应当是20+20+文字高度，即应当在40px以上。理论上#box这个div的高度会被挤开，至少达到40px以上。我们看看预览效果。
 浏览器预览结果：
@@ -545,10 +577,14 @@ div<
 < span>div class="box2"<downdiv<
 修改后的CSS：
 
-# box{
+```css
+#box{
+
     background-color:#eee;
 }
-# box p{
+
+#box p{
+
     margin-top:20px;
     margin-bottom:20px;
     text-align:center;
@@ -556,6 +592,7 @@ div<
 .box2{
     background-color:#aaa;
 }
+```
 
 再来看下预览结果：
 浏览器预览结果：
@@ -594,12 +631,16 @@ div<
 XHTML代码有三部分组成，一个是主对象#layout，主框架中有#left为左浮动对象，右侧为普通的4个链接，类似于左右分栏的布局。
 CSS：
 
+```css
 # layout{
+
     border:5px solid #35BB0C;
     width:400px;
     background-color:#F2F2F2;
 }
+
 # left{
+
     border:5px solid #D4CA25;
     width:200px;
     float:left;
@@ -608,6 +649,7 @@ CSS：
 a:hover{
     background-color:#fff;
 }
+```
 
 在CSS代码部分，主要设置了链接的背景色，#left的左浮动，以便于我们观察的粗边框效果。先通过浏览器看看问题是如何发生的，见下图：
 IE6预览效果：
@@ -642,14 +684,19 @@ HTML：
 div<
 CSS：
 
+```css
 # divGroup{
+
     border:2px solid #333;
 }
+
 # a,#b{
+
     border:2px solid #333;
     float:left;
     margin:5px;
 }
+```
 
 IE预览结果：
 
@@ -712,7 +759,7 @@ min-height:200px;
 $(document).ready(function(){     $("div[class='cover']").height($(document).height());//将可见区域都遮罩起来      $("div[class='confirm']").css("left",($(document).width()-($("div[class='confirm']").width()))/2+"px");//提示层居中});
 最佳实践：
 1.写DTD声明：
-DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "<http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"<>
+<!DOCTYPE html>
 2.引入base.css重置各浏览器默认属性值：
 
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0px;padding:0px;}table{border-collapse:collapse;border-spacing:0px;}fieldset,img,abbr,acronym{border:0px;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}
