@@ -10,6 +10,7 @@ Chrome 有丰富的插件, 可以扩展出很多功能, 提高我们的工作效
 ## [沙拉查词](https://saladict.crimx.com/)
 
 hrome 中最好的一款翻译插件, chrome 应用商店该插件下的好评如潮.
+在设置里关闭---默认用本扩展浏览 PDF
 
 ## Full Page Screen Capture (全网页截屏)
 

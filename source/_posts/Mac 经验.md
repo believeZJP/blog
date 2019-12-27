@@ -11,6 +11,11 @@ tags: mac
 
 记录日常经验
 
+## keyboard键盘设置
+
+按command+空格或用Alfred搜keyboard, 打开键盘设置窗口
+把按键重复和重复前延迟调到最快，可提升打字效率
+
 ## 窗口平铺工具
 
 [Magnet](https://itunes.apple.com/cn/app/magnet/id441258766?mt=12&ign-mpt=uo%3D4)

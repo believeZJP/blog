@@ -7,12 +7,12 @@ tags: hexo
 
 [toc]
 
-# hexo 搭建
+## hexo 搭建
 
 1. [HEXO 官网](https://hexo.io/zh-cn/docs/)
 2. [文档](https://hexo.io/zh-cn/docs/)
 
-# 安装
+## 安装
 
 1. node.js git 已经安装，跳过
 2. hexo 安装
@@ -41,7 +41,7 @@ hexo server
 
 <!-- more -->
 
-# 安装 hexo-admin
+## 安装 hexo-admin
 
 ```bash
 npm install --save hexo-admin
@@ -49,21 +49,21 @@ hexo server -d
 open http://localhost:4000/admin
 ```
 
-# 安装 next 主题
+## 安装 next 主题
 
 1. 在根目录运行
 
-```bash
- git clone https://github.com/theme-next/hexo-theme-next themes/next
-```
+    ```bash
+    git clone https://github.com/theme-next/hexo-theme-next themes/next
+    ```
 
-会在 themes 目录下创建 next 文件夹
+    会在 themes 目录下创建 next 文件夹
 
-(需运行多次才能顺利下载)
+    (需运行多次才能顺利下载)
 
 2. 在根目录的\_config.yml 里配置 themes: next
 
-# 发布到 github
+## 发布到 github
 
 需先安装插件
 
@@ -85,7 +85,7 @@ deploy:
 
 配置完成运行
 
-```
+```bash
 hexo clean
 hexo d -g
 ```
@@ -96,39 +96,39 @@ hexo d -g
 如果没有权限，需要将本地的 id_rsa.pub 里的 key 加到 github 的 SSH key 中
 查看本地的 key
 
-```
+```bash
 less  ~/.ssh/id_rsa.pub
 ```
 
 githubSSH keys 地址[快捷地址](https://github.com/settings/ssh), 添加 SSH key 值
 
-# 打赏设置
+## 打赏设置
 
 将二维码图片放到主题 source/images 下面
 打开主题目录下面的配置文件\_config.yml
 这里的配置项可能每个主题不一样。
 根据每个主题自己配置。
 
-```
-# 打赏文字提示
+```bash
+## 打赏文字提示
 reward_comment: '扫码送礼, 走起~~~'
-# 微信收款图片
+## 微信收款图片
 wechatpay: /images/wechatpay.jpeg
-# 支付宝收款图片
+## 支付宝收款图片
 alipay: /images/alipay.jpeg
-# 比特币收款
+## 比特币收款
 #bitcoin: /images/bitcoin.png
 ```
 
-# 新建文章
+## 新建文章
 
-```
+```bash
 hexo new "标题"
 ```
 
 在 \_posts 目录下会生成文件标题.md, 如下:
 
-```
+```md
 title: '标题'
 date: 2018-11-04 10:17:16 #发表日期，一般不改动
 categories: hexo #文章文类
@@ -140,11 +140,11 @@ tags: [hexo,github] #文章标签，多于一项时用这种格式
 
 编辑完后保存，hexo server，浏览器输入 localhost:4000 预览
 
-# 添加阅读全文隔断
+## 添加阅读全文隔断
 
 默认文章列表页是全部展示, 只展示部分的话，可以在文章中加入
 
-```
+```md
 
 <!-- more -->
 
@@ -152,20 +152,20 @@ tags: [hexo,github] #文章标签，多于一项时用这种格式
 
 会自动隔断，添加阅读全文按钮。(注意, 是在文章列表页有阅读全文按钮)
 
-# 展示摘要
+## 展示摘要
 
-# 字数统计和阅读时长
+## 字数统计和阅读时长
 
 1. 安装 hexo-wordcount
 
-```
+```bash
  npm install hexo-symbols-count-time --save
 ```
 
 文件配置
 在根目录的\_config.yml 中添加如下配置(注意格式一定要准确无误):
 
-```
+```md
 symbols_count_time:
   symbols: true
   time: true
@@ -175,7 +175,7 @@ symbols_count_time:
 
 在 next 主题的配置文件中查看如下配置是否启用
 
-```
+```md
 symbols_count_time:
   separated_meta: true
   item_text_post: true
@@ -187,7 +187,7 @@ symbols_count_time:
 重启服务, 刷新页面, 可以看到效果。
 这个只针对文章详情页才会展示。列表页不会展示。
 
-# 展示总访问量
+## 展示总访问量
 
 [不蒜子 - 极简网页计数器](http://busuanzi.ibruce.info/)
 
@@ -206,12 +206,12 @@ symbols_count_time:
 
 即可在首页末尾看到总数，因为本地是 localhost:4000,所以数量有误
 
-# 修改 footer 内容
+## 修改 footer 内容
 
 next 主题默认会有由 next 强力驱动等文字。不喜欢可以去掉, 配置方法:
 在目录 themes/next/\_config.yml 中搜 footer:, 将 copyright 中的 powered, 如下配置。即可去掉。
 
-```
+```yml
   copyright:
   powered:
     enable: false
@@ -222,7 +222,7 @@ next 主题默认会有由 next 强力驱动等文字。不喜欢可以去掉, �
     version: false
 ```
 
-## 网站运行时间添加
+### 网站运行时间添加
 
 根据目录 themes/next/layout/\_partials/footer.swig, 找到页脚配置文件。
 在末尾添加
@@ -249,29 +249,29 @@ setInterval("createtime()",250);
 
 ```
 
-# leancloud 阅读统计功能
+## leancloud 阅读统计功能
 
 1. [注册 leancloud](https://leancloud.cn/dashboard/login.html#/signup)
 2. 登录后创建应用,点击设置-应用 key, 查看 app ID 和 app Key
 3. 在 next/\_config.yml 中搜索`leancloud_visitors`配置 ID 和 Key
 
-```
-leancloud_visitors:
-  enable: true
-  app_id: #<app_id>
-  app_key: #<app_key>
-```
+    ```yml
+    leancloud_visitors:
+      enable: true
+      app_id: #<app_id>
+      app_key: #<app_key>
+    ```
 
 4. 创建 Class
-   在左侧点击存储，创建一个名为 Counter 的 Class 文件，这里的名称一定为 Counter 不能随意取！！！
-   权限设置要选无限制, 否则在第二次访问会报错。
-   设置完后，回到我的博客，随便点击一篇博文，刷新几次 就可以在 leancloud–》存储–》Counter 看到我们的浏览记录了，在我们的博文副标题也可以看到浏览记录。
+  在左侧点击存储，创建一个名为 Counter 的 Class 文件，这里的名称一定为 Counter 不能随意取！！！
+  权限设置要选无限制, 否则在第二次访问会报错。
+  设置完后，回到我的博客，随便点击一篇博文，刷新几次 就可以在 leancloud–》存储–》Counter 看到我们的浏览记录了，在我们的博文副标题也可以看到浏览记录。
 
-# hexo 新建目录，page, 标签, 分类, 关于
+## hexo 新建目录，page, 标签, 分类, 关于
 
 在主题的\_config.yml 中打开配置
 
-```
+```yml
 menu:
   home: / || home
   about: /about/ || user
@@ -291,7 +291,7 @@ menu:
 访问标签页, 新页面可以正常访问
 在 source/tags/index.md 中如下设置, 即可看到标签分类(前提:在文章中需添加 tags)
 
-```
+```md
 ---
 title: tags
 date: 2018-11-06 16:55:49
@@ -302,13 +302,13 @@ layout: "tags"
 
 ## 分类
 
-```
+```bash
 hexo new page categories
 ```
 
 在 source/categories/index.md 中添加如下
 
-```
+```md
 ---
 title: categories
 date: 2018-11-06 17:11:29
@@ -319,7 +319,7 @@ layout: "categories"
 
 文章中多个 tag 时，如下配置
 
-```
+```md
 tags:
     - http
     - 网络
@@ -327,23 +327,23 @@ tags:
 
 单个
 
-```
+```md
 tags: 网络
 ```
 
 ## 关于
 
-```
+```bash
 hexo new page about
 ```
 
 在 source/about/index.md 写个人信息
 
-# 添加社交链接
+## 添加社交链接
 
 在主题配置文件中搜索 social:
 
-```
+```yml
 social:
   GitHub: https://github.com/believeZJP || github
   微博: https://weibo.com/u/6021664425 || weibo
@@ -352,7 +352,7 @@ social:
 
 图标配置：
 
-```
+```yml
 social_icons:
   enable: true
   icons_only: true
@@ -367,22 +367,22 @@ social_icons:
 默认显示文字和图标, 如果只显示图标可设置
 icons_only: true
 
-# 站内搜索
+## 站内搜索
 
-```
+```bash
 npm install hexo-generator-searchdb --save
 ```
 
 在主题 next/\_config.yml 中配置
 
-```
+```yml
 local_search:
   enable: true
 ```
 
 在全局配置中\_config.yml 添加
 
-```
+```yml
 search:
   path: search.xml
   field: post
@@ -406,7 +406,7 @@ search:
 - 用 vim 编辑器查看特殊字符一目了然
   常见的特殊字符`^H, .(灰色)`
 
-# 来必力评论
+## 来必力评论
 
 <https://www.livere.com/一定要用这个注册,> 中文版(<http://www.laibili.com.cn/)失效！！！！>
 注册完成后, 填写相应信息, 即可获取到 data-uid.
@@ -416,7 +416,7 @@ next/\_config.yml 中搜索`livere_uid`, 填入对应 data-uid
 livere_uid: fsdfs343==
 一定不要加任何引号~~~~~~~(🕳🕳🕳🕳🕳)
 
-# 本地图片添加
+## 本地图片添加
 
 1. 在\_config.yml 中搜索`post_asset_folder`, 设为 true
 2. 在 source 文件夹下创建文件夹 img
@@ -430,7 +430,7 @@ livere_uid: fsdfs343==
 
 注意: 这里一定要用绝对路径, 因为图片在根目录下
 
-## 不用根目录的图片添加
+### 不用根目录的图片添加
 
 用`hexo n '文章标题'`创建文章后，会生成与文章标题相同的文件夹，可以把图片放到对应文件夹中
 在md中引用方式
@@ -440,11 +440,11 @@ livere_uid: fsdfs343==
 ![设置百度内容](/posts/Alfred/addbaidu-input.png)
 ```
 
-# 部署命令简化
+## 部署命令简化
 
 在 package.json 中添加
 
-```
+```json
 "scripts": {
   "d": "hexo clean && hexo g -d",
   "s": "hexo clean && hexo g && hexo s"
@@ -457,13 +457,13 @@ livere_uid: fsdfs343==
 
 [好的链接](https://blog.csdn.net/qq_35561857/article/details/81590953)
 
-# 百度统计
+## 百度统计
 
 在 next/\_config.yml 中搜索 baidu_analytics, 配置 id
 
 在[官网](https://tongji.baidu.com/),新建应用，点击管理，复制 id
 
-```
+```html
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -472,11 +472,11 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0];
 ```
 
-# 添加头像
+## 添加头像
 
 在 next/config.yml 里搜 avatar,如下配置, 图片链接可更换
 
-```
+```yml
 avatar:
   url: /images/avatar.gif
   rounded: true
@@ -484,15 +484,15 @@ avatar:
   rotated: true
 ```
 
-# 添加缓存
+## 添加缓存
 
 [hexo-offline](https://www.npmjs.com/package/hexo-offline)
 
-```
+```bash
 npm i hexo-offline --save
 ```
 
-# 修改默认的文章链接
+## 修改默认的文章链接
 
 [官方文档](https://hexo.io/zh-cn/docs/permalinks.html)
 
@@ -505,7 +505,7 @@ npm i hexo-offline --save
 在\_config.yml 中搜索`permalink`,修改如下
 
 ```JavaScript
-# permalink: :year/:month/:day/:title/
+## permalink: :year/:month/:day/:title/
 permalink: :category/:title/
 ```
 
@@ -517,13 +517,13 @@ default_category: posts
 
 重启服务即可
 
-# 绑定自己域名
+## 绑定自己域名
 
 在阿里云控制台域名修改域名解析，记录类型 CNAME, 记录纸为 believezjp.github.io
 
 在 hexo 项目下，source 文件夹下面创建 CNAME 文件（没有后缀名的），在里面写上购买的域名。
 
-```
+```cname
 believezjp.oriht.com
 ```
 
@@ -533,7 +533,7 @@ believezjp.oriht.com
 
 详见:[参考链接](https://blog.csdn.net/wgshun616/article/details/81019739)
 
-# 替换 jquery 资源库地址
+## 替换 jquery 资源库地址
 
 在主题目录下找到 after-footer.ejs 文件，PS：主题目录指的是 themes 下 next 目录
 
@@ -549,15 +549,15 @@ believezjp.oriht.com
 <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
 ```
 
-# 项目添加 changelog❌
+## 项目添加 changelog❌
 
-```
+```bash
 npm install --save conventional-changelog
 
 conventional-changelog -p angular -i CHANGELOG.md -w -r 0
 ```
 
-# 项目添加git commit 规范
+## 项目添加git commit 规范
 
 [插件链接](https://github.com/marionebl/commitlint)
 
@@ -566,8 +566,8 @@ npm install --save-dev @commitlint/{cli,config-conventional}
 echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 npm install --save-dev husky
 
-# 在package.json中配置
-# package.json
+## 在package.json中配置
+## package.json
 {
   "husky": {
     "hooks": {
@@ -580,13 +580,13 @@ npm install --save-dev husky
 提交方式：
 
 格式：
-> type(scope?): subject  # scope 可选
+> type(scope?): subject  ## scope 可选
 
 subject是 commit 目的的简短描述，不超过50个字符，且结尾不加句号（.）
 
 eg:
 
-```
+```js
 chore: run tests on travis ci
 fix(server): send cors headers
 feat(blog): add comment section
@@ -608,7 +608,7 @@ feat(blog): add comment section
 - wip：移除文件或者代码
 - chore：不属于以上类型的其他类型
 
-# 生成changelog
+## 生成changelog
 
 Change log 就可以用脚本自动生成。生成的文档包括以下三个部分：
 
@@ -640,7 +640,7 @@ conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0
 npm run changelog
 ```
 
-# 新建草稿
+## 新建草稿
 
 草稿相当于很多博客都有的“私密文章”功能。
 `hexo new draft "new draft"`
@@ -657,11 +657,11 @@ filename为不包含md后缀的文章名称。它的原理只是将文章从 sou
 
 > 若日后想将正式文章转为为草稿，只需手动将文章从 source/_posts 目录移动到 source/_drafts 目录即可。
 
-# hexo 命令
+## hexo 命令
 
 常用命令
 
-```
+```bash
 hexo help #查看帮助
 hexo init #初始化一个目录
 hexo new "postName" #新建文章
@@ -681,7 +681,9 @@ hexo s == hexo server
 hexo d == hexo deploy
 ```
 
-# 参考文章
+## Hexo博客收录百度和谷歌-基于Next主题
+
+## 参考文章
 
 [Hexo 进阶高级教程](http://tigerliu.site/2017/06/hexo-1/)
 [Hexo+Github: 个人博客网站搭建完全教程](https://www.cnblogs.com/shwee/p/11421156.html)
