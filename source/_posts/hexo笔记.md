@@ -22,6 +22,10 @@ npm install -g hexo-cli
 ```
 
 <!-- more  -->
+```html
+
+不能在文章中有{{}},否则hexo无法见解析，会报错
+```
 
 运行
 

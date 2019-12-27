@@ -678,7 +678,7 @@ store.dispatch('increment')
 
 其他方式 不留痕迹
 
-```
+```html
 一、router.push(location, onComplete?, onAbort?)
 
 <router-link :to="..."> router.push(...)
@@ -710,7 +710,7 @@ router.push({ path: 'register', query: { plan: 'private' }})
 
 # vue-router传参方式
 
-```
+```js
 query 和params
  { path: '/news/:id', component: NewsDetail },
       <span>{{$route.params.id}}</span>

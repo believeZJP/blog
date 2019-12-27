@@ -130,7 +130,9 @@ this.props.form.setFieldsValue({
 
  一个页面多个form，点击每个form的提交，其他form的字段会跟着提交
 
-Form的FormItem如果是rangePicker，则设置style={{width:100%}}，可以让输入框响应容器
+```js
+Form的FormItem如果是rangePicker，则设置`style={{width:100%}}`，可以让输入框响应容器
+```
 
 Form的label和input输入框的宽度通过调节labelCol，wrapperCol
 来设置，总长度为24
@@ -138,7 +140,8 @@ Form的label和input输入框的宽度通过调节labelCol，wrapperCol
 啊啊啊啊大经验啊！！！！
 
 nginx的proxy配置一定要前后路径一致
-    'POST /coupon/v1/(.*)': '<http://10.64.38.89:8081/coupon/v1/',>
+
+`'POST /coupon/v1/(.*)': '<http://10.64.38.89:8081/coupon/v1/',>`
 
 前面是coupon/v1后面也一定是coupon/v1,
 不能前面是coupon 后面是coupon/v1

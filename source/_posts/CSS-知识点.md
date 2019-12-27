@@ -33,6 +33,7 @@ tags:
 - **解释代码**：用注释和详细的文档来
 
 <!--more-->
+
 用`overflow: auto` 必须给容器指定高度`height: 固定值`
 
 ## 页面首次加载动画展示
@@ -283,7 +284,11 @@ overflow的padding-bottom缺失现象
 1.怪异模式问题：漏写DTD声明，Firefox仍然会按照标准模式来解析网页，但在IE中会触发怪异模式。为避免怪异模式给我们带来不必要的麻烦，最好养成书写DTD声明的好习惯。
 2.IE6双边距问题：在IE6下，如果对元素设置了浮动，同时又设置了margin-left或margin-right，margin值会加倍。例如：
 HTML：
+
+```html
 < span>div class="myDiv"<div<
+```
+
 CSS：
 
 .myDiv{
@@ -311,8 +316,12 @@ IE6预览结果：
 IE6预览结果：
 3.上下margin重合：margin是个有点特殊的样式，相邻的margin-left和margin-right是不会重合的，但相邻的margin-top和margin-bottom会产生重合。不管IE还是Firefox都存在这问题。例如：
 HTML：
+
+```html
 < span>div class="topDiv"<div<
 < span>div class="bottomDiv"<div<
+```
+
 CSS：
 
 .topDiv{
@@ -368,8 +377,7 @@ max-height: 除 “none" 之外的任意值
 如果BUG是hasLayout被自动触发而引起的，则要看触发是什么引起的，若这元素本身就会自动触发hasLayout，可以考虑换一个元素。若是对于这元素设置的某个CSS属性引起的，则可以考虑删除这属性，倘若这属性又是必要的，则就需要自己根据具体情况去编写CSS Hack，因为hasLayout是只读的，一旦hasLayout="true"后，便不可逆转。
 6.行内元素上下margin及padding不拉开元素间距的问题：行内元素的margin和padding属性很奇怪，水平方向的padding-left、padding-right、margin-left、margin-right都产生边距效果，但竖直方向的padding-top、padding-bottom、margin-top、margin-bottom却不会产生边距效果。例如：
 HTML：
-< span>div<块级元素div<
-< span>span<行内元素span<
+
 CSS:
 div{background:gray;padding:20px;}
 span{background:green;padding:20px;margin:20px;}
@@ -383,10 +391,10 @@ span{background:green;padding:20px;margin:20px;display:block;}
 但由于块级元素与行内元素的默认样式不同，可能会因此书写额外的样式代码。比如width样式，因为块级元素默认占据整行。
 7.IE6下select元素显示问题：浏览器解析页面时，会先判断元素的类型，如果是窗口类型的，会优先于非窗口类型的元素，显示在页面最顶端，如果同属于非窗口类型的，才会去判断z-index的大小。select元素在IE6下是以窗口形式显示的，这是IE6的一个Bug。导致的情况是往往想要弹出一个层，结果select元素出现在层上方。例如：
 HTML：
-< span>select<< span>option<=请选择=option<select<
-< span>div<div<
+
 CSS：
 
+```css
 div{
     position:absolute;
     background:#CCDCEE;
@@ -397,14 +405,13 @@ div{
     border:1px solid #000;
     margin:5px;
 }
+```
 
 IE6预览结果：
 解决问题：
 我们可以用一个和弹出层同样大小的iframe放在层下面，select上面，用iframe遮住select。比如设置弹出层的样式z-index:2，iframe的样式z-index:1，使iframe位于层下方。
 修改后HTML：
-< span>select<< span>option<=请选择=option<select<
-< span>div<div<
-< span>iframe src="xx.htm"<iframe<
+
 修改后CSS：
 
 div{
@@ -433,14 +440,6 @@ IE6预览结果：
 8.IE6对png的透明度支持问题：png格式因为其优秀的压缩算法和对透明度的完美支持，成为Web中最流行的图片格式之一。但它存在一个众所周知的头疼问题---IE6下对png的透明度支持并不好。本该是透明的地方，在IE6下会显示为浅蓝色。可以使用IE下私有的滤镜功能来解决问题，格式如下：filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='png图片路径',sizingMethod='crop')。
 9.ul的不同表现：ul列表也是在IE与Firefox中容易发生问题的对象，主要源自浏览器对ul对象的默认值设置。在IE与Firefox中，一部分对象有默认的属性（比如h1~h6），他们本身就带有大字号、加粗样式以及一些边距效果。ul也是如此，默认情况下ul是有边距的。例如：
 HTML：
-
-< span>div id="layout"<
-< span>ul<
-< span>li<菜单一li<
-< span>li<菜单二li<
-< span>li<菜单三li<
-ul<
-div<
 
 CSS：
 
@@ -473,7 +472,7 @@ Firefox预览结果：
 修改后的CSS：
 
 ```css
-# layout{border:1px solid #333;}
+#layout{border:1px solid #333;}
 
 ul{
     list-style:none;
@@ -492,8 +491,12 @@ Firefox预览结果：
 可以用hack方法分别针对IE和Firefox单独写样式，但更好的做法是样式开头先统一ul边距，ul{padding:0px;margin:0px;}。
 10.IE3px问题：3px问题不是经常被人发现，因为它的影响只产生3px的位移。如果是精确到像素级的设计，3px的影响可谓不小。先来看下例子：
 HTML：
-< span>div id="left"<左浮动divdiv<
-< span>div id="mydiv"<段落div<
+
+```html
+<div id="left">左浮动div</div>
+<div id="mydiv">段落div</div>
+```
+
 CSS：
 
 ```css
@@ -546,9 +549,6 @@ IE各版本预览结果：
 结果与Firefox一致。
 11.高度不适应问题：高度不适应指的是，当内层对象的高度发生变化时，外层对象的高度不能自动扩展，特别是当内层对象使用padding或margin之后。高度不适应问题不是IE的专利，Firefox也出现这种问题。先来看看例子：
 HTML：
-< span>div id="box"<
-< span>p<p对象中的内容p<
-div<
 CSS：
 
 ```css
@@ -570,11 +570,6 @@ CSS：
 
 似乎并非预想的结果，看上去带背景的#box还是和文字一样高，并没有超过40px，这是为什么呢？为了验证一些事情，我们在html前后加上一个带背景的div。
 修改后的HTML：
-< span>div class="box2"<updiv<
-< span>div id="box"<
-< span>p<p对象中的内容p<
-div<
-< span>div class="box2"<downdiv<
 修改后的CSS：
 
 ```css
@@ -603,30 +598,11 @@ div<
 经过一些测试，我们发现对#box定义padding或者border，就会迫使#box重新计算自己的高度，从而使自身能够适应内容的高度变化。但如果强制给对象设置了边距又会带来位移。我们需要找到一个新方法，不再从对象本身的属性入手，而是在对象的内部进行修复。我们可以在对象上下增加2个高度为0的空div，并强制内容不显示。
 修改后的HTML：
 
-< span>div class="box2"<updiv<
-< span>div id="box"<
-< span>div style="height:0px;overflow:hidden"<div<
-< span>p<p对象中的内容p<
-< span>div style="height:0px;overflow:hidden"<div<
-div<
-< span>div class="box2"<downdiv<
-
 这2个div只充当了占位符的角色，而不发生实际的占位。而对它的外层对象而言，由于其中多了一些逻辑占位对象使得它会重新计算高度，从而实现高度的自适应。
 预览效果：
 
 12.IE6断头台问题：断头台问题是国外的CSS设计者给这个问题起的一个非常形象的名字，与之相反的，被切断的不是对象的头部，而是对象的底部。先来看下例子：
 HTML：
-
-< span>div id="layout"<
-< span>div id="left"<
-< span>p<W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的使用条款和隐私条款。版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任
-p<
-div<
-< span>a href="#"<链接1a<< span>br/<
-< span>a href="#"<链接2a<< span>br/<
-< span>a href="#"<链接3a<< span>br/<
-< span>a href="#"<链接4a<
-div<
 
 XHTML代码有三部分组成，一个是主对象#layout，主框架中有#left为左浮动对象，右侧为普通的4个链接，类似于左右分栏的布局。
 CSS：
@@ -660,28 +636,12 @@ IE6预览效果：
 解决问题：
 根据问题产生的原因，我们可以做出多套解决方案。我们知道因为非浮动对象与浮动对象都在#layout中，所以我们可以从浮动方式入手，把非浮动对象改为浮动对象，这样便可以解决问题。例如对XHTML修改如下：
 
-< span>div id="layout"<
-< span>div id="left"<
-< span>p<W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的使用条款和隐私条款。版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任
-p<
-div<
-< span>div id="right"<
-< span>a href="#"<链接1a<< span>br/<
-< span>a href="#"<链接2a<< span>br/<
-< span>a href="#"<链接3a<< span>br/<
-< span>a href="#"<链接4a<
-div<
-div<
-
 对链接加上个div，并设置浮动#right{float:left}。这样使得两个对象都成为浮动对象，不会引发问题。
 也可以在#layout底部增加一个div来强制IE浏览器重新计算高度
 ，这个清除浮动内容的div会帮助浏览器重新找到合适的高度，从而解决断头台问题。
 13.容器不扩展问题：容器不扩展问题是我们经常遇到的。比如我们创建了一个div嵌套结构:
 HTML：
-< span>div id="divGroup"<
-< span>div id="a"<子容器adiv<
-< span>div id="b"<子容器bdiv<
-div<
+
 CSS：
 
 ```css
@@ -706,11 +666,8 @@ Firefox预览结果：
 解决问题：
 解决方案是在容器的末尾加入个清理浮动的div。
 修改后的HTML：
-< span>div id="divGroup"<
-< span>div id="a"<子容器adiv<
-< span>div id="b"<子容器bdiv<
-< span>div style="clear:both;"<div<
-div<
+
+
 如果还想防止这个元素占据父元素的高度，可以进一步优化成
 
 ，这样这个清除浮动的容器被认为是个不占任何高度的空格字符。在网页中的任何地方，当遇到容器不扩展时，只需加入此段便能修复问题。
@@ -759,7 +716,7 @@ min-height:200px;
 $(document).ready(function(){     $("div[class='cover']").height($(document).height());//将可见区域都遮罩起来      $("div[class='confirm']").css("left",($(document).width()-($("div[class='confirm']").width()))/2+"px");//提示层居中});
 最佳实践：
 1.写DTD声明：
-<!DOCTYPE html>
+`<!DOCTYPE html>`
 2.引入base.css重置各浏览器默认属性值：
 
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0px;padding:0px;}table{border-collapse:collapse;border-spacing:0px;}fieldset,img,abbr,acronym{border:0px;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}

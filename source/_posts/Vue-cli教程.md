@@ -466,7 +466,7 @@ export default new Router({
 
 这个文件就是我们在第一节课看到的页面文件了。也是分为<template><script><style>三个部分，以后我们大部分的工作都是写这些.vue结尾的文件。现在我们可以试着改一些内容，然后预览一下。
 
-```
+```html
     <template>
       <div class="hello">
         <h1>{{ msg }}</h1>
