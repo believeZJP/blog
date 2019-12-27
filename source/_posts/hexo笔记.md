@@ -683,6 +683,8 @@ hexo d == hexo deploy
 
 ## Hexo博客收录百度和谷歌-基于Next主题
 
+[参考链接](https://www.jianshu.com/p/8c0707ce5da4)
+
 ## 参考文章
 
 [Hexo 进阶高级教程](http://tigerliu.site/2017/06/hexo-1/)
