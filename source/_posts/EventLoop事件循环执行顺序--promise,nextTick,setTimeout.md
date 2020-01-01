@@ -1,5 +1,5 @@
 ---
-title: 'promise,nextTick,setTimeout,EventLoop事件循环执行顺序'
+title: 'EventLoop事件循环执行顺序--promise,nextTick,setTimeout'
 date: 2020-01-01 16:37:16
 updated: 2020-01-01 16:37:16
 tags:
@@ -45,6 +45,8 @@ new Promise(function(resolve){
 })
 console.log('script end')
 ```
+
+<!-- more -->
 
 面试题正确的输出结果
 
