@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - '8'
+
+branches:
+  only:
+  - master
+
+before_install:
+- git config --global user.name "believeZJP"
+- git config --global user.email "1811886228@qq.com"
+- sed -i'' "s~https://github.com/believeZJP/believeZJP.github.io.git~https://${ACCESS_TOKEN}@github.com/believeZJP/believeZJP.github.io.git~" _config.yml
+
+install:
+- npm install hexo-cli -g
+- npm install
+
+script:
+- npm run d

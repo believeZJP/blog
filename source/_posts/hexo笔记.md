@@ -681,6 +681,13 @@ hexo s == hexo server
 hexo d == hexo deploy
 ```
 
+## git push以后自动发布到gitHub上
+
+使用Travis 自动化部署Hexo Blog
+
+1. 添加.travis.yml
+2. 配置token
+
 ## Hexo博客收录百度和谷歌-基于Next主题
 
 [参考链接](https://www.jianshu.com/p/8c0707ce5da4)
