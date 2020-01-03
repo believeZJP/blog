@@ -5,12 +5,12 @@ updated: 2018-11-22 20:27:01
 tags:
 ---
 
-# 使用axios在url后统一加参数遇到的问题
+## 使用axios在url后统一加参数遇到的问题
 
 如果是get请求，直接加在url后面
-```javascript
-https://www.baidu.com?a=1&b=2
-```
+
+`https://www.baidu.com?a=1&b=2`
+
 如果要get, post, put都加呢？
 
 ```javascript
