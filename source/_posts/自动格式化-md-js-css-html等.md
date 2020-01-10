@@ -173,7 +173,7 @@ rules: 是对应的详细规则，有些规则查不到的可以先查询报错�
 插件名: [koro1FileHeader](https://github.com/OBKoro1/koro1FileHeader)
 
 在VSCode扩展市场搜索直接安装
-
+**要注意，搜索名字是`koroFileHeader`没有1**
 配置
 
 ```json
