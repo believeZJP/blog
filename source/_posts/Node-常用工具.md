@@ -10,9 +10,9 @@ tags:
 ## supervisor 监听Node改动
 
 [supervisor 官网](http://supervisord.org/)
-是一个进程控制系统：
+是一个进程控制系统
 
-平时，我们 node app.js 后，当我们修改了 app.js 的内容，就需要关闭 node 命令行再执行 node app.js。
+平时，我们 `node app.js` 后，当我们修改了 app.js 的内容，就需要关闭 node 命令行再执行 node app.js。
 而我们使用 supervisor 后，我们修改了 app.js 中的内容，只要点击保存，即可生效保存后的代码，实现实时监听 node 代码的变动。
 
 <!-- more -->
@@ -28,6 +28,7 @@ tags:
 例如：Express4.0中，启动文件位于`./bin/www`，启动时，必须在`./`下执行`supervisor bin/www`
 
 没有任何参数启动服务，默认监控所有文件, 文件夹的变化，一旦有变化，服务就会重启。
+
 这样会出现很多问题：将日志存入某些文件夹，或上传附件等，都会导致服务器文件的变化，必然引起node服务器的重启。
 
 不想监控某些文件夹，可以使用-i参数。如：忽略根目录下的private, 可以这样启动：
@@ -35,7 +36,7 @@ tags:
 忽略多个文件夹，则用`,`隔开
 `supervisor -i ./private,./otherdir myapp`
 
-## 详细介绍
+### 详细介绍
 
 运行：`supervisor`
 
@@ -125,9 +126,8 @@ pm2 start app.js -i max # 根据机器CPU核数，开启对应数目的进程
 
 ## 开机自动启动
 
-1. 通过pm2 save保存当前进程状态。
-2. 通过pm2 startup [platform]生成开机自启动的命令。例如：pm2 startup centeros
-3. 将步骤2生成的命令，粘贴到控制台进行，搞定。
+1. 运行 `pm2 startup`，即在`/etc/init.d/` 目录下生成 `pm2-root` 的启动脚本，且自动将 `pm2-root` 设为服务；
+2. 通过pm2 save保存当前进程状态。
 
 ## 详细介绍pm2
 
@@ -135,3 +135,20 @@ pm2 start app.js -i max # 根据机器CPU核数，开启对应数目的进程
 pm2 -h # help
 pm2 # 语法介绍
 ```
+
+## node版本升级
+
+先清缓存
+安装n模块
+升级到指定版本/最新版本
+
+```bash
+npm cache clean -f
+
+npm install -g n
+
+n stable
+```
+
+安装完成后，查看Node的版本
+`node -v`
