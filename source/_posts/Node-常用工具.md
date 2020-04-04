@@ -124,6 +124,14 @@ pm2 start app.js -i 3 # 开启三个进程
 pm2 start app.js -i max # 根据机器CPU核数，开启对应数目的进程
 ```
 
+## 查看日志
+
+`pm2 logs`
+
+## 查看监控
+
+`pm2 monit`
+
 ## 开机自动启动
 
 1. 运行 `pm2 startup`，即在`/etc/init.d/` 目录下生成 `pm2-root` 的启动脚本，且自动将 `pm2-root` 设为服务；
