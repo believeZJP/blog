@@ -11,6 +11,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "conventional-changelog": "^3.0.5",
     "hexo": "^3.8.0",
     "hexo-admin": "^2.3.0",
