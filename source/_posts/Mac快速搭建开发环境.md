@@ -18,6 +18,8 @@ mkdir /Users/zjp(此处为电脑用户名)/.ssh
 
 将原来电脑里的 known_hosts，id_rsa.pub， id_rsa放到这个目录下即可 用git命令
 
+<!-- more -->
+
 ## Git 命令快捷方式
 
 bdgp
