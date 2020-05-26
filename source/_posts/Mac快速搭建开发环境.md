@@ -26,7 +26,7 @@ bdgp
 
 在 ~/.oh-my-zsh/plugins/git的 git.plugin.zsh文件末尾添加
 
-```
+```bash
 bdgp() {
  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
  git push origin head:refs/for/"${*}"

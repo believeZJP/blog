@@ -17,19 +17,7 @@ mac 自带的终端实在是差劲，改用 iTerm2 可以 6 到飞起~~~
 
 ## 安装[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
-via curl
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-```
-
-via wget
-
-```bash
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-
-```
+安装方法由于会经常更新，请点击链接跳转查看安装办法
 
 <!--- more --->
 
@@ -54,32 +42,11 @@ ZSH_THEME="ys"
 
 ## 代码高亮([zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md))
 
-```bash
-# 1 安装
-brew install zsh-syntax-highlighting
-# 2 用 vim 打开 .zshrc 文件，找到插件设置命令(快捷键 /plugins=)，默认是 plugins=(git)
-plugins=(zsh-syntax-highlighting git)
-```
+安装方法详见链接
 
 ## 自动提示命令([zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions))
 
-先进到 oh-my-zsh 的 plugins 目录
-
-```bash
-cd .oh-my-zsh/plugins
-
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# 在配置文件中添加plugins
-plugins=(
-  git
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-)
-
-# 执行文件
-source ~/.zshrc
-```
+安装方法详见链接
 
 ## 自动切换目录([autojump](https://github.com/wting/autojump))
 
@@ -140,8 +107,8 @@ brew update
 ```bash
 cd /etc
 sudo pico motd
-control+x
-设置问候语
+输入密码后输入问候语
+
 按control+x退出，按y确认， 按回车确认，
 用 y保存退出，再 y一次确认文件名motd
 ```
