@@ -11,6 +11,12 @@ tags: mac
 
 记录日常经验
 
+## 在 Mac OS X 的 Terminal 上如何修改行首的显示
+
+udo scutil --set HostName username
+
+然后重启terminal
+
 ## keyboard键盘设置
 
 按command+空格或用Alfred搜keyboard, 打开键盘设置窗口
