@@ -12,7 +12,7 @@ tags:
 
 - [SmartGit](https://www.syntevo.com/smartgit/)✨✨✨(开始用的，后来放弃)
 - [Sourcetree](https://www.sourcetreeapp.com/)✨✨✨✨✨(现在用的这个，需要翻墙注册)
-- [GitKraken](https://www.gitkraken.com/) 很好用，可以替代SourceTree, 全平台免费
+- [GitKraken](https://www.gitkraken.com/) 很好用，可以替代SourceTree, 全平台免费(也开始收费了)
 
 <!-- more -->
 
@@ -32,8 +32,6 @@ GitHub默认只有账号绑定的邮箱提交的commits才会展示.
     ```bash
     git config user.email "email@example.com"
     ```
-
-    用smartGit客户端，选择目录-->右键-->setting-->修改用户名，邮箱
 
 ## centos安装git
 
@@ -206,9 +204,11 @@ $ git push -u origin master
 解决办法：
     2.push前先将远程repository修改pull下来
 
+```bash
     git pull origin master
 
     git push -u origin master
+```
 
 添加公钥:
     应将id_rsa.pub中的内容拷贝到文本框中，而不是id_rsa中的！！！！！！！！！！！！！！
@@ -317,7 +317,7 @@ git diff //查看修改的内容
 git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别
 git checkout -- readme.txt    丢弃工作区的修改
 
-    命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
     一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
     一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
     总之，就是让这个文件回到最近一次git commit或git add时的状态。
@@ -347,7 +347,7 @@ git@github.com/believeZJP/believeZJP.github.io.git
 <https://gitcafe.com/believeZJP/believeZJP.git>
 
 git 只克隆一个分支
- git clone -b <branch> <remote_repo>
+ `git clone -b <branch> <remote_repo>`
  eg:      git clone -b gitcafe-pages  git@gitcafe.com:believeZJP/believeZJP.git
 
 --------------切换分支-------------
@@ -557,3 +557,10 @@ git stash pop   //还原暂存的内容
 git 常用插件
 
 1. [commitizen](https://github.com/commitizen/cz-cli) 规范commit message
+
+`git show`
+在当前分支，运行`git show <其他分支名>` k可以查看当前分支与其他分支的diff
+
+`git diff master f_tmp`
+
+可以查看master和f_tmp分支的区别
