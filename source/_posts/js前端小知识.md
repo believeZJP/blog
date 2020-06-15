@@ -467,3 +467,155 @@ result = users.find(ele => {
 ```js
 splice(index, 1)
 ```
+
+## 数组比较
+
+```js
+const arr1 =['a', 'b', 'c'];
+const arr2 =['b', 'c', 'a'];
+console.log(
+    arr1.sort() === arr1,
+    arr2.sort() === arr2,
+    arr1.sort() === arr2.sort()
+);
+// true, true, false
+```
+
+解析:
+
+arr.sort方法对原始数组进行排序，并返回该数组的引用，调用.sort(), 对数组内对象进行排序
+
+当比较对象时，数组的排序顺序并不重要。由于arr1.sort()和arr1指向内存中的同一对象，因此第一个和第二个返回true.
+
+arr1.sort()和arr2.sort()排序顺序相同；但他们指向内存中的不同对象，所以返回false
+
+## 前端实现即时通讯的方式有哪些，并介绍对应的优缺点
+
+### 短轮询
+
+短轮询的原理很简单，每隔一段时间客户端就发出一个请求，去获取服务器最新的数据，一定程度上模拟实现了即时通讯。
+
+优点：兼容性强，实现非常简单
+缺点：延迟性高，非常消耗请求资源，影响性能
+
+### comet
+
+comet有两种主要实现手段， 一种是基于AJAX的长轮询(1ong-polling) 方式， 另一种是基于Iframe及html file的流(streaming) 方式，通常被叫做长连接。
+
+a.长轮询优缺点：
+优点：兼容性好，资源浪费较小
+缺点：服务器hold连接会消耗资源， 返回数据顺序无保证，难于管理维护
+
+b.长连接优缺点：
+优点：兼容性好，消息即时到达，不发无用请求
+缺点：服务器维护长连接消耗资源
+
+### SSE
+
+SSE(Server-Sent Event， 服务端推送事件) 是一种允许服务端向客户端推送新数据的HTML 5技术。
+
+a.优点：基于HTTP而生， 因此不需要太多改造就能使用， 使用方便， 而websocket非常复杂， 必须借
+助成熟的库或框架
+b.缺点：基于文本传输效率没有websocket高， 不是严格的双向通信，客户端向服务端发送请求无法复用之前的连接，需要重新发出独立的请求
+
+### Web socket
+
+Web socket是一个全新的、独立的协议， 基于TCP协议，与http协议兼容、却不会融入http协议， 仅仅作为htmL 5的一部分， 其作用就是在服务器和客户
+端之间建立实时的双向通信。
+a.优点：真正意义上的实时双向通信，性能好，低延迟
+b.缺点：独立与http的协议， 因此需要额外的项目改造，使用复杂度高，必须引入成熟的库，无法兼容低版本浏览器
+
+### Service workers
+
+Service Worker从英文翻译过来就是一个服务工人， (服务于前端页面的后台线程， 基于Web Worker实现。有着独立的js运行环境，分担、协助前端页面完成前端开发者分配的需要在后台悄悄执行的任
+务。基于它可以实现拦截和处理网络请求、消息推送、静默更新、事件同步等服务。
+
+优势及使用场景：
+
+①离线缓存：可以将H5应用中不变化的资源或者很少变化的资源长久的存储在用户端，提升加载速度
+降低流量消耗、降低服务器压力。如中重度的H5游戏、框架数据独立的web资讯客户端、web邮件客户端等
+
+②消息推送：激活沉睡的用户，推送即时消息、公告通知，激发更新等。如web资讯客户端、web即时通讯工具、h5游戏等运营产品。
+
+③事件同步：确保web端产生的任务即使在用户关闭了web页面也可以顺利完成。如web邮件客户端、web即时通讯工具等。
+
+④定时同步：周期性的触发Service Worker脚中的定时同事件，可借助它提前刷新缓存内容。如web资讯客户端。
+
+## 数组push
+
+```js
+function addToList(item, list) {
+    return list.push(item);
+}
+const result = addToList('abc', ['de']);
+console.log(result);
+// 结果是2
+```
+
+push方法返回新数组的长度
+push方法修改原始数组，如果想从函数返回数组而不是数组长度，应该先push，后返回
+
+```js
+list.push(item);
+return list;
+```
+
+## 实现Promise.all
+
+思路
+
+1. 接收一个Promise实例的数组或具有Iterator接口的对象作为参数
+2. 这个方法返回一个新的promise对象
+3. 遍历传入的参数，用promise.resolve()将参数包一层，使其变成一个promise对象
+4. 参数所有回调成功才是成功，返回值数组与参数顺序一致
+5. 参数数组其中一个失败，则触发失败状态，第一个触发失败的Promise错误信息作为Promise.all的错误信息
+
+扩展
+
+一般来说，Promise.all用来处理多个并发请求，也是为了页面数据构造的方便，将一个页面所用到的在不同接口的数据一起请求过来。
+不过如果其中一个借口失败了，多个请求也就失败了，页面可能啥也出不来，这就看当前页面的耦合程度了。
+
+```js
+
+function promiseAll(promises) {
+    return new Promise((resolve, reject) => {
+        if (!Array.isArray(promises)) {
+            throw new TypeError('argument must be a array')
+        }
+        let resolvedCounter = 0;
+        let promiseNum = promises.length;
+        let resolvedResult = [];
+        for(let i=0;i<promiseNum;i++) {
+            Promise.resolve(promises[i]).then(value => {
+                resolvedCounter++;
+                resolvedResult[i] = value;
+                if (resolvedCounter === promiseNum) {
+                    return resolve(resolvedResult)
+                }
+            }, error => {
+                return reject(error)
+            })
+        }
+
+    })
+}
+// test
+let p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(1)
+    }, 1000)
+})
+let p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(2)
+    }, 2000)
+})
+let p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(3)
+    }, 3000)
+})
+promiseAll([p3, p1, p2]).then(res => {
+    console.log(res)
+});
+```
