@@ -560,6 +560,20 @@ list.push(item);
 return list;
 ```
 
+## Script放在底部会影响DOM的解析和渲染吗
+
+Script放在底部影响DOM渲染。不会影响解析。
+
+## Script内的代码执行会会等待CSS加载完成么
+
+Script内的代码执行会等待CSS加载
+
+## CSS加载会影响DOMContentLoaded么
+
+CSS代码下若无Script代码段，就不会影响DOMContentLoaded
+
+也可以借助**控制台的Performance**详细的查看HTML的整体渲染流程，这是成为高级前端的第一步。
+
 ## 实现Promise.all
 
 思路

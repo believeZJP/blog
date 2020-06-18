@@ -242,6 +242,10 @@ git 只添加文件夹，
    用git status 是不会检测到添加的文件夹，(多级文件夹也无法检测到)
     只有文件夹中有文件，才会检测到，
 
+### 给本次存储加个备注，以防时间久了忘了
+
+`git stash save "存储"`
+
 git stash 经验，
 当遇到本地已经commit后，发现忘记了git pull 时，此时，git pull会提示：you have unstaged changes.
 可以先git stash ，将本地的状态存起来，
