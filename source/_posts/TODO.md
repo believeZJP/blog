@@ -7,7 +7,12 @@ tags:
 
 ## TODO
 
-JS 精度问题
+## 如何在 JS 循环中正确使用 async 与 await
+
+[参考](https://juejin.im/post/5cf7042df265da1ba647d9d1#heading-5)
+在循环中使用异步，请使用`for..of`
+
+## JS 精度问题
 
 ```js
 2599.7 * 100
