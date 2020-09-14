@@ -13,7 +13,11 @@ tags: mac
 
 ## 在 Mac OS X 的 Terminal 上如何修改行首的显示
 
-udo scutil --set HostName username
+```bash
+sudo scutil --set HostName 新的主机名
+```
+
+执行命令后，再输入 exit 结束当前终端进程。重新打开终端，就会发现主机名已经修改为新的主机名了。
 
 然后重启terminal
 
