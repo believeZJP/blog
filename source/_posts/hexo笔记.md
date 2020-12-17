@@ -51,6 +51,11 @@ open http://localhost:4000/admin
 
 ## 安装 next 主题
 
+[好的主题推荐](https://github.com/Ailln/awesome-hexo-theme)
+[链接](https://hexo.voxel.site/)
+
+next主题不在维护~~，不推荐使用
+
 1. 在根目录运行
 
     ```bash
