@@ -125,3 +125,11 @@ sitemap:
   path: sitemap.xml
 baidusitemap: 
   path: baidusitemap.xml
+
+# Baidu Webmaster tools verification setting
+# See: https://ziyuan.baidu.com/site/
+baidu_site_verification: "I2u0DE4wmK"
+
+# Google Webmaster tools verification setting
+# See: https://www.google.com/webmasters/
+google_site_verification: "SHb5vhFCgZ9uQMbnVgAGa_fUD1ldaQ-dt1zwex5XX9M"

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "d": "hexo clean && hexo g -d",
-    "s": "hexo clean && hexo g && hexo s",
+    "s": "hexo clean && hexo g && hexo s && hexo g -w",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0"
   },
   "dependencies": {
