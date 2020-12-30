@@ -32,7 +32,8 @@
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^2.0.0",
     "hexo-symbols-count-time": "^0.4.4",
-    "hexo-theme-icarus": "^4.1.1"
+    "hexo-theme-icarus": "^4.1.1",
+    "hexo-theme-next": "^8.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
