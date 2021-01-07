@@ -4,7 +4,7 @@ date: 2019-12-03 15:57:18
 updated: 2019-12-03 15:57:18
 tags:
 ---
-
+[toc]
 [插件列表](https://github.com/varHarrie/Dawn-Blossoms/issues/10)
 
 ## 主命令框
@@ -140,3 +140,23 @@ vscode自动给所有的import改为实际路径而不是相对路径，解决�
  C:\Users\zhaojianpeng3\AppData\Roaming\Code\User
 
  修改文件中的token为github中对应的token，保存文件。重新按快捷键即可启用。
+
+## 直接运行js文件
+
+安装`Code Runner`插件
+在settings.json中配置
+
+```json
+"code-runner.defaultLanguage": "javascript",
+"code-runner.executorMapByGlob": {
+    "*.js": "node"
+},
+"code-runner.runInTerminal": true
+```
+
+按快捷键`Ctrl+Alt+N`或右键`Run Code`即可在控制台看到输出结果
+
+## 调试js
+
+打开js文件，点击左侧变懒调试，点击`运行与调试`，选择`Node.js(preview)`，即可打断点调试
+
