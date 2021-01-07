@@ -11,6 +11,7 @@ tags:
 
 - String是复合类型，int ,float 是基本类型
     复合类型是对象类型，对象自己提供了比较方法
+
 ```java
 String a = "A"; String b = a+"";
 System.out.println(a==b);-----------false;
@@ -31,7 +32,6 @@ substring(begin,end)  包含begin，不含end，半开区间[begin,end);
 long a = 365L*24*60*60*1000  ----------转为long型，自动向long型转换
 long a = (long)……
 long a = 1L*……-------------非侵入式
-
 
 - 类型转换
     自动向高级别转换
@@ -112,8 +112,6 @@ char[] cc = s.toCharArray();
     任意位置插入，删除容易
     可以动态增长
     随机访问比数组慢
-    
-
 
 - this
     this是隐藏的形参变量，是一个地址值(对象内存中地址)，是栈变量
@@ -126,8 +124,6 @@ char[] cc = s.toCharArray();
     static块在类加载入内存时执行一次
         仅仅执行一次，不会反复执行
         与类同时存在
-
-
 
 - 继承
     封装是基础，继承是桥梁，多态是华彩乐章
@@ -142,7 +138,6 @@ char[] cc = s.toCharArray();
     重载是编译时可以区分的
     覆盖是在运行时决定调用哪个方法
     覆盖是多态的基础
-
 
 - 泛化
     对象不发生变化，只是指针发生变化
@@ -176,9 +171,11 @@ try{
 // 4
 }
 ```
+
 执行顺序: 1243
 
 - 重定向
+
  >>追加
  >输出到
 <导入
@@ -213,6 +210,7 @@ jar.exe 能处理打包和解包的工作
 - 文档自动化
     javadoc -d 文档位置 xx.java
     javadoc -d 文档位置 -encoding utf-8  制定编码方式
+
 ```java
 @param x 参数的描述
 @return 返回值的描述
@@ -234,14 +232,6 @@ public class A{
     }
 }
 ```
-
-
-
-
-
-
-
-
 
 # android 开发环境搭建经验积累
 
