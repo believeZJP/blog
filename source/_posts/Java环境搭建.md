@@ -96,3 +96,11 @@ export PATH=$M3_HOME/bin:$PATH
     `sudo chmod -R 755 apache-tomcat-9.0.34`
 
 再重新启动Tomcat即可。
+
+## 查看本地修改文件
+
+菜单栏`View -> Tool Windows -> Commit`
+
+快捷键`command + 0`
+
+快捷键`command + 1`即可展示`Project`
