@@ -104,3 +104,7 @@ export PATH=$M3_HOME/bin:$PATH
 快捷键`command + 0`
 
 快捷键`command + 1`即可展示`Project`
+
+## 断点调试
+
+`Resume Program command+option+r`可以跳过断点直接执行完整个程序
