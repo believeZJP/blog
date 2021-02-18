@@ -14,6 +14,8 @@ npm link命令通过链接目录和可执行文件，实现npm包命令的全局
 1. 为npm包目录创建软链接，将其链到{prefix}/lib/node_modules/package(包名)
 2. 为可执行文件(bin)创建软链接，将其链到{prefix}/bin/{name}
 
+<!-- more -->
+
 在`package.json`中配置
 
 ```json

@@ -20,6 +20,8 @@ vi ~/.bash_profile
 
 配置生效$source ~/.bash_profile
 
+<!-- more -->
+
 配置maven环境变量
 
 export M3_HOME=/usr/local/Cellar/maven/3.6.3_1/libexec
