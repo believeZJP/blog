@@ -584,3 +584,29 @@ git 常用插件
 `git diff master f_tmp`
 
 可以查看master和f_tmp分支的区别
+
+## github无法访问解决办法
+
+`Failed to connect to github.com port 443: Operation timed out`
+
+`LibreSSL SSL_connect: SSL_ERR`
+
+### 地址失效
+
+查询可以用的IP
+
+在 <http://ping.chinaz.com/github.com> 查询对应的耗时情况。
+
+修改 hosts 文件
+hosts 文件路径：`sudo vim /etc/hosts`
+找一个最快的IP添加到hosts文件中, 如下：
+
+```hosts
+13.250.177.223  github.com
+```
+
+即可正常访问
+
+## 用github520可以自动更新ip，更加方便，推荐
+
+[github520](https://github.com/521xueweihan/GitHub520)
