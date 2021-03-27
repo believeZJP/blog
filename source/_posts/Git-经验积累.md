@@ -16,6 +16,22 @@ tags:
 
 <!-- more -->
 
+## git 快捷键
+
+```js
+bdgp() {
+ if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
+ git push origin head:refs/for/"${*}"
+ else
+ [[ "$#" == 0 ]] && local b="$(git_current_branch)"
+ git push origin head:refs/for/"${b:=$1}"
+ fi
+}
+
+
+
+```
+
 ## github contributions 展示问题
 
 正常情况下会将每天的提交记录展示到图表中。

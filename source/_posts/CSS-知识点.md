@@ -667,7 +667,6 @@ Firefox预览结果：
 解决方案是在容器的末尾加入个清理浮动的div。
 修改后的HTML：
 
-
 如果还想防止这个元素占据父元素的高度，可以进一步优化成
 
 ，这样这个清除浮动的容器被认为是个不占任何高度的空格字符。在网页中的任何地方，当遇到容器不扩展时，只需加入此段便能修复问题。
@@ -728,3 +727,8 @@ html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textar
 。
 7.对于文本，在使用margin-left、padding-left、margin-top、padding-top之前优先考虑是否可用text-indent和line-height代替。因为计算尺寸的代价相对来说要大些。
 如能做到以上几点，就已经避免了90%的浏览器兼容性问题。
+
+### 图片叠加到div的滤镜效果
+
+mix-blend-mode: color-dodge;
+Filter: brightness;
