@@ -8,6 +8,10 @@ tags:
 - GitKraken
 ---
 
+## git命令学习网站
+
+[Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN)
+
 ## 客户端推荐
 
 - [SmartGit](https://www.syntevo.com/smartgit/)✨✨✨(开始用的，后来放弃)

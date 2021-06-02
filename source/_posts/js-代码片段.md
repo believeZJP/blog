@@ -4,6 +4,60 @@ date: 2019-06-20 16:03:49
 updated: 2019-06-20 16:03:49
 tags:
 ---
+
+## 多种方式异步实现一个 sleep 函数
+
+1. Promise
+
+```js
+const sleep = time => {
+    return new Promise(resolve => setTimeout(resolve, time))
+}
+sleep(1000).then(() =>{
+    console.log(1)
+})
+
+```
+
+2. Generator
+
+```js
+function* sleepGenerator(time) {
+    yield new Promise(resolve => setTimeout(resolve, time))
+}
+sleepGenerator(1000).next().value.then(() => console.log(1))
+
+```
+
+3. async await
+
+```js
+function sleep(time) {
+    return new Promise(resolve => setTimeout(resolve, time))
+}
+async function output() {
+    let res = await sleep(1000)
+    console.log(1)
+    return res
+}
+output()
+```
+
+4. ES5
+
+```js
+function sleep(callback, time) {
+    if (typeof callback === 'function') {
+        setTimeout(callback, time)
+    }
+}
+
+function output() {
+    console.log(1)
+}
+sleep(output, 1000)
+```
+
 ## js比较版本号
 
 ```js
@@ -471,7 +525,7 @@ a.reduce(function(v1,v2){
 
 // 数组 arr = [1,2,3,4] 求数组的和
 
-forEach 实现
+// forEach 实现
 var arr = [1,2,3,4],
 sum = 0;
 arr.forEach(function(e){sum += e;}); // sum = 10

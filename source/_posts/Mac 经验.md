@@ -7,6 +7,17 @@ tags: mac
 
 [TOC]
 
+## mac存储备忘录的目录
+
+打开Finder，按住option,在左上角找到前往，选择电脑，用户，选择要找用户的备忘录，然后找`Library（资源库）`文件夹下的
+
+1、按住option后点击“访达/Finder”→“前往”→“资源库”；
+
+2、定位到（Group Containers）→（group.com.apple.notes）并进行拷贝；               
+
+3、粘贴（group.com.apple.notes）文件夹至其他电脑相同的目录下；
+
+4、打开“备忘录”即可看到数据已恢复。
 ## mac日常经验积累
 
 记录日常经验

@@ -7,6 +7,20 @@ tags:
 [toc]
 [插件列表](https://github.com/varHarrie/Dawn-Blossoms/issues/10)
 
+## 在终端通过`code`打开编辑器
+
+由于mac是用zsh作为默认终端的，所以添加变量的语句要加到`~/.zprofile`
+[参加文档](https://code.visualstudio.com/docs/setup/mac)
+直接在命令行执行以下代码即可
+
+```bash
+cat << EOF >> ~/.zprofile
+# Add Visual Studio Code (code)
+export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+EOF
+
+```
+
 ## 主命令框
 
 `Command+Shift+P`: 打开命令面板。在打开的输入框内，可以输入任何命令，例如：
@@ -159,4 +173,3 @@ vscode自动给所有的import改为实际路径而不是相对路径，解决�
 ## 调试js
 
 打开js文件，点击左侧变懒调试，点击`运行与调试`，选择`Node.js(preview)`，即可打断点调试
-

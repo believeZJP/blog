@@ -6,6 +6,8 @@ tags:
 ---
 [参考资料](https://github.com/nswbmw/N-blog)
 
+关键词 事件驱动、非阻塞式 I/O
+
 ## 1. 安装Node.js
 
 官网下载直接安装
