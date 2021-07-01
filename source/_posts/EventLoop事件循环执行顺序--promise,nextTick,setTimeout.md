@@ -67,6 +67,25 @@ setTimeout3
 
 ## 提出问题
 
+**遇到了await时，会将await后面的表达式执行一遍，所以就紧接着输出async2，然后将await后面的代码也就是console.log('async1 end')加入到microtask中的Promise队列中，接着跳出async1函数来执行后面的代码。**
+
+```js
+async function async1() {
+ console.log('async1 start');
+ await async2();
+ console.log('async1 end');
+}
+
+// 等价于
+
+async function async1() {
+ console.log('async1 start');
+ Promise.resolve(async2()).then(() => {
+        console.log('async1 end');
+})
+}
+```
+
 node.js的开发者一定都知道它是单线程的，异步不阻塞且高并发的一门语言
 
 node.js中的异步内部原理:（微任务与事件循环）
