@@ -614,3 +614,11 @@ hosts 文件路径：`sudo vim /etc/hosts`
 ## 用github520可以自动更新ip，更加方便，推荐
 
 [github520](https://github.com/521xueweihan/GitHub520)
+
+## git命令行配置不用账号密码登录，改用token登录
+
+[创建token的方法](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+创建好token后，在命令行执行git push操作时，会要求输入账号和密码，注意这里的密码是刚才生成的token
+
+如果没有提示输入账号的时候，在mac的keychains里删除github.com相关的密码，再次操作即可。
