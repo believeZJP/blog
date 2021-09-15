@@ -5,6 +5,52 @@ updated: 2019-06-20 16:03:49
 tags:
 ---
 
+## 递归及递归优化
+
+实现阶乘：
+
+```js
+let factorial = n => {
+    if (n === 0) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+console.log(factorial(10));
+
+```
+
+这样计算效率低，会重复计算好多次，采用动态规划方法。
+即如何保存已经计算过的值。
+
+```js
+const memo = fn => {
+    const cache = {};
+    // return cache[fn] || (cache(fn) = fn());
+    return (arg) => cache[arg] || (cache[arg] = fn(arg));
+}
+```
+
+将阶乘的函数放入高阶函数中
+
+```js
+let fastFact = memo(
+    n => {
+        if (n<=0) {
+            return 1;
+        } else  {
+            return n * fastFact(n-1);
+        } 
+    }
+)
+```
+
+React Hooks里面提供的useMemo，就是这样的记忆机制：
+
+```js
+const memoizedValue = useMemo(() => computeExpensive(a, b), [a, b])
+```
+
 ## 多种方式异步实现一个 sleep 函数
 
 1. Promise
