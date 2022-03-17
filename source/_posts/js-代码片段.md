@@ -251,14 +251,13 @@ new Promise(function (resolve, reject) {
 
 思路，用一个数组将所有要请求的存起来，循环发送执行后，根据数组长度判断是否执行完成。
 
-1、接收一个 Promise 实例的数组或具有 Iterator 接口的对象，
+1、接收一个 `Promise` 实例的数组或具有 `Iterator` 接口的对象作为参数,这个方法返回一个新的 `Promise` 对象
 
-2、如果元素不是 Promise 对象，则使用 Promise.resolve 转成 Promise 对象
+2、遍历传入的参数，用promise.resolve()将参数包一层，使其变成一个promise对象
 
 3、如果全部成功，状态变为 resolved，返回值将组成一个数组传给回调
 
-4、只要有一个失败，状态就变为 rejected，返回值将直接传递给回调
-all() 的返回值也是新的 Promise 对象
+4、只要有一个失败，状态就变为 rejected，第一个触发失败的Promise错误信息作为Promise.all的错误信息，返回值也是新的 Promise 对象
 
 ```js
 function promiseAll(promises) {
@@ -714,12 +713,15 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 ## 数组扁平化  有多种解决办法
 
 ```js
-var flattened = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
-    return a.concat(b);
-});
-// flattened is [0, 1, 2, 3, 4, 5]
+// 一次性扁平化所有
+function flattenDeep (arr) {
+    return Array.isArray(arr) ? arr.reduce((acc, cur) => [...acc, ...flattenDeep(cur)], [])
+}
+var test = [[0, 1], [2, 3], [4, 5]];
+flattenDeep(test);
+// [0, 1, 2, 3, 4, 5]
 
-使用递归实现
+// 使用递归实现
 
 function flattenDepth(array, depth=1) {
   let result = [];
@@ -739,19 +741,19 @@ console.log(flattenDepth([1,[2,[3,[4]],5]]))
 ## 数组去重多种方法
 
 ```js
-扩展运算符（…）内部使用for…of循环
 
+// 一、扩展运算符（…）内部使用for…of循环
 [...new Set([1,2,3,1,'a',1,'a'])]
 
 Array.from(new Set(array));
 
-// 原理：利用forEach的三个参数和indexOf()的第二个参数(从哪里开始查找)，
-在数组中检测该元素后方是否有与该元素相同的元素。
+// 二、利用forEach的三个参数和indexOf()的第二个参数(从哪里开始查找)，
+// 在数组中检测该元素后方是否有与该元素相同的元素。
 distinct = (arr) =>{
     let _arr = [];
     arr.forEach((item, index, arr) => {
-    var bool = arr.indexOf(item,index+1);
- if(bool === -1){
+        var bool = arr.indexOf(item,index+1);
+        if(bool === -1){
             _arr.push(item);
         }
     })
@@ -761,7 +763,7 @@ let arr = [2,1,3,5,1,2,4];
 distinct(arr);
 => [3, 5, 1, 2, 4]   //1是后面的1，2也是后出现的2.
 
-// 原理：splice()删除元素，会改变原数组。
+// 三、splice()删除元素，会改变原数组。
 
 distinct = (arr) =>{
     let len = arr.length;  
@@ -778,8 +780,25 @@ distinct = (arr) =>{
 }
 let arr = [2,1,3,5,1,2,4];
 distinct(arr);
-=>[2, 1, 3, 5, 4]
+// =>[2, 1, 3, 5, 4]
 
+// 四、reduce
+function unique(arr) {
+    return arr.sort.reduce((acc, cur) => {
+        if (acc.length === 0 || acc[acc.length - 1] !== curr) {
+            acc.push(cur);
+        }
+    }, [])
+}
+var arr = [1, 2, 2, 3];
+unique(arr);
+
+// 五、filter
+function unique(arr) {
+    return arr.filter((element, index, array) => {
+        return array.indexOf(element) === index
+    })
+}
 
 ```
 
@@ -787,19 +806,19 @@ distinct(arr);
 
 ```js
 Array.max = function( array ){
-return Math.max.apply( Math, array );
+    return Math.max.apply( Math, array );
 };
 Array.min = function( array ){
-return Math.min.apply( Math, array );
+    return Math.min.apply( Math, array );
 };
 
 
 
 Array.prototype.max = function(){
-return Math.max.apply({},this)
+    return Math.max.apply({},this)
 }
 Array.prototype.min = function(){
-return Math.min.apply({},this)
+    return Math.min.apply({},this)
 }
 [1,2,3].max()// => 3
 [1,2,3].min()// => 1

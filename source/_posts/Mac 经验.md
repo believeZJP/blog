@@ -13,11 +13,12 @@ tags: mac
 
 1、按住option后点击“访达/Finder”→“前往”→“资源库”；
 
-2、定位到（Group Containers）→（group.com.apple.notes）并进行拷贝；               
+2、定位到（Group Containers）→（group.com.apple.notes）并进行拷贝；
 
 3、粘贴（group.com.apple.notes）文件夹至其他电脑相同的目录下；
 
 4、打开“备忘录”即可看到数据已恢复。
+
 ## mac日常经验积累
 
 记录日常经验
@@ -263,6 +264,10 @@ Command-减号 缩小页面
 
 - [Flavor](http://www.fancynode.com.cn/flavor)
 sketch导出为PxCook插件Flavor
+
+sketch将多个元素合并成一个图导出
+
+command + shift选中多个元素，右键，编组选中对象，右下角导出
 
 ## Xmind安装
 
