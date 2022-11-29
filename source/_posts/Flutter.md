@@ -4,6 +4,11 @@ date: 2021-05-13 15:54:44
 updated: 2021-05-13 15:54:44
 tags:
 ---
+
+flutter
+
+在Android studio 直接点Flutter Attach即可打开调试模式
+
 ## 安装踩坑
 
 由于mac终端是zsh,所以添加path变量要添加到`~/.zprofile`中

@@ -5,6 +5,18 @@ updated: 2019-06-20 16:03:49
 tags:
 ---
 
+## 兼容Safari浏览器时间格式
+
+```js
+// 原因，Safari不能识别时间字符串里有 - . 
+function convertDateFormat(value) {
+    return value = value.toString().replace(/\-/g, '/').replace(/\./g, '/');
+    // jquery.table.js里还有最后这一句，但这样的话就把时间转成
+    // '2022/11/29/21:43:52' 无法正则解析
+    // .replace(/\s/g, '/');
+}
+```
+
 ## 递归及递归优化
 
 实现阶乘：

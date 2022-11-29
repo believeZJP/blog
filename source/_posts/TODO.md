@@ -479,17 +479,8 @@ FLEX
 
 <https://github.com/FreeCodeCamp/FreeCodeCamp/blob/staging/CONTRIBUTING.md>
 
-线下课 <<前端工程师与测试工程师>>
-<http://www.tudou.com/programs/view/NRpKuBbeZEg>
-密码 ydxt2016
 
-<<EcmaScript6编程风格上>>
-链接: <http://pan.baidu.com/s/1c1TfnUC> 密码: 945t
 
-<<第一周考题>>你可以测验一下自己的水平。
-<http://pan.baidu.com/s/1gf7BsUf> 密码ceuh
-讲解 <http://www.tudou.com/programs/view/epsKmGW-Nwg/>
-密码YDXTpass2016
 
 Vue.js资源分享
 <https://github.com/maidishike/FrontEnd-Wikis/blob/master/vuejs.md>

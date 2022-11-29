@@ -9,7 +9,19 @@ tags:
 
 ## 记录踩过的坑
 
-数组必须要key的解决办法
+## 覆盖全局样式
+
+项目里用的`styled-components`
+
+可以在全局里定义单独的`antdform.global.less`，在需要的地方引用，覆盖样式
+
+```less
+.ant-form-item-margin-offset {
+    margin-bottom: 0 !important;
+}
+```
+
+## 数组必须要key的解决办法
 
 由于有些数据没有唯一key值。需要自行添加
 

@@ -38,3 +38,9 @@ const TestInput= (props) => {
 }
 export default TestInput
 ```
+
+## 一个项目配置多个basename
+
+需求是域名后面可以加`/iot`或`/spp`，不能跳转，浏览器的链接不能变。
+
+`<BrowserRouter basename={base}>` 这里的base可以根据不同情况设置不同值
