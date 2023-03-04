@@ -16,7 +16,7 @@
     "conventional-changelog": "^3.1.24",
     "hexo": "^5.2.0",
     "hexo-admin": "^2.3.0",
-    "hexo-deployer-git": "^2.1.0",
+    "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-baidu-sitemap": "^0.1.9",
     "hexo-generator-category": "^1.0.0",
