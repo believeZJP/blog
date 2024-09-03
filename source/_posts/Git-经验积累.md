@@ -8,6 +8,17 @@ tags:
 - GitKraken
 ---
 
+## git status不显示中文
+
+配置 Git 设置
+确保 Git 的输出也使用 UTF-8 编码。
+
+```bash
+git config --global i18n.commitencoding utf-8
+git config --global i18n.logoutputencoding utf-8
+git config --global core.quotepath false
+```
+
 ## git命令学习网站
 
 [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN)
@@ -359,20 +370,20 @@ git commit -m "remove test.txt"
             文件就从版本库中被删除了。
 -----------远程关联------------
 git remote add origin git@server-name:path/repo-name.git；
-      eg:  $ git remote add origin git@github.com:michaelliao/learngit.git
+      eg:  $ git remote add origin <git@github.com>:michaelliao/learngit.git
 git push -u origin master第一次推送master分支的所有内容；
 每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 git remote -v   看有没有权限推送
 
 ------------用命令克隆一个远程库----------------
-git clone git@github.com:michaelliao/gitskills.git      用命令git clone克隆一个本地库：
-git@github.com/believeZJP/believeZJP.github.io.git
+git clone <git@github.com>:michaelliao/gitskills.git      用命令git clone克隆一个本地库：
+<git@github.com>/believeZJP/believeZJP.github.io.git
 
 <https://gitcafe.com/believeZJP/believeZJP.git>
 
 git 只克隆一个分支
  `git clone -b <branch> <remote_repo>`
- eg:      git clone -b gitcafe-pages  git@gitcafe.com:believeZJP/believeZJP.git
+ eg:      git clone -b gitcafe-pages  <git@gitcafe.com>:believeZJP/believeZJP.git
 
 --------------切换分支-------------
 git checkout -b dev   checkout命令加上-b参数表示创建并切换，相当于以下两条命令：
@@ -439,7 +450,7 @@ git push origin v1.0            推送某个标签到远程
 git push origin :refs/tags/v0.9
 签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：从远程删除。删除命令也是push，但是格式如下：
 git push origin :refs/tags/v0.9
-// To git@github.com:michaelliao/learngit.git   不知道有没有这个
+// To <git@github.com>:michaelliao/learngit.git   不知道有没有这个
 
 小结
 命令git push origin <tagname>可以推送一个本地标签；

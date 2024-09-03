@@ -280,3 +280,53 @@ git config --global core.quotepath false
     |\\*\\*B00000000000000|Run Silent Coprocess|/usr/local/bin/iterm2-recv-zmodem.sh|checked|
 
     注意最后一项需要你将Instant选项勾上，否则将不生效
+
+4. 设置滚动屏幕阅读文件
+在item2的“Preferences”->“advance”菜单中找到“Scroll wheel sends arrow keys when in alternate screen mode.”，并将该选项的“Yes”修改为“No”即可。由下图可看到，此版本，改完立即生效了，再次双指滑动触摸屏，可看到屏幕开始滚动：
+
+## powerlevel10k 安装
+
+Powerlevel10k 是一个功能强大且高度可定制的 Zsh 主题框架。它是 Oh My Zsh 和 Prezto 等 Zsh 配置框架的主题选择之一。Powerlevel10k 以其快速、高效和丰富的功能而闻名，适用于那些希望在命令行界面中获得最佳体验的用户。
+
+以下是 Powerlevel10k 的一些主要特点：
+
+性能优越: Powerlevel10k 是 Powerlevel9k 的优化版本，速度更快，性能更高。它在设计时考虑了性能问题，能够在不影响速度的情况下提供丰富的功能和信息。
+
+高度可定制: 通过配置文件，用户可以根据个人偏好自定义主题的各个方面，包括提示符的样式、颜色、图标和信息展示的内容。
+
+丰富的信息展示: Powerlevel10k 可以在终端提示符中显示各种有用的信息，例如 Git 状态、命令执行时间、电池状态、网络信息等，帮助用户更高效地工作。
+
+易于安装和配置: Powerlevel10k 提供了简单的安装步骤和配置向导，使新用户能够快速上手。通过交互式向导，用户可以轻松选择和调整主题设置。
+
+兼容性好: Powerlevel10k 与许多流行的 Zsh 插件和工具兼容，确保用户在自定义终端环境时不会遇到障碍。
+
+安装步骤
+以下是安装 Powerlevel10k 的基本步骤：
+
+安装 Zsh:
+如果你还没有安装 Zsh，可以通过包管理器进行安装。例如，在 Debian/Ubuntu 系统上，可以使用以下命令：
+
+sudo apt install zsh
+安装 Oh My Zsh:
+你可以通过以下命令安装 Oh My Zsh：
+
+`sh -c "$(curl -fsSL <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh>)"`
+安装 Powerlevel10k:
+使用以下命令来安装 Powerlevel10k：
+
+`git clone --depth=1 <https://github.com/romkatv/powerlevel10k.git> ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
+配置 Zsh 使用 Powerlevel10k:
+编辑你的 .zshrc 文件，将主题设置为 Powerlevel10k：
+
+`ZSH_THEME="powerlevel10k/powerlevel10k"`
+保存并关闭文件，然后重新加载 Zsh 配置：
+
+`source ~/.zshrc`
+启动配置向导:
+在终端中输入以下命令启动 Powerlevel10k 配置向导：
+
+`p10k configure`
+按照向导提示进行设置，选择你喜欢的样式和配置。
+
+总结
+Powerlevel10k 是一个强大且灵活的 Zsh 主题，它能够显著提升终端的用户体验。如果你经常使用命令行工具，Powerlevel10k 绝对是一个值得尝试的主题。通过其性能优化和高度可定制的特性，你可以打造一个专属于你的高效工作环境。

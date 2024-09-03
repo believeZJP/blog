@@ -15,6 +15,8 @@ const bubble = arr => {
         }
     }
 }
+// 生成一串随机字符
+
 const bubble2 = arr => {
     const length = arr.length
     if (arr.length <=1) return

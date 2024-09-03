@@ -42,6 +42,7 @@ bdgp() {
 因为HomeBrew官网提供的安装办法会报错，所以改用以下方法，简介好用，强烈推荐！！！
 [知乎链接](https://zhuanlan.zhihu.com/p/111014448)
 然后就可以正常安装插件
+`/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"`
 
 各个插件的安装要根据每个插件的安装指南对应安装
 

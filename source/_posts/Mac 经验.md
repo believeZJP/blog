@@ -7,6 +7,21 @@ tags: mac
 
 [TOC]
 
+## mac硬盘格式不支持
+
+mounty
+
+## Mac 截屏录制gif
+
+[LICEcap](https://www.cockos.com/licecap/)
+
+安装包不到1M，非常方便
+
+## mac其他占用空间太大清理办法
+
+系统里显示的其他其实不准，用软件 `OmniDiskSweeper` 可以自己查看系统内哪些文件可以删除，选择删除即可清理空间
+[下载地址](https://www.omnigroup.com/more)
+
 ## mac存储备忘录的目录
 
 打开Finder，按住option,在左上角找到前往，选择电脑，用户，选择要找用户的备忘录，然后找`Library（资源库）`文件夹下的
@@ -106,15 +121,24 @@ mac 下 vim 快捷键
 
 系统自带APP--活动监视器, 可以查看
 
-## mac 添加任何来源允许权限
+## mac 添加任何来源允许权限， 系统偏好设置 – 安全性与隐私 – 通用 ，中的“任何来源”选项
 
 在命令行执行
 
 ```bash
-  sudo spctl --master-disable
+sudo spctl --master-disable
 ```
 
 输入密码,再回到隐私里，就能看到任何来源.
+
+不管是遇到什么程序提示“已损坏，无法打开。您应该将它移到废纸娄” 或 “已损坏，打不开，推出磁盘映像”，都按照下面的步骤操作。
+
+将提示已损坏，无法打开的程序图标拖到命令栏中。
+例如这里的`/Applications/Xmind.app`
+
+```bash
+xattr -cr /Applications/Xmind.app
+```
 
 ## 如何卸载 paragon NTFS for mac
 
@@ -134,6 +158,9 @@ sudo vim /etc/hosts
 ```
 
 可以添加多个域名, 也可以一个
+访问GitHub增加域名解析
+
+<https://github.com/521xueweihan/GitHub520>
 
 ## mac手势快捷键
 
